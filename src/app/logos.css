@@ -1,0 +1,7 @@
+/* Encabezado con logos: Scenario Zero a la izquierda, MinTIC a la derecha. */
+/* No es fijo: el logo cian se perdería sobre la banda cian al hacer scroll. */
+.top-logos { position: absolute; padding-block: 16px; background: none; }
+.top-logos .wrap { max-width: 1560px; display: flex; align-items: center; justify-content: space-between; }
+.hero.espera { padding-top: 150px; }
+.top-logos .logo-sz { display: block; height: clamp(52px, 7vw, 88px); width: auto; }
+.top-logos .logo-mintic { display: block; height: clamp(52px, 6.5vw, 80px); width: auto; }
