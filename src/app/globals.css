@@ -131,6 +131,7 @@ h2.h-sm { font-size: clamp(22px, 2.4vw, 28px); letter-spacing: -.01em; margin-bo
 .eve strong { font-family: var(--f-display); letter-spacing: .2em; color: var(--accent); }
 .eve p { margin-top: 6px; color: var(--muted); font-size: 15px; }
 .form-card { padding: 24px; border-radius: 24px; border: 1px solid var(--line); background: var(--panel); min-width: 0; }
+@media (max-width: 640px) { .form-card { padding: 10px; border-radius: 16px; } }
 .embed { width: 100%; }
 /* Tarjeta del embed, como en las otras páginas de Ticketcode. */
 .ticketcode-card { background: var(--panel); border-radius: 4px; overflow: hidden; margin-inline: auto; }
