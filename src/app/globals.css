@@ -133,7 +133,7 @@ h2.h-sm { font-size: clamp(22px, 2.4vw, 28px); letter-spacing: -.01em; margin-bo
 .form-card { padding: 24px; border-radius: 24px; border: 1px solid var(--line); background: var(--panel); min-width: 0; }
 .embed { width: 100%; }
 /* Tarjeta del embed, como en las otras páginas de Ticketcode. */
-.ticketcode-card { background: var(--panel); border-radius: 4px; padding: clamp(10px, 2vw, 20px); padding-bottom: 0; overflow: hidden; margin-inline: auto; }
+.ticketcode-card { background: var(--panel); border-radius: 4px; overflow: hidden; margin-inline: auto; }
 /* El iframe de Ticketcode es transparente: si hereda color-scheme: dark de la página, Chrome le pinta un fondo blanco opaco. */
 .ticketcode-card, .ticketcode-card iframe { color-scheme: light; }
 /* ticketcode-iframe.js agrega 150 px al alto real del contenido (setHeight: height + 150); ese margen queda como un recuadro en blanco. Se recorta. */
