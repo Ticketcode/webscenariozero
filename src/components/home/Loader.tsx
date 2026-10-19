@@ -4,8 +4,8 @@ import { clamp, reducedMotion, smooth } from '@/lib/raf';
 
 const PULSE = 'M0 30 L330 30 L350 8 L370 52 L390 30 L560 30 L580 14 L600 48 L620 30 L800 30 L820 4 L842 56 L864 30 L1200 30';
 
-// Pantalla de carga de 2,4 s: contador, letras que entran en cascada y línea de latido que se dibuja.
-export default function Loader({ word = 'SCENARIO ZERO', tag = 'CONFIANZA DIGITAL Y TECNOLÓGICA' }: { word?: string; tag?: string }) {
+// Pantalla de carga de 1,8 s en cada carga completa de la página (no en navegación interna): contador, letras que entran en cascada y línea de latido que se dibuja.
+export default function Loader({ word = 'SCENARIO ZERO', tag = 'ECOSISTEMA DE CONFIANZA DIGITAL Y TECNOLÓGICA' }: { word?: string; tag?: string }) {
   const count = useRef<HTMLDivElement>(null);
   const mark = useRef<HTMLDivElement>(null);
   const tagEl = useRef<HTMLDivElement>(null);
@@ -23,7 +23,7 @@ export default function Loader({ word = 'SCENARIO ZERO', tag = 'CONFIANZA DIGITA
     let raf = 0;
     let timer: ReturnType<typeof setTimeout>;
     const tick = (now: number) => {
-      const p = clamp((now - t0) / 2400);
+      const p = clamp((now - t0) / 1800);
       const ep = smooth(p);
       if (count.current) count.current.textContent = `${Math.round(p * 100)}%`;
       letters.current.forEach((s, i) => { if (s && p > 0.1 + (i / letters.current.length) * 0.6) s.classList.add('on'); });
