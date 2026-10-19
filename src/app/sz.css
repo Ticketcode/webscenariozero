@@ -66,7 +66,7 @@
 .sz-hilo { margin-top: 24px; display: grid; gap: 16px; max-width: 760px; }
 .sz-msg-p { justify-self: end; max-width: 85%; padding: 16px 20px; border-radius: 18px; background: var(--panel); border: 1px solid var(--linea); }
 .sz-msg-h { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-.sz-msg-e p { font-size: 17px; line-height: 1.65; min-height: 1.65em; }
+.sz-msg-e p { font-size: 17px; line-height: 1.65; min-height: 1.65em; white-space: pre-line; }
 .sz-acciones { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
 .sz-pulso { position: absolute; left: 0; right: 0; bottom: 0; height: 48px; pointer-events: none; }
 .sz-pulso svg { width: 100%; height: 100%; }

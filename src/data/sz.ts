@@ -1,3 +1,4 @@
+import { CATEGORIAS, lineaRecibe } from './categorias';
 // Sitio global (sombrilla) de Scenario Zero. Textos del Anexo A y corpus de EVE del Anexo B (requerimiento del 18 oct 2026).
 // Regla: nada sale al sitio fuera de esta base. Las cifras solo se renderizan si su estado es 'verificada'.
 
@@ -153,12 +154,7 @@ export const ALIADOS = {
   antetitulo: 'LOS PRIMEROS ALIADOS',
   titular: 'Quien llega después, empieza sin historia.',
   bajada: 'Hay 20 cupos en cuatro categorías para vincular a tu organización en 2026. No compras un patrocinio de un día: tomas una posición con retorno en cuatro palancas.',
-  categorias: [
-    { nombre: 'Silicio', cupos: 2, texto: 'Diseñas el ejercicio y tienes voz: abres o cierras el ejercicio nacional. Eres aliado ancla de una transversal y eliges primero.', cifras: '3 sillas en el ejercicio · 12 reuniones 1 a 1 prioritarias · 10 boletas para tus clientes · presencia en Bogotá, Villavicencio y Medellín' },
-    { nombre: 'Platinum', cupos: 4, texto: 'Tienes voz en el desarrollo del ejercicio y eres aliado de una transversal.', cifras: '2 sillas · 8 reuniones 1 a 1 · 6 boletas · presencia en Bogotá, Villavicencio y Medellín' },
-    { nombre: 'Gold', cupos: 6, texto: 'Puedes ser convocado a la mesa de crisis.', cifras: '2 sillas · 4 reuniones 1 a 1 · 4 boletas · presencia en Bogotá' },
-    { nombre: 'Silver', cupos: 8, texto: 'La entrada al ecosistema desde el primer día.', cifras: '1 silla · 2 reuniones 1 a 1 · 2 boletas · presencia en Bogotá' },
-  ],
+  categorias: CATEGORIAS.filter((c) => c.recibe).map((c) => ({ nombre: c.nombre, cupos: c.cupos as number, texto: c.rol, cifras: lineaRecibe(c) })),
   academia: 'Las universidades y centros de investigación se vinculan como aliados Academic, con aportes en especie.',
   pasos: [
     'Te inscribes en la lista de tu categoría.',
@@ -193,7 +189,13 @@ export const SEO: Record<string, [string, string]> = {
 };
 
 // ---- EVE (respuestas fijas del corpus, Anexo B §7). Reemplazar por el modelo con recuperación cuando estén las credenciales. ----
-export type Respuesta = { re: string; texto: string; acciones: { label: string; href: string; principal?: boolean }[] };
+export type Respuesta = {
+  re: string;
+  texto: string;
+  acciones: { label: string; href: string; principal?: boolean }[];
+  /** Preguntas de seguimiento propuestas según la respuesta. Si no viene, el sitio usa las sugerencias fijas de la portada. */
+  sugerencias?: string[];
+};
 
 export const KB: Respuesta[] = [
   { re: 'cu[aá]nto cuesta ser aliado|precio.*(cupo|aliad)|valor.*(cupo|aliad)|cu[aá]nto.*(cupo|vincul)', texto: 'Los valores llegan en tu propuesta formal. Te muestro qué recibe cada categoría y te inscribes en la lista de la que te interese.', acciones: [{ label: TEXTOS.cta, href: RUTAS.espera, principal: true }, { label: 'Qué recibe cada categoría', href: '/aliados' }] },

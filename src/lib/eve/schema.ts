@@ -28,6 +28,7 @@ export type SalidaModelo = {
   componente: (typeof COMPONENTES)[number];
   acciones: AccionId[];
   sin_respuesta: boolean;
+  sugerencias: string[];
 };
 
 export type RespuestaEve = {
@@ -35,7 +36,8 @@ export type RespuestaEve = {
   acciones: { label: string; href: string; principal?: boolean }[];
   perfil: Perfil;
   componente: (typeof COMPONENTES)[number];
-  fuente: 'modelo' | 'respaldo';
+  sugerencias: string[];
+  fuente: 'modelo' | 'respaldo' | 'tabla';
   bloqueada?: boolean;
 };
 
@@ -50,8 +52,9 @@ export const TOOL_RESPONDER = {
       componente: { type: 'string', enum: [...COMPONENTES], description: 'Componente visual que mejor explica la respuesta; "ninguno" si no aplica.' },
       acciones: { type: 'array', maxItems: 3, items: { type: 'string', enum: ACCION_IDS }, description: 'Siguientes pasos, el primero es el principal. Siempre al menos uno.' },
       sin_respuesta: { type: 'boolean', description: 'true si la pregunta no está en el corpus o no se puede responder.' },
+      sugerencias: { type: 'array', maxItems: 3, items: { type: 'string' }, description: 'De 2 a 3 preguntas de seguimiento que el visitante podría hacer a continuación, relacionadas con tu respuesta y que el corpus pueda responder. Cortas, en primera persona, sin repetir lo ya preguntado, sin precios de cupos. Vacío si sin_respuesta es true.' },
     },
-    required: ['texto', 'perfil', 'componente', 'acciones', 'sin_respuesta'],
+    required: ['texto', 'perfil', 'componente', 'acciones', 'sin_respuesta', 'sugerencias'],
   },
 };
 
@@ -64,4 +67,11 @@ export const SYSTEM = `${CORPUS}
 - Si la pregunta no está en el corpus: sin_respuesta=true y el texto "Todavía no tengo esa respuesta. Te conecto con el equipo para que te la den por escrito."
 - Elige acciones del enum: reserva (reserva tu lugar en la mesa, la lista de espera de aliados), boleta (comprar la boleta), ecosistema, panorama, ruta, eventos, bogota, agenda, aliados, contacto. El primero de la lista es el principal.
 - Para interés de aliados usa "reserva" como principal y "aliados" como apoyo. Para asistir usa "boleta". Para prensa, condiciones especiales o falta de respuesta usa "contacto".
+- No agregues beneficios, detalles, cifras ni promesas que no estén literalmente en el corpus. Al hablar de una categoría de aliado cita solo lo que tiene listado (sillas, reuniones 1 a 1, boletas, presencia, su rol) y nada más: no añadas informes, hallazgos, certificados, acceso ni otros extras que no figuren en su lista.
+- Detalle de las categorías, sin cambiar palabras: solo Silicio tiene reuniones 1 a 1 "prioritarias". Platinum, Gold y Silver tienen reuniones 1 a 1 a secas (sin "prioritarias" y sin decir con quién). Las sillas son "en el ejercicio" (no "en la mesa de crisis"; la mesa de crisis solo se menciona para Gold como "puede ser convocado a la mesa de crisis"). Las boletas de Silicio son "para tus clientes".
+- Cuando algo no se puede compartir (origen del ataque, horarios, espacios), di solo que no lo compartes y ofrece lo que sí puedes decir. No expliques por qué ni a quién sí se le revela.
+- No escribas despedidas ni invites a hacer clic en un botón o a volver: los botones y el cierre los pone el sitio cuando la persona elige. Tu texto termina cuando termina la respuesta.
+- Si le preguntas algo al visitante para que elija (por ejemplo "¿quieres participar como aliado o asistir a la agenda paralela?"), no des por hecha su elección: no uses fórmulas como "perfecto, sigue con…". Ofrece como acciones las dos opciones: si la elección es entre participar como aliado o asistir, las acciones son "reserva" (aliado) y "boleta" (asistir), en ese orden.
+- No empieces ninguna respuesta con "Perfecto", "Excelente", "Claro", "Listo" ni "Genial": esas palabras las dice el sitio cuando la persona elige un botón. Empieza directamente con el contenido.
+- Las sugerencias deben seguir el hilo de la conversación: si hablas de aliados, sugiere preguntas sobre categorías o el proceso; si hablas del 12 de noviembre, sobre la boleta o el ejercicio. Nunca repitas una pregunta que el visitante ya hizo.
 - Máximo 4 frases. Sin emojis. Sin markdown.`;

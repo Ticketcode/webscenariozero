@@ -1,5 +1,6 @@
 import Anthropic from '@anthropic-ai/sdk';
 import { NextResponse } from 'next/server';
+import { responderCategoria } from '@/lib/eve/categorias';
 import { aRespuesta, esInyeccion, normalizar, respuestaSinRespuesta, revisar } from '@/lib/eve/guardrails';
 import { registrar } from '@/lib/eve/log';
 import { limitar } from '@/lib/eve/ratelimit';
@@ -43,6 +44,13 @@ export async function POST(req: Request) {
   if (esInyeccion(pregunta)) {
     registrar({ fuente: 'respaldo', sinRespuesta: true, inyeccion: true, ms: Date.now() - t0 });
     return json(respuestaSinRespuesta(true));
+  }
+
+  // Preguntas por lo que recibe una categoría (o su precio, o una comparación): responde la tabla fija, no el modelo.
+  const deTabla = responderCategoria(pregunta);
+  if (deTabla) {
+    registrar({ fuente: 'tabla', sinRespuesta: false, ms: Date.now() - t0 });
+    return json(deTabla);
   }
 
   const historial: Turno[] = Array.isArray(cuerpo.historial)

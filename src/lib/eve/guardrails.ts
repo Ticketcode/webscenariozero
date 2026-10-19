@@ -7,6 +7,7 @@ export const respuestaSinRespuesta = (bloqueada = false): RespuestaEve => ({
   acciones: [{ ...ACCIONES.contacto, principal: true }],
   perfil: 'desconocido',
   componente: 'ninguno',
+  sugerencias: [],
   fuente: 'respaldo',
   bloqueada,
 });
@@ -35,6 +36,8 @@ const PROHIBIDOS: [RegExp, string][] = [
   [/\b(garantiza|garantizamos|prometemos?)\b.{0,40}\b(retorno|roi|ganancia|dinero)\b/i, 'promesa_retorno'],
   [/\b(computaci[oó]n\s+cu[aá]ntica|cu[aá]ntic[oa])\b/i, 'escenario_futuro'],
   [/\b(inject|injects)\b/i, 'detalle_ejercicio'],
+  // Si el modelo describe lo que recibe una categoría (sillas, reuniones, boletas con número), se bloquea: eso lo entrega la tabla.
+  [/(?=[\s\S]*\b(silicio|platinum|gold|silver)\b)(?=[\s\S]*(\b\d+\s+(sillas?|reuniones|boletas)\b|\b(una|dos|tres|cuatro|seis|ocho|diez|doce)\s+(sillas?|reuniones|boletas)\b))/i, 'detalle_categoria'],
   [/\b(las\s+)?[0-2]?\d[:.]\d{2}\s*(h|hrs|a\.?\s?m\.?|p\.?\s?m\.?)\b/i, 'horario'],
 ];
 
@@ -42,6 +45,24 @@ const PROHIBIDOS: [RegExp, string][] = [
 function tienePrecioNoPermitido(texto: string): boolean {
   const montos = texto.match(/\$\s*[\d][\d.,]*|[\d][\d.,]*\s*(COP|pesos)\b/gi) ?? [];
   return montos.some((m) => !/(^|\D)3\.000\.000(?![.,]?\d)/.test(m));
+}
+
+// Una sugerencia es una pregunta corta del visitante. Se descartan (sin bloquear la respuesta) las que rompan una línea roja,
+// tengan enlaces, sean demasiado largas o estén duplicadas.
+export function limpiarSugerencias(raw: unknown): string[] {
+  if (!Array.isArray(raw)) return [];
+  const vistas = new Set<string>();
+  const out: string[] = [];
+  for (const x of raw) {
+    if (typeof x !== 'string') continue;
+    const t = x.replace(/\s+/g, ' ').trim();
+    if (t.length < 4 || t.length > 80 || vistas.has(t.toLowerCase())) continue;
+    if (PROHIBIDOS.some(([re]) => re.test(t)) || tienePrecioNoPermitido(t) || /https?:\/\/|www\.|<\/?[a-z]/i.test(t) || esInyeccion(t)) continue;
+    vistas.add(t.toLowerCase());
+    out.push(t);
+    if (out.length === 3) break;
+  }
+  return out;
 }
 
 // El modelo puede devolver valores fuera de las listas (un componente o una acción que no existen). Eso no es un riesgo de
@@ -54,6 +75,7 @@ export function normalizar(s: SalidaModelo): SalidaModelo {
     componente: COMPONENTES.includes(s.componente) ? s.componente : 'ninguno',
     acciones: acciones.length ? acciones : ['contacto'],
     sin_respuesta: !!s.sin_respuesta,
+    sugerencias: limpiarSugerencias(s.sugerencias),
   };
 }
 
@@ -76,6 +98,7 @@ export function aRespuesta(s: SalidaModelo): RespuestaEve {
     acciones: ids.slice(0, 3).map((id, i) => ({ ...ACCIONES[id], principal: i === 0 })),
     perfil: s.perfil,
     componente: s.componente,
+    sugerencias: s.sugerencias,
     fuente: 'modelo',
   };
 }

@@ -1,9 +1,10 @@
 'use client';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import EveAvatar, { eve } from './EveAvatar';
 import { PORTADA, type Respuesta } from '@/data/sz';
-import { pedirRespuesta } from '@/lib/eve/cliente';
+import { eleccionDe, mensajeAlElegir, pedirRespuesta } from '@/lib/eve/cliente';
 
 type Msg = { id: number; role: 'persona' | 'eve'; texto: string; r?: Respuesta };
 
@@ -19,6 +20,7 @@ const liberar = () => {
 const reduce = () => typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 export default function Portada() {
+  const router = useRouter();
   const [valor, setValor] = useState('');
   const [valorP, setValorP] = useState('');
   const [msgs, setMsgs] = useState<Msg[]>([]);
@@ -49,12 +51,16 @@ export default function Portada() {
     setValorP('');
     setEstado('EVE está pensando...');
     eve.estado('pensando');
-    Promise.all([pedirRespuesta(q, historial), new Promise((ok) => setTimeout(ok, reduce() ? 0 : 900))]).then(([r]) => {
+    Promise.all([pedirRespuesta(q, historial), new Promise((ok) => setTimeout(ok, reduce() ? 0 : 900))]).then(([r]) => hablar(r));
+  };
+
+  // EVE "habla": agrega su mensaje y lo escribe a ritmo de lectura. Devuelve una promesa que se cumple al terminar de hablar.
+  const hablar = (r: Respuesta): Promise<void> => new Promise((terminado) => {
       setEscrito('');
       setMsgs((m) => [...m, { id: ++n.current, role: 'eve', texto: r.texto, r }]);
       setEstado('EVE · respondiendo');
       eve.estado('respondiendo');
-      const fin = () => { setEscrito(r.texto); setEstado('EVE · en línea'); eve.estado('reposo'); };
+      const fin = () => { setEscrito(r.texto); setEstado('EVE · en línea'); eve.estado('reposo'); terminado(); };
       if (reduce()) { fin(); return; }
       // EVE "habla": el texto sale a ritmo de lectura (~60 caracteres/s) y el avatar se ilumina con swells lentos e
       // irregulares (uno cada ~0,4–0,6 s, como sílabas y pausas), no con un latido por fragmento de texto.
@@ -71,7 +77,22 @@ export default function Portada() {
         const gate = document.documentElement.classList.contains('gate');
         (gate ? hiloP : hilo).current?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
       }, 60);
-    });
+  });
+
+  // La persona elige un botón de siguiente paso: EVE contesta (excelente, te llevo a…, vuelve si necesitas algo más) y recién
+  // cuando termina de hablar se pasa de página. Así el salto no es abrupto ni se da por hecha una elección que no se hizo.
+  const elegir = (e: React.MouseEvent, a: { label: string; href: string }) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return; // abrir en pestaña nueva sigue funcionando
+    e.preventDefault();
+    if (yendo) return;
+    setYendo(true);
+    clearInterval(timer.current);
+    setMsgs((m) => [...m, { id: ++n.current, role: 'persona', texto: eleccionDe(a.label) }]);
+    setEstado('EVE está pensando...');
+    eve.estado('pensando');
+    setTimeout(() => {
+      hablar({ re: '', texto: mensajeAlElegir(a), acciones: [], sugerencias: [] }).then(() => setTimeout(() => router.push(a.href), reduce() ? 0 : 1000));
+    }, reduce() ? 0 : 500);
   };
 
   useEffect(() => {
@@ -83,7 +104,11 @@ export default function Portada() {
 
   const respuesta = [...msgs].reverse().find((m) => m.role === 'eve');
   const listo = !!respuesta && escrito.length >= respuesta.texto.length;
-  const restantes = PORTADA.sugerencias.filter((s) => !msgs.some((x) => x.texto === s));
+  // Las sugerencias siguen el hilo: si la respuesta trae las suyas (propuestas por el modelo según lo conversado) se usan esas;
+  // si no hay, las fijas de la portada. Nunca se repite una pregunta que ya se hizo.
+  const propuestas = respuesta?.r?.sugerencias;
+  const base = propuestas && propuestas.length ? propuestas : PORTADA.sugerencias;
+  const restantes = base.filter((s) => !msgs.some((x) => x.texto.toLowerCase() === s.toLowerCase()));
 
   // Mismo hilo en la puerta y en el home. Al tocar un enlace la puerta se queda (sin mostrar el home) hasta que llega la página nueva.
   const renderHilo = (ref: React.RefObject<HTMLDivElement | null>, clase: string) => (
@@ -97,7 +122,7 @@ export default function Portada() {
           {(m === respuesta ? listo : true) && (
             <div className="sz-acciones">
               {m.r?.acciones.map((a) => (
-                <Link key={a.href + a.label} href={a.href} onClick={() => { setYendo(true); eve.estado('pensando'); }} className={a.principal ? 'sz-btn sz-btn-primary' : 'sz-chip'}>{a.label}</Link>
+                <Link key={a.href + a.label} href={a.href} onClick={(e) => elegir(e, a)} className={a.principal ? 'sz-btn sz-btn-primary' : 'sz-chip'}>{a.label}</Link>
               ))}
             </div>
           )}
@@ -110,7 +135,7 @@ export default function Portada() {
 
   return (
     <>
-      <div className={`sz-pov${msgs.length ? ' sz-pov-conv' : ''}${yendo ? ' sz-pov-yendo' : ''}`} role="dialog" aria-modal="true" aria-label="Pregúntale a EVE">
+      <div className={`sz-pov${msgs.length ? ' sz-pov-conv' : ''}`} role="dialog" aria-modal="true" aria-label="Pregúntale a EVE">
         <button type="button" className="sz-pov-skip" onClick={() => { liberar(); eve.estado('reposo'); }}>Omitir</button>
         <div className="sz-pov-art" aria-hidden>{pgran > 0 && <EveAvatar key={'g' + pgran} size={pgran} />}</div>
         <form className="sz-ask sz-pov-ask" onSubmit={(e) => { e.preventDefault(); enviar(valorP); }}>
@@ -125,7 +150,7 @@ export default function Portada() {
           </div>
         )}
         {renderHilo(hiloP, 'sz-hilo sz-pov-hilo')}
-        {listo && restantes.length > 0 && (
+        {listo && !yendo && restantes.length > 0 && (
           <div className="sz-chips sz-pov-chips">
             {restantes.slice(0, 3).map((s) => <button key={s} type="button" className="sz-chip" onClick={() => enviar(s)}>{s}</button>)}
           </div>
@@ -160,7 +185,7 @@ export default function Portada() {
             )}
 
             {renderHilo(hilo, 'sz-hilo')}
-            {listo && restantes.length > 0 && (
+            {listo && !yendo && restantes.length > 0 && (
               <div className="sz-chips">
                 {restantes.slice(0, 3).map((s) => <button key={s} type="button" className="sz-chip" onClick={() => enviar(s)}>{s}</button>)}
               </div>

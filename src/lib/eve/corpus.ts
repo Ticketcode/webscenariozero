@@ -66,10 +66,7 @@ Se compra con el código del comercial que hizo el contacto. Cambios de nombre, 
 
 ## Aliados
 20 cupos en cuatro categorías: Silicio (2), Platinum (4), Gold (6) y Silver (8). Academic, para academia, en especie.
-Silicio: diseña y tiene voz en el ejercicio, abre o cierra; 3 sillas, 12 reuniones 1 a 1 prioritarias, 10 boletas; aliado ancla de una transversal; Bogotá, Villavicencio y Medellín.
-Platinum: voz en el desarrollo del ejercicio; 2 sillas, 8 reuniones, 6 boletas; aliado de una transversal; las tres ciudades.
-Gold: puede ser convocado a la mesa de crisis; 2 sillas, 4 reuniones, 4 boletas; Bogotá.
-Silver: la entrada al ecosistema desde el primer día; 1 silla, 2 reuniones, 2 boletas; Bogotá.
+El detalle de lo que recibe cada categoría (sillas, reuniones 1 a 1, boletas, presencia y rol) NO está en este corpus: lo entrega el sitio desde una tabla fija. Si preguntan por ello, no lo detalles ni lo resumas: ofrece la acción "aliados". Puedes decir cuántos cupos tiene cada categoría y que cada una se inscribe en su propia lista.
 Cuatro palancas de retorno: impacto en la industria, posicionamiento, influencia y conexiones, data (siempre agregada y anonimizada).
 Proceso: inscripción en la lista de la categoría -> propuesta formal con 5 días hábiles para decidir -> carta de intención y ficha de aporte -> anticipo del 50 % y términos y condiciones. El saldo se paga el 5 de noviembre; factura la Fundación Social Colectivo.
 La vinculación cubre 2026. Quien continúa conserva su lugar, su línea base y su historia.
