@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import EveAvatar, { eve } from './EveAvatar';
 import { PORTADA, type Respuesta } from '@/data/sz';
 import { pedirRespuesta } from '@/lib/eve/cliente';
@@ -15,6 +15,25 @@ export default function EveFlotante() {
   const [pensando, setPensando] = useState(false);
   const n = useRef(0);
   const fin = useRef<HTMLDivElement>(null);
+  const [sobreCampo, setSobreCampo] = useState(false);
+  const [desplazando, setDesplazando] = useState(false);
+
+  // En móvil el botón se aparta mientras se hace scroll (no se solapa con el contenido) y vuelve al detenerse.
+  useEffect(() => {
+    let t: ReturnType<typeof setTimeout>;
+    const onScroll = () => { setDesplazando(true); clearTimeout(t); t = setTimeout(() => setDesplazando(false), 700); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => { window.removeEventListener('scroll', onScroll); clearTimeout(t); };
+  }, []);
+
+  // En la portada el campo de EVE ya está a la vista: el botón flotante se oculta mientras el campo se ve para no taparlo.
+  useEffect(() => {
+    const campo = document.getElementById('pregunta');
+    if (!campo) return;
+    const io = new IntersectionObserver(([e]) => setSobreCampo(e.isIntersecting), { rootMargin: '80px' });
+    io.observe(campo);
+    return () => io.disconnect();
+  }, []);
 
   const enviar = async (texto: string) => {
     const q = texto.trim();
@@ -35,7 +54,7 @@ export default function EveFlotante() {
   const chips = (ultima?.r?.sugerencias?.length ? ultima.r.sugerencias : PORTADA.sugerencias).filter((s) => !msgs.some((x) => x.texto.toLowerCase() === s.toLowerCase())).slice(0, 3);
 
   return (
-    <div className="eve-fl">
+    <div className={`eve-fl${sobreCampo && !abierto ? ' eve-fl-oculto' : ''}${desplazando && !abierto ? ' eve-fl-scroll' : ''}`}>
       {abierto && (
         <section className="eve-fl-panel" role="dialog" aria-label="Pregúntale a EVE">
           <header><EveAvatar size={28} /><strong>EVE</strong><button type="button" onClick={() => setAbierto(false)} aria-label="Cerrar">×</button></header>
