@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import EveAvatar, { eve } from './EveAvatar';
 import { PORTADA, type Respuesta } from '@/data/sz';
-import { eleccionDe, mensajeAlElegir, pedirRespuesta } from '@/lib/eve/cliente';
+import { eleccionDe, etiqueta, mensajeAlElegir, pedirRespuesta } from '@/lib/eve/cliente';
 
 type Msg = { id: number; role: 'persona' | 'eve'; texto: string; r?: Respuesta };
 
@@ -129,10 +129,10 @@ export default function Portada() {
         <div key={m.id} className="sz-msg sz-msg-e">
           <div className="sz-msg-h"><EveAvatar size={32} /><strong>EVE</strong></div>
           <p>{m === respuesta ? escrito : m.texto}</p>
-          {m === respuesta && listo && (
+          {m === respuesta && listo && restantes.length === 0 && (
             <div className="sz-acciones">
               {m.r?.acciones.map((a) => (
-                <Link key={a.href + a.label} href={a.href} onClick={(e) => elegir(e, a)} className={a.principal ? 'sz-btn sz-btn-primary' : 'sz-chip'}>{a.label}</Link>
+                <Link key={a.href + a.label} href={a.href} onClick={(e) => elegir(e, a)} className={a.principal ? 'sz-btn sz-btn-primary' : 'sz-chip'}>{etiqueta(a.label)}</Link>
               ))}
             </div>
           )}

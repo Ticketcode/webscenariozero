@@ -42,11 +42,11 @@ export function responderCategoria(pregunta: string): RespuestaEve | null {
     const c = cats[0];
     texto = `${precio ? 'Los valores de cada categoría llegan en tu propuesta formal. ' : ''}${describir(c)}`.trim();
     const otra = CATEGORIAS.filter((x) => x.recibe && x.id !== c.id)[0];
-    sugerencias = [`¿Cuál es la diferencia entre ${c.nombre} y ${otra.nombre}?`, '¿Cómo me vinculo?', '¿Puedo asistir sin ser aliado?'];
+    sugerencias = [`¿Cuál es la diferencia entre ${c.nombre} y ${otra.nombre}?`, 'Quiero reservar mi lugar como aliado', '¿Puedo asistir sin ser aliado?'];
   } else {
     if (!compara && !detalle && !precio) return null;
     texto = `${cats.map(describir).join(' ')}${nota}`.trim();
-    sugerencias = ['¿Cómo me vinculo?', '¿Qué es una transversal?', '¿Puedo asistir sin ser aliado?'];
+    sugerencias = ['Quiero reservar mi lugar como aliado', '¿Qué es una transversal?', '¿Puedo asistir sin ser aliado?'];
   }
 
   return {

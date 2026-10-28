@@ -16,6 +16,9 @@ export function mensajeAlElegir(a: { label: string; href: string }): string {
   return `Claro. Te llevo a ${destino}. Cuando quieras, vuelve aquí y seguimos conversando.`;
 }
 
+// Etiqueta de un botón de EVE: si el texto viene todo en mayúsculas (como el CTA del sitio) se muestra en minúsculas, igual que el resto.
+export const etiqueta = (label: string) => (label === label.toUpperCase() ? sentencia(label) : label);
+
 // Etiqueta de un botón como la diría la persona al elegirlo (por ejemplo «Compra tu boleta»).
 export const eleccionDe = (label: string) => sentencia(label);
 

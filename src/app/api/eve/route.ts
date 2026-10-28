@@ -1,6 +1,7 @@
 import Anthropic from '@anthropic-ai/sdk';
 import { NextResponse } from 'next/server';
 import { responderCategoria } from '@/lib/eve/categorias';
+import { responderIntencion } from '@/lib/eve/intencion';
 import { aRespuesta, esInyeccion, normalizar, respuestaSinRespuesta, revisar } from '@/lib/eve/guardrails';
 import { registrar } from '@/lib/eve/log';
 import { limitar } from '@/lib/eve/ratelimit';
@@ -51,6 +52,13 @@ export async function POST(req: Request) {
   if (deTabla) {
     registrar({ fuente: 'tabla', sinRespuesta: false, ms: Date.now() - t0 });
     return json(deTabla);
+  }
+
+  // Intención de dar el paso (reservar como aliado / comprar la boleta): texto fijo y solo el botón de ese paso.
+  const deIntencion = responderIntencion(pregunta);
+  if (deIntencion) {
+    registrar({ fuente: 'tabla', sinRespuesta: false, ms: Date.now() - t0 });
+    return json(deIntencion);
   }
 
   const historial: Turno[] = Array.isArray(cuerpo.historial)

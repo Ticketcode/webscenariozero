@@ -2,6 +2,7 @@
 import assert from 'node:assert/strict';
 import { esInyeccion, limpiarSugerencias, normalizar, revisar } from '../src/lib/eve/guardrails';
 import { responderCategoria } from '../src/lib/eve/categorias';
+import { responderIntencion } from '../src/lib/eve/intencion';
 import { limitar } from '../src/lib/eve/ratelimit';
 import type { SalidaModelo } from '../src/lib/eve/schema';
 
@@ -118,5 +119,12 @@ ok('permite 10 y bloquea la 11 en un minuto', () => {
   assert.equal(limitar('ip-prueba', t0 + 61_000).ok, true);
 });
 ok('cuenta por separado a cada visitante', () => assert.equal(limitar('otra-ip', 5).ok, true));
+
+
+// Cierre de la conversación: las sugerencias de intención dan un texto fijo y solo el botón de ese paso.
+ok('"Quiero reservar mi lugar como aliado" -> solo el botón de reserva', () => { const r = responderIntencion('Quiero reservar mi lugar como aliado'); assert.deepEqual(r?.acciones.map((a) => a.label.toLowerCase()), ['reserva tu lugar en la mesa']); assert.deepEqual(r?.sugerencias, []); });
+ok('"Quiero comprar mi boleta" -> solo el botón de boleta', () => { const r = responderIntencion('Quiero comprar mi boleta'); assert.deepEqual(r?.acciones.map((a) => a.label.toLowerCase()), ['compra tu boleta']); assert.deepEqual(r?.sugerencias, []); });
+ok('una pregunta común no dispara la intención', () => { assert.equal(responderIntencion('¿Cómo me vinculo?'), null); assert.equal(responderIntencion('¿Cuánto cuesta la boleta?'), null); });
+ok('las frases de las sugerencias pasan el filtro de sugerencias', () => assert.deepEqual(limpiarSugerencias(['Quiero reservar mi lugar como aliado', 'Quiero comprar mi boleta']), ['Quiero reservar mi lugar como aliado', 'Quiero comprar mi boleta']));
 
 console.log(`\n${n} pruebas pasaron`);

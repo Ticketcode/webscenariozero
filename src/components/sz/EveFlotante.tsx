@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import EveAvatar, { eve } from './EveAvatar';
 import { PORTADA, type Respuesta } from '@/data/sz';
-import { pedirRespuesta } from '@/lib/eve/cliente';
+import { etiqueta, pedirRespuesta } from '@/lib/eve/cliente';
 
 type Msg = { id: number; role: 'persona' | 'eve'; texto: string; r?: Respuesta };
 
@@ -86,7 +86,7 @@ export default function EveFlotante() {
             {msgs.map((m) => m.role === 'persona' ? <p key={m.id} className="eve-fl-msg eve-fl-p">{m.texto}</p> : (
               <div key={m.id} className="eve-fl-msg">
                 <p>{m === ultima ? escrito : m.texto}</p>
-                {m === ultima && listo && m.r?.acciones.map((a) => <Link key={a.href + a.label} href={a.href} className="eve-fl-chip">{a.label}</Link>)}
+                {m === ultima && listo && chips.length === 0 && m.r?.acciones.map((a) => <Link key={a.href + a.label} href={a.href} className="eve-fl-chip">{etiqueta(a.label)}</Link>)}
               </div>
             ))}
             {pensando && <p className="eve-fl-msg">EVE está pensando...</p>}

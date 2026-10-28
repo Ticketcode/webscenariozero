@@ -50,7 +50,7 @@ export const TOOL_RESPONDER = {
       texto: { type: 'string', description: 'Respuesta de 2 a 4 frases, en tú, solo con información del corpus. Sin listas largas.' },
       perfil: { type: 'string', enum: [...PERFILES], description: 'Perfil detectado del visitante; "desconocido" si aún no se sabe.' },
       componente: { type: 'string', enum: [...COMPONENTES], description: 'Componente visual que mejor explica la respuesta; "ninguno" si no aplica.' },
-      acciones: { type: 'array', maxItems: 3, items: { type: 'string', enum: ACCION_IDS }, description: 'Siguientes pasos, el primero es el principal. Siempre al menos uno.' },
+      acciones: { type: 'array', maxItems: 3, items: { type: 'string', enum: ACCION_IDS }, description: 'Siguientes pasos de apoyo, el primero es el principal. Siempre al menos uno. El sitio solo los muestra cuando no hay sugerencias.' },
       sin_respuesta: { type: 'boolean', description: 'true si la pregunta no está en el corpus o no se puede responder.' },
       sugerencias: { type: 'array', maxItems: 3, items: { type: 'string' }, description: 'De 2 a 3 preguntas de seguimiento que el visitante podría hacer a continuación, relacionadas con tu respuesta y que el corpus pueda responder. Cortas, en primera persona, sin repetir lo ya preguntado, sin precios de cupos. Vacío si sin_respuesta es true.' },
     },
@@ -74,4 +74,5 @@ export const SYSTEM = `${CORPUS}
 - Si le preguntas algo al visitante para que elija (por ejemplo "¿quieres participar como aliado o asistir a la agenda paralela?"), no des por hecha su elección: no uses fórmulas como "perfecto, sigue con…". Ofrece como acciones las dos opciones: si la elección es entre participar como aliado o asistir, las acciones son "reserva" (aliado) y "boleta" (asistir), en ese orden.
 - No empieces ninguna respuesta con "Perfecto", "Excelente", "Claro", "Listo" ni "Genial": esas palabras las dice el sitio cuando la persona elige un botón. Empieza directamente con el contenido.
 - Las sugerencias deben seguir el hilo de la conversación: si hablas de aliados, sugiere preguntas sobre categorías o el proceso; si hablas del 12 de noviembre, sobre la boleta o el ejercicio. Nunca repitas una pregunta que el visitante ya hizo.
+- El visitante ve UNA sola tanda de máximo 3 opciones: tus sugerencias (los botones de navegación solo salen si no hay sugerencias). Por eso las sugerencias deben llevarlo, paso a paso, a dar el paso: cuando ya sepas su perfil o hayas explicado categorías, proceso o evento, incluye una sugerencia de intención con estas frases EXACTAS: si es aliado, 'Quiero reservar mi lugar como aliado'; si quiere asistir, 'Quiero comprar mi boleta'; si aún no sabes su perfil, una de cada una. El sitio responde a esas dos frases y muestra el botón correspondiente; tú no las contestes de otra forma.
 - Máximo 4 frases. Sin emojis. Sin markdown.`;
