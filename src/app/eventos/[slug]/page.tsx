@@ -9,6 +9,7 @@ import Faq from '@/components/Faq';
 import MesaResumen from '@/components/Mesa';
 import TicketcodeEmbed from '@/components/TicketcodeEmbed';
 import EveFlotante from '@/components/sz/EveFlotante';
+import QuitaPuerta from '@/components/sz/QuitaPuerta';
 import { eventos, PENDIENTE } from '@/data/events';
 
 type Props = { params: Promise<{ slug: string }> };
@@ -235,6 +236,7 @@ export default async function EventoPage({ params }: Props) {
       </main>
       <Footer />
       <EveFlotante />
+      <QuitaPuerta />
     </>
   );
 }

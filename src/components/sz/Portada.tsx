@@ -32,6 +32,7 @@ export default function Portada() {
   const timer = useRef<ReturnType<typeof setInterval>>(undefined);
   const hilo = useRef<HTMLDivElement>(null);
   const hiloP = useRef<HTMLDivElement>(null);
+  const povRef = useRef<HTMLDivElement>(null);
   const n = useRef(0);
 
   useEffect(() => {
@@ -102,6 +103,13 @@ export default function Portada() {
     return () => document.removeEventListener('keydown', esc);
   }, [gran]);
 
+  // En la puerta la conversación se desplaza dentro del overlay: cada mensaje nuevo (y cada letra que EVE escribe) se mantiene a la vista,
+  // incluido el aviso de redirección antes de pasar de página.
+  useEffect(() => {
+    const pov = povRef.current;
+    if (pov && document.documentElement.classList.contains('gate')) pov.scrollTo({ top: pov.scrollHeight });
+  }, [msgs.length, escrito, yendo]);
+
   const respuesta = [...msgs].reverse().find((m) => m.role === 'eve');
   const listo = !!respuesta && escrito.length >= respuesta.texto.length;
   // Las sugerencias siguen el hilo: si la respuesta trae las suyas (propuestas por el modelo según lo conversado) se usan esas;
@@ -135,7 +143,7 @@ export default function Portada() {
 
   return (
     <>
-      <div className={`sz-pov${msgs.length ? ' sz-pov-conv' : ''}`} role="dialog" aria-modal="true" aria-label="Pregúntale a EVE">
+      <div ref={povRef} className={`sz-pov${msgs.length ? ' sz-pov-conv' : ''}`} role="dialog" aria-modal="true" aria-label="Pregúntale a EVE">
         <button type="button" className="sz-pov-skip" onClick={() => { liberar(); eve.estado('reposo'); }}>Omitir</button>
         <div className="sz-pov-art" aria-hidden>{pgran > 0 && <EveAvatar key={'g' + pgran} size={pgran} />}</div>
         <form className="sz-ask sz-pov-ask" onSubmit={(e) => { e.preventDefault(); enviar(valorP); }}>

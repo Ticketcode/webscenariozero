@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Header from '@/components/Header';
 import EveFlotante from '@/components/sz/EveFlotante';
+import QuitaPuerta from '@/components/sz/QuitaPuerta';
 import Footer from '@/components/Footer';
 import Reveal from '@/components/Reveal';
 import Faq from '@/components/Faq';
@@ -78,6 +79,7 @@ export default async function ListaEspera({ params }: Props) {
       </main>
       <Footer variant="espera" fecha="12.11.2026" />
       <EveFlotante />
+      <QuitaPuerta />
     </>
   );
 }

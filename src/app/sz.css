@@ -205,9 +205,9 @@
 
 /* portada de EVE a pantalla completa: en iPhone el body no bloquea el scroll y la página asomaba por debajo (pie, ruta).
    Mientras la portada está activa se oculta el resto; al salir (gate-out) vuelve a mostrarse bajo el desvanecido. */
-.gate:not(.gate-out) .sz-top,
-.gate:not(.gate-out) main > :not(.sz-pov),
-.gate:not(.gate-out) .sz-sello,
-.gate:not(.gate-out) .sz-foot { display: none; }
-.gate, .gate body { overflow: hidden; overscroll-behavior: none; background: #000119; }
+.gate:not(.gate-out) .sz-home .sz-top,
+.gate:not(.gate-out) .sz-home main > :not(.sz-pov),
+.gate:not(.gate-out) .sz-home .sz-sello,
+.gate:not(.gate-out) .sz-home .sz-foot { display: none; }
+.gate:has(.sz-home), .gate:has(.sz-home) body { overflow: hidden; overscroll-behavior: none; background: #000119; }
 .gate .sz-pov { height: 100vh; height: 100dvh; }
