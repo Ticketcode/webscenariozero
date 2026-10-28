@@ -111,12 +111,14 @@ export default function Portada() {
   }, [msgs.length, escrito, yendo]);
 
   const respuesta = [...msgs].reverse().find((m) => m.role === 'eve');
-  const listo = !!respuesta && escrito.length >= respuesta.texto.length;
-  // Las sugerencias siguen el hilo: si la respuesta trae las suyas (propuestas por el modelo según lo conversado) se usan esas;
-  // si no hay, las fijas de la portada. Nunca se repite una pregunta que ya se hizo.
-  const propuestas = respuesta?.r?.sugerencias;
-  const base = propuestas && propuestas.length ? propuestas : PORTADA.sugerencias;
-  const restantes = base.filter((s) => !msgs.some((x) => x.texto.toLowerCase() === s.toLowerCase()));
+  // "Listo" = EVE ya terminó de escribir su última respuesta. Si lo último del hilo es la persona (pregunta o botón elegido), EVE
+  // está respondiendo: ni los botones ni las sugerencias se muestran hasta que termine.
+  const listo = !!respuesta && msgs[msgs.length - 1] === respuesta && escrito.length >= respuesta.texto.length;
+  // Después de la primera respuesta las sugerencias salen solo de lo conversado (las propone el modelo con cada respuesta); las fijas
+  // de la portada solo se ven antes de empezar. Nunca se repite una pregunta ya hecha ni lo que ya ofrecen los botones de la respuesta.
+  const norm = (t: string) => t.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
+  const vistos = new Set([...msgs.filter((m) => m.role === 'persona').map((m) => norm(m.texto)), ...(respuesta?.r?.acciones ?? []).map((a) => norm(a.label))]);
+  const restantes = (respuesta?.r?.sugerencias ?? []).filter((s) => { const k = norm(s); if (vistos.has(k)) return false; vistos.add(k); return true; });
 
   // Mismo hilo en la puerta y en el home. Al tocar un enlace la puerta se queda (sin mostrar el home) hasta que llega la página nueva.
   const renderHilo = (ref: React.RefObject<HTMLDivElement | null>, clase: string) => (
@@ -127,7 +129,7 @@ export default function Portada() {
         <div key={m.id} className="sz-msg sz-msg-e">
           <div className="sz-msg-h"><EveAvatar size={32} /><strong>EVE</strong></div>
           <p>{m === respuesta ? escrito : m.texto}</p>
-          {(m === respuesta ? listo : true) && (
+          {m === respuesta && listo && (
             <div className="sz-acciones">
               {m.r?.acciones.map((a) => (
                 <Link key={a.href + a.label} href={a.href} onClick={(e) => elegir(e, a)} className={a.principal ? 'sz-btn sz-btn-primary' : 'sz-chip'}>{a.label}</Link>

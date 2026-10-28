@@ -211,3 +211,9 @@
 .gate:not(.gate-out) .sz-home .sz-foot { display: none; }
 .gate:has(.sz-home), .gate:has(.sz-home) body { overflow: hidden; overscroll-behavior: none; background: #000119; }
 .gate .sz-pov { height: 100vh; height: 100dvh; }
+
+/* objetivos táctiles: enlaces sueltos de al menos 44 px de alto */
+.sz-foot a, .sz-aviso a, .lnk, .top .brand, .sz-card h3 a { display: inline-flex; align-items: center; min-height: 44px; }
+.sz-card h3 a { color: inherit; text-decoration: none; }
+.sz-card h3 a:hover { color: var(--brillo); }
+.sz-aviso a { min-height: 0; display: inline; }
