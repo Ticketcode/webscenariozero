@@ -27,7 +27,7 @@ export const TEXTOS = {
 };
 
 export const PORTADA = {
-  antetitulo: 'ECOSISTEMA 2026-2030 · BOGOTÁ · VILLAVICENCIO · MEDELLÍN',
+  antetitulo: 'ECOSISTEMA 2026-2030',
   titular: ['La confianza digital y tecnológica no se decreta.', 'Se construye juntos.'],
   bajada: 'Pregúntale a EVE lo que quieras saber del ecosistema: te responde corto y te muestra el camino.',
   estado: 'EVE · en línea',
@@ -155,7 +155,7 @@ export const ALIADOS = {
   titular: 'Quien llega después, empieza sin historia.',
   bajada: 'Hay 20 cupos en cuatro categorías para vincular a tu organización en 2026. No compras un patrocinio de un día: tomas una posición con retorno en cuatro palancas.',
   categorias: CATEGORIAS.filter((c) => c.recibe).map((c) => ({ nombre: c.nombre, cupos: c.cupos as number, texto: c.rol, cifras: lineaRecibe(c) })),
-  academia: 'Las universidades y centros de investigación se vinculan como aliados Academic, con aportes en especie.',
+  academia: 'Las universidades y centros de investigación se vinculan como aliados Academic, con aportes en especie: 3 a 4 cupos en especie, que no consumen cupo pago.',
   pasos: [
     'Te inscribes en la lista de tu categoría.',
     'Recibes la propuesta formal y tienes 5 días hábiles para decidir; tu posición queda reservada a tu nombre.',
@@ -171,9 +171,9 @@ export const CONTACTO = {
   titular: 'Hablemos.',
   bajada: 'EVE responde de inmediato. Si prefieres a una persona, escríbenos.',
   canales: [
-    ['WhatsApp con EVE', '[número]'],
-    ['Correo', '[correo de contacto]'],
-    ['Prensa', '[correo de prensa]'],
+    ['WhatsApp con EVE', '+57 311 842 7799'],
+    ['Correo', 'hola@scenariozero.org'],
+    ['Operaciones', 'operaciones@scenariozero.org'],
   ],
 };
 

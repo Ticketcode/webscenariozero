@@ -33,7 +33,7 @@ export const CATEGORIAS: Categoria[] = [
   },
   {
     id: 'academic', nombre: 'Academic', cupos: null,
-    rol: 'Las universidades y centros de investigación se vinculan como aliados Academic, con aportes en especie.',
+    rol: 'Las universidades y centros de investigación se vinculan como aliados Academic, con aportes en especie: 3 a 4 cupos en especie, que no consumen cupo pago.',
     recibe: null,
   },
 ];

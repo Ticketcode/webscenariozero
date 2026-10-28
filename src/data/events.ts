@@ -44,7 +44,7 @@ export const bogota: EventoData = {
   fechaLarga: '12 de noviembre de 2026',
   // El evento arranca a las 8:00 a. m. (hora de Colombia).
   inicioISO: '2026-11-12T08:00:00-05:00',
-  lugar: null,
+  lugar: 'Américas BPS, calle 26, Bogotá, Colombia',
   horario: null,
   estadoBoleta: 'venta_abierta',
   ventaDesde: '2026-10-14',
@@ -79,9 +79,9 @@ export const bogota: EventoData = {
     { n: '03', title: 'El ejercicio nacional TTX', text: '70 a 80 decisores públicos y privados ponen a prueba la coordinación del país.' },
   ],
   hangares: [
-    { id: 'H1', title: 'Apertura, agenda paralela y cierre', text: 'Plenarias y 200 asistentes con boleta Silicio.' },
+    { id: 'H1', title: 'Apertura, agenda paralela y cierre', text: 'Plenarias y 250–300 participantes en la agenda paralela, con boleta Silicio.' },
     { id: 'H2', title: 'TTX en el salón oval', text: '70 a 80 decisores en 34 posiciones numeradas.' },
-    { id: 'H3', title: 'Decision Floor', text: 'Agenda propia por transversal.' },
+    { id: 'H3', title: 'Evidence Floor - Experiencias', text: 'Agenda propia por transversal.' },
     { id: 'H4', title: 'Network', text: 'Conexiones y matchmaking.' },
   ],
   fases: [
@@ -92,7 +92,7 @@ export const bogota: EventoData = {
   ],
   dimensiones: ['Gobernanza', 'Articulación', 'Calidad de la información', 'Continuidad', 'Narrativa pública', 'Riesgo reputacional', 'Cooperación', 'Trazabilidad'],
   faq: [
-    { q: '¿Dónde y a qué hora es?', a: 'El lugar y el horario se publicarán aquí apenas estén confirmados. [Por confirmar]' },
+    { q: '¿Dónde y a qué hora es?', a: 'En Américas BPS, calle 26, Bogotá, Colombia. El horario se publicará aquí apenas esté confirmado.' },
     { q: '¿La boleta da acceso al salón oval?', a: 'No. La boleta da acceso a la agenda paralela. El salón oval es el ejercicio nacional, con 70 a 80 decisores.' },
     { q: '¿Cómo participo como aliado en la mesa?', a: 'Los cupos se acuerdan con el equipo. Inscríbete en la lista de espera y una persona te contacta.' },
     { q: '¿Me registro igual si soy aliado o invitado?', a: '[Por definir]' },

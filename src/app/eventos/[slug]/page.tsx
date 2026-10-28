@@ -8,6 +8,7 @@ import Reveal from '@/components/Reveal';
 import Faq from '@/components/Faq';
 import MesaResumen from '@/components/Mesa';
 import TicketcodeEmbed from '@/components/TicketcodeEmbed';
+import EveFlotante from '@/components/sz/EveFlotante';
 import { eventos, PENDIENTE } from '@/data/events';
 
 type Props = { params: Promise<{ slug: string }> };
@@ -79,6 +80,7 @@ export default async function EventoPage({ params }: Props) {
               </Reveal>
             ))}
           </div>
+          {e.lugar && (<div className="wrap"><iframe className="mapa" title={`Mapa: ${e.lugar}`} loading="lazy" referrerPolicy="no-referrer-when-downgrade" src={`https://www.google.com/maps?q=${encodeURIComponent(e.lugar)}&output=embed`} /></div>)}
         </section>
 
         <section className="sec" id="hitos">
@@ -134,7 +136,7 @@ export default async function EventoPage({ params }: Props) {
               <Reveal className="forma">
                 <div className="when">ASISTENTES</div><h3>Boleta Silicio</h3>
                 <ul>
-                  <li>Agenda paralela: agenda personalizada, reuniones uno a uno, plenarias, Decision Floor, almuerzo por sector y Network.</li>
+                  <li>Agenda paralela: agenda personalizada, reuniones uno a uno, plenarias, Evidence Floor - Experiencias, almuerzo por sector y Network.</li>
                   <li>Después: informe al D+30, certificado y prioridad en Trust Academy 2027.</li>
                   <li>Se compra aquí, en el formulario de Ticketcode del evento.</li>
                   <li>EVE te acompaña por WhatsApp y te conecta con personas afines.</li>
@@ -197,9 +199,9 @@ export default async function EventoPage({ params }: Props) {
           <div className="wrap entradas-grid">
             <div>
               <p className="eyebrow">Agenda paralela · Boleta Silicio</p>
-              <h2>{e.lugares.total} lugares. <span className="acc">Una sola boleta.</span></h2>
+              <h2>250–300 participantes. <span className="acc">Una sola boleta.</span></h2>
               <p className="chip-estado"><i aria-hidden /> {boleta}</p>
-              <p className="lead muted">El 12.11: agenda personalizada, reuniones uno a uno, plenarias, Decision Floor, almuerzo por sector y Network. Después: informe al D+30, certificado y prioridad en Trust Academy 2027.</p>
+              <p className="lead muted">El 12.11: agenda personalizada, reuniones uno a uno, plenarias, Evidence Floor - Experiencias, almuerzo por sector y Network. Después: informe al D+30, certificado y prioridad en Trust Academy 2027.</p>
               <p className="muted">Se venden bloques corporativos. Un aliado puede patrocinar boletas para las pymes de su cadena. <strong>La boleta no da acceso al salón oval.</strong></p>
               <div className="eve"><strong>EVE</strong><p>Al completar tu registro, EVE, nuestra asistente de IA, te lo confirma por WhatsApp, te resuelve dudas de agenda, ubicación y accesos, y te conecta con personas afines a tu rol.</p></div>
               {e.estadoListaEspera === 'abierta' && (
@@ -232,6 +234,7 @@ export default async function EventoPage({ params }: Props) {
         </section>
       </main>
       <Footer />
+      <EveFlotante />
     </>
   );
 }

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import type { ReactNode } from 'react';
 import Loader from '@/components/home/Loader';
 import QuitaPuerta from './QuitaPuerta';
+import EveFlotante from './EveFlotante';
 import { NAV, RUTAS, TEXTOS } from '@/data/sz';
 
 // Estructura común del sitio global: cabecera, contenido, franja institucional y pie.
@@ -41,6 +42,7 @@ export function Shell({ children, loader = false, home = false }: { children: Re
           </p>
         </div>
       </footer>
+      <EveFlotante />
     </div>
   );
 }
