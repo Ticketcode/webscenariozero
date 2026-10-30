@@ -79,7 +79,7 @@ export const bogota: EventoData = {
     { n: '03', title: 'El ejercicio nacional TTX', text: '70 a 80 decisores públicos y privados ponen a prueba la coordinación del país.' },
   ],
   hangares: [
-    { id: 'H1', title: 'Apertura, agenda paralela y cierre', text: 'Plenarias y 250–300 participantes en la agenda paralela, con boleta Silicio.' },
+    { id: 'H1', title: 'Apertura, agenda paralela y cierre', text: '250–300 participantes en la agenda paralela, con boleta única.' },
     { id: 'H2', title: 'TTX en el salón oval', text: '70 a 80 decisores en 34 posiciones numeradas.' },
     { id: 'H3', title: 'Evidence Floor - Experiencias', text: 'Agenda propia por transversal.' },
     { id: 'H4', title: 'Network', text: 'Conexiones y matchmaking.' },

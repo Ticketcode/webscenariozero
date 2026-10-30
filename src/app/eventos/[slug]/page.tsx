@@ -10,6 +10,7 @@ import MesaResumen from '@/components/Mesa';
 import TicketcodeEmbed from '@/components/TicketcodeEmbed';
 import EveFlotante from '@/components/sz/EveFlotante';
 import QuitaPuerta from '@/components/sz/QuitaPuerta';
+import { SESIONES, TE_LLEVAS } from '@/data/agenda';
 import { eventos, PENDIENTE } from '@/data/events';
 
 type Props = { params: Promise<{ slug: string }> };
@@ -60,7 +61,7 @@ export default async function EventoPage({ params }: Props) {
                 <a className="door primary" href="#entradas">
                   <span className="door-k">Para asistentes</span>
                   <strong>Quiero asistir →</strong>
-                  <span>Boleta Silicio y agenda paralela.</span>
+                  <span>Boleta única y agenda paralela.</span>
                 </a>
                 <Link className="door" href={espera}>
                   <span className="door-k">Para aliados</span>
@@ -135,10 +136,10 @@ export default async function EventoPage({ params }: Props) {
             <Reveal><p className="eyebrow">Dos formas de participar</p><h2>Una agenda para quienes asisten. <span className="acc">Una mesa para los aliados.</span></h2></Reveal>
             <div className="formas">
               <Reveal className="forma">
-                <div className="when">ASISTENTES</div><h3>Boleta Silicio</h3>
+                <div className="when">ASISTENTES</div><h3>Boleta única</h3>
                 <ul>
-                  <li>Agenda paralela: agenda personalizada, reuniones uno a uno, plenarias, Evidence Floor - Experiencias, almuerzo por sector y Network.</li>
-                  <li>Después: informe al D+30, certificado y prioridad en Trust Academy 2027.</li>
+                  <li>Agenda paralela: agenda personalizada, sesiones (keynote, stand up chat y panel), Evidence Floor - Experiencias y networking con reuniones 1 a 1.</li>
+                  <li>Después: informe al D+30, certificado y directorio autorizado de participantes.</li>
                   <li>Se compra aquí, en el formulario de Ticketcode del evento.</li>
                   <li>EVE te acompaña por WhatsApp y te conecta con personas afines.</li>
                 </ul>
@@ -205,14 +206,12 @@ export default async function EventoPage({ params }: Props) {
                 <div>
                   <p className="eyebrow">Lo que vives ese día</p>
                   <ul>
-                    <li><strong>Keynote — El algoritmo contraataca.</strong> IA, automatización y el nuevo campo de batalla de la ciberseguridad.</li>
-                    <li><strong>Stand Up Chat — Hackers vs. ciberdelincuentes.</strong> Mismas herramientas, lados opuestos: la comunidad que descubre, explota y defiende.</li>
-                    <li><strong>Panel — El Próximo Zero Day.</strong> Las tendencias que están redefiniendo la ciberseguridad.</li>
+                    {SESIONES.map((x) => <li key={x.titulo}><strong>{x.titulo}.</strong> {x.texto}</li>)}
                   </ul>
                 </div>
                 <div>
                   <p className="eyebrow">Lo que te llevas</p>
-                  <p>Acceso a Evidence Floor (la tecnología de los aliados, en vivo) · espacio de networking con apoyo de IA para conectar con el ecosistema · alimentación · informe del ejercicio al día 30 · certificado de participación.</p>
+                  <p>{TE_LLEVAS}</p>
                 </div>
               </div>
               <p className="roi-cierre"><strong>No es un ticket de un día.</strong> Es tu entrada al ecosistema de confianza digital de Colombia.</p>
@@ -220,7 +219,7 @@ export default async function EventoPage({ params }: Props) {
           </div>
           <div className="wrap entradas-grid">
             <div>
-              <p className="eyebrow">Agenda paralela · Boleta Silicio</p>
+              <p className="eyebrow">Agenda paralela · Boleta única</p>
               <h2>250–300 participantes. <span className="acc">Una sola boleta.</span></h2>
               <p className="chip-estado"><i aria-hidden /> {boleta}</p>
               <p className="muted">Se venden bloques corporativos. Un aliado puede patrocinar boletas para las pymes de su cadena. <strong>La boleta no da acceso al salón oval.</strong></p>

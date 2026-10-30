@@ -27,7 +27,7 @@ export const KB: KbItem[] = [
   {
     re: 'boleta|entrada|comprar|ticket|asistir|registr|agenda',
     q: '¿Cómo compro una boleta?',
-    a: `La boleta Silicio da acceso a la agenda paralela del 12 de noviembre. Se compra en la página del evento con el formulario de Ticketcode; la venta está abierta desde el ${ev.ventaDesdeLarga}. No da acceso al salón oval.`,
+    a: `La boleta única da acceso a la agenda paralela del 12 de noviembre. Se compra en la página del evento con el formulario de Ticketcode; la venta está abierta desde el ${ev.ventaDesdeLarga}. No da acceso al salón oval.`,
     src: [['Eventos', '#eventos']],
     cta: ['Ir a entradas', `${EVENTO}#entradas`],
   },
