@@ -32,7 +32,7 @@ export default function RutaScene() {
         <div className="wrap">
           <div className="ruta-head">
             <p className="eyebrow">La ruta</p>
-            <h2>Un año con entregables fechados. <span className="acc">Un rumbo hasta 2030.</span></h2>
+            <h2>Cuatro años con entregables fechados. <span className="acc">Un rumbo hasta 2030.</span></h2>
           </div>
           <svg className="pulse" viewBox="0 0 1200 120" aria-hidden="true">
             <path d={D} stroke="#12224a" strokeWidth="3" />

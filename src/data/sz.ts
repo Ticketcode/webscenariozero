@@ -10,7 +10,6 @@ export const RUTAS = {
 
 export const NAV = [
   { href: '/ecosistema', label: 'Ecosistema' },
-  { href: '/panorama', label: 'Panorama' },
   { href: '/ruta', label: 'Ruta' },
   { href: '/eventos', label: 'Eventos' },
   { href: '/aliados', label: 'Vincúlate' },
@@ -90,15 +89,20 @@ export const PANORAMA = {
 
 // Cifras: solo se muestran con estado 'verificada'. La URL de la fuente original está pendiente (no se inventa).
 export type Cifra = { texto: string; fuente: string; url: string | null; estado: 'verificada' | 'pendiente' };
+
+// Cifra de apertura del panorama (aprobada 30 oct; reemplaza la de IBM, retirada en la base v7.2 por ser de segunda mano).
+export const CIFRA_APERTURA = { texto: 'Según MinTIC, en 2024 Colombia gestionó 1.427 incidentes de seguridad digital — y 8 de cada 10 registrados en los últimos dos años fueron por fraude.', fuente: 'MinTIC' };
 export const CIFRAS: Cifra[] = [
+  { texto: 'Según Asobancaria, los bancos colombianos reciben más de 1.000 ciberataques por segundo — 32.000 millones en 2025 — y han invertido COP 1,74 billones en ciberseguridad en los últimos dos años.', fuente: 'Asobancaria, vía Ricardo Ávila Pinto, “Un riesgo sistémico”, El Tiempo, 17 oct 2026', url: null, estado: 'verificada' },
+  { texto: 'Solo el 24 % de los colombianos confía en que sus datos personales están protegidos frente a la IA; más del 60 % pide más cooperación entre gobierno y sector privado para gobernarla.', fuente: 'Centro Nacional de Consultoría (CNC), estudio “Apropiación Digital” Colombia/Chile/Perú 2025', url: null, estado: 'verificada' },
+  { texto: 'Entre quienes no usan internet en Colombia, el 7 % dice que es muy inseguro y el 6 % que le preocupa su privacidad.', fuente: 'Centro Nacional de Consultoría (CNC), estudio “Apropiación Digital” Colombia/Chile/Perú 2025', url: null, estado: 'verificada' },
   { texto: 'Según MinTIC, en 2025 se gestionaron 697 incidentes de seguridad digital, y en los últimos dos años el fraude representó el 79,83 % de los incidentes.', fuente: 'MinTIC', url: null, estado: 'verificada' },
   { texto: 'El mercado de ciberseguridad en Colombia pasaría de cerca de USD 280 millones en 2024 a unos USD 1.102 millones en 2034, un crecimiento del 14,7 % anual.', fuente: 'ICEX España', url: null, estado: 'verificada' },
-  { texto: 'Según IBM, en 2025 una filtración de datos en Latinoamérica costó en promedio USD 2,51 millones, y su ciclo de vida para identificarla y contenerla fue de 316 días.', fuente: 'IBM', url: null, estado: 'verificada' },
 ];
 
 export const RUTA = {
   antetitulo: 'LA RUTA',
-  titular: 'Del lanzamiento al D+365: un año con entregables fechados.',
+  titular: 'Del lanzamiento a 2030: cuatro años de ecosistema, con entregables fechados.',
   // Los tres primeros hitos los aprueba Alex antes de publicarlos: aprobado=false no se renderiza.
   hitos: [
     { fecha: 'Agosto 2026', titulo: 'Nace la idea', texto: 'Un ejercicio nacional de gestión de crisis cibernética.', aprobado: false },
@@ -109,7 +113,7 @@ export const RUTA = {
     { fecha: 'D+30 · 12.12.2026', titulo: 'Primeros hallazgos', texto: 'Informe del programa de ejercicios y plan de mejora.', aprobado: true },
     { fecha: 'D+90 · 10.02.2027', titulo: 'Arrancan los programas', texto: 'Cohorte de juntas, línea base del Índice y autodiagnóstico pyme.', aprobado: true },
     { fecha: 'D+180 · 11.05.2027', titulo: 'Llega a la ciudadanía', texto: 'Piloto de campaña ciudadana y módulo de IA confiable.', aprobado: true },
-    { fecha: 'D+365 · 12.11.2027', titulo: 'Un año de ecosistema', texto: 'Lo que entregó cada transversal, a la vista.', aprobado: true },
+    { fecha: 'D+365 · 12.11.2027', titulo: 'Año 1 de 4', texto: 'Lo que entregó cada transversal, a la vista.', aprobado: true },
     { fecha: '2030', titulo: 'Rumbo país', texto: 'Colombia, el milagro digital y tecnológico. Después, LATAM.', aprobado: true },
   ],
 };
@@ -180,8 +184,7 @@ export const CONTACTO = {
 export const SEO: Record<string, [string, string]> = {
   '/': ['Scenario Zero · Ecosistema de Confianza Digital y Tecnológica', 'La confianza digital y tecnológica no se decreta. Se construye juntos. Ecosistema 2026-2030 con el respaldo de MinTIC.'],
   '/ecosistema': ['Qué es Scenario Zero', 'Una iniciativa privada que diagnostica, forma, ejercita, mide y conecta la confianza digital del país.'],
-  '/panorama': ['Panorama del ecosistema', 'Seis transversales, cinco sectores críticos y cuatro palancas de retorno.'],
-  '/ruta': ['La ruta 2026-2030', 'Del lanzamiento del 12 de noviembre al D+365, con entregables fechados.'],
+  '/ruta': ['La ruta 2026-2030', 'Del lanzamiento del 12 de noviembre a 2030: cuatro años de ecosistema, con entregables fechados.'],
   '/eventos': ['Eventos 2026 · Bogotá, Villavicencio, Medellín', 'La apertura del ecosistema en Bogotá y los ejercicios regionales de 2026.'],
   '/agenda-paralela': ['Agenda paralela · 12.11.2026', 'Keynotes, talleres, experiencias y reuniones 1 a 1 en la apertura del ecosistema.'],
   '/aliados': ['Vincúlate como aliado', '20 cupos en cuatro categorías para construir el ecosistema desde adentro.'],
@@ -206,18 +209,18 @@ export const KB: Respuesta[] = [
   { re: 'gobierno|mintic', texto: 'No. Es una iniciativa privada, financiada por el sector privado y con el respaldo de MinTIC.', acciones: [{ label: 'Qué es Scenario Zero', href: '/ecosistema', principal: true }] },
   { re: '12 de noviembre|12\\.11|bogot[aá]|qu[eé] pasa', texto: 'Es la apertura del ecosistema en Américas BPS, Bogotá: MinTIC presenta el Plan de desarrollo TIC y ciberseguridad 2026-2030, se lanza Scenario Zero y se realiza el ejercicio nacional con 70–80 decisores. ¿Quieres asistir a la agenda paralela?', acciones: [{ label: TEXTOS.ctaBoleta, href: RUTAS.boleta, principal: true }, { label: 'Ver la ficha de Bogotá', href: RUTAS.bogota }] },
   { re: 'villavicencio|medell[ií]n|otras ciudades', texto: 'Antes de finalizar 2026. Las fechas se anuncian aquí y por WhatsApp.', acciones: [{ label: 'Ver los eventos', href: '/eventos', principal: true }] },
-  { re: 'emblema', texto: 'Es un reconocimiento que se gana, no se compra: Ensaya, Mide, Mejora. Certifica la práctica, no la seguridad, y lo otorga Scenario Zero.', acciones: [{ label: 'Explorar el panorama', href: '/panorama', principal: true }] },
+  { re: 'emblema', texto: 'Es un reconocimiento que se gana, no se compra: Ensaya, Mide, Mejora. Certifica la práctica, no la seguridad, y lo otorga Scenario Zero.', acciones: [{ label: 'Explorar el panorama', href: '/ecosistema#panorama', principal: true }] },
   { re: 'c[oó]mo se paga|pago|anticipo|factur', texto: 'Con un anticipo del 50 % al confirmar y el saldo el 5 de noviembre; factura la Fundación Social Colectivo. Cualquier detalle adicional te lo confirma el comercial por escrito.', acciones: [{ label: 'Hablar con el equipo', href: '/contacto', principal: true }] },
   { re: 'arrepient|reembols', texto: 'Queda establecido en los términos y condiciones que firmas al confirmar. Te conecto con el equipo.', acciones: [{ label: 'Hablar con el equipo', href: '/contacto', principal: true }] },
-  { re: 'qui[eé]nes m[aá]s|qui[eé]nes participan|participan', texto: 'Participan Gobierno, empresas, academia y organismos internacionales. Los nombres se anuncian cuando cada vinculación está confirmada.', acciones: [{ label: 'Ver el panorama', href: '/panorama', principal: true }] },
+  { re: 'qui[eé]nes m[aá]s|qui[eé]nes participan|participan', texto: 'Participan Gobierno, empresas, academia y organismos internacionales. Los nombres se anuncian cuando cada vinculación está confirmada.', acciones: [{ label: 'Ver el panorama', href: '/ecosistema#panorama', principal: true }] },
   { re: 'qu[eé] gana|retorno|roi', texto: 'Depende de tu perfil: te muestro qué recibe cada categoría. El retorno en dinero lo calculas con tus cifras en la reunión 1 a 1.', acciones: [{ label: 'Qué recibe cada categoría', href: '/aliados', principal: true }, { label: TEXTOS.cta, href: RUTAS.espera }] },
-  { re: 'operador|infraestructura cr[ií]tica', texto: 'El regulador, la junta y tus clientes van a preguntar si la crisis se ensayó antes de que ocurriera. El ecosistema te da esa evidencia. Te abro el panorama: tu sector es una de las 5 infraestructuras críticas del ejercicio nacional.', acciones: [{ label: TEXTOS.cta, href: RUTAS.espera, principal: true }, { label: 'Ver el panorama', href: '/panorama' }] },
+  { re: 'operador|infraestructura cr[ií]tica', texto: 'El regulador, la junta y tus clientes van a preguntar si la crisis se ensayó antes de que ocurriera. El ecosistema te da esa evidencia. Te abro el panorama: tu sector es una de las 5 infraestructuras críticas del ejercicio nacional.', acciones: [{ label: TEXTOS.cta, href: RUTAS.espera, principal: true }, { label: 'Ver el panorama', href: '/ecosistema#panorama' }] },
   { re: 'proveedor|tecnolog[ií]a|ciberseguridad.*(vendo|soluci)', texto: 'Entre 2026 y 2030 el país va a definir qué necesita en confianza digital y tecnológica. Estar adentro es conocerlo cuando se define.', acciones: [{ label: 'Qué recibe cada categoría', href: '/aliados', principal: true }, { label: TEXTOS.ctaBoleta, href: RUTAS.boleta }] },
   { re: 'vincul|aliad|cupo|mesa|lista', texto: 'Hay 20 cupos en cuatro categorías: Silicio, Platinum, Gold y Silver, y Academic para la academia. Te inscribes en la lista de tu categoría, recibes la propuesta formal y tienes 5 días hábiles para decidir.', acciones: [{ label: TEXTOS.cta, href: RUTAS.espera, principal: true }, { label: 'Qué recibe cada categoría', href: '/aliados' }] },
   { re: 'boleta|entrada|comprar|asistir', texto: 'La boleta única da acceso a la agenda paralela del 12 de noviembre en Bogotá. Se compra con el código del comercial que te contactó.', acciones: [{ label: TEXTOS.ctaBoleta, href: RUTAS.boleta, principal: true }] },
-  { re: 'ejercicio|ttx|simulacro|decisor', texto: 'Es una crisis cibernética nacional que empieza con una anomalía pendiente de verificar y se propaga en cascada por cinco sectores. Participan 70–80 decisores. Los hallazgos son agregados y salen en un informe al D+30; nunca un ranking.', acciones: [{ label: 'Ver el panorama', href: '/panorama', principal: true }] },
+  { re: 'ejercicio|ttx|simulacro|decisor', texto: 'Es una crisis cibernética nacional que empieza con una anomalía pendiente de verificar y se propaga en cascada por cinco sectores. Participan 70–80 decisores. Los hallazgos son agregados y salen en un informe al D+30; nunca un ranking.', acciones: [{ label: 'Ver el panorama', href: '/ecosistema#panorama', principal: true }] },
   { re: 'ruta|2030|transversal|programa|academy|pyme', texto: 'Arranca el 12 de noviembre de 2026 con seis transversales y entregables fechados: D+30, D+90 y D+180. El rumbo llega a 2030 y después a LATAM.', acciones: [{ label: 'Ver la ruta', href: '/ruta', principal: true }] },
-  { re: 'qu[eé] es|scenario|ecosistema', texto: 'Es el ecosistema de confianza digital y tecnológica de Colombia entre 2026 y 2030: una iniciativa privada con el respaldo de MinTIC que diagnostica, forma, ejercita, mide y conecta. El desafío del país es de coordinación, y aquí converge el ecosistema. Te abro el panorama.', acciones: [{ label: 'Explorar el panorama', href: '/panorama', principal: true }] },
+  { re: 'qu[eé] es|scenario|ecosistema', texto: 'Es el ecosistema de confianza digital y tecnológica de Colombia entre 2026 y 2030: una iniciativa privada con el respaldo de MinTIC que diagnostica, forma, ejercita, mide y conecta. El desafío del país es de coordinación, y aquí converge el ecosistema. Te abro el panorama.', acciones: [{ label: 'Explorar el panorama', href: '/ecosistema#panorama', principal: true }] },
 ];
 
 export const SIN_RESPUESTA: Respuesta = {

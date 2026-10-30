@@ -197,12 +197,32 @@ export default async function EventoPage({ params }: Props) {
         </section>
 
         <section className="sec entradas" id="entradas">
+          <div className="wrap">
+            <div className="roi">
+              <h3>Esto es lo que ganas, no solo lo que pagas.</h3>
+              <p className="lead">Tu boleta de $3M te lleva por toda la Agenda Paralela del 12.11 — y te vas con mucho más que una entrada.</p>
+              <div className="roi-cols">
+                <div>
+                  <p className="eyebrow">Lo que vives ese día</p>
+                  <ul>
+                    <li><strong>Keynote — El algoritmo contraataca.</strong> IA, automatización y el nuevo campo de batalla de la ciberseguridad.</li>
+                    <li><strong>Stand Up Chat — Hackers vs. ciberdelincuentes.</strong> Mismas herramientas, lados opuestos: la comunidad que descubre, explota y defiende.</li>
+                    <li><strong>Panel — El Próximo Zero Day.</strong> Las tendencias que están redefiniendo la ciberseguridad.</li>
+                  </ul>
+                </div>
+                <div>
+                  <p className="eyebrow">Lo que te llevas</p>
+                  <p>Acceso a Evidence Floor (la tecnología de los aliados, en vivo) · espacio de networking con apoyo de IA para conectar con el ecosistema · alimentación · informe del ejercicio al día 30 · certificado de participación.</p>
+                </div>
+              </div>
+              <p className="roi-cierre"><strong>No es un ticket de un día.</strong> Es tu entrada al ecosistema de confianza digital de Colombia.</p>
+            </div>
+          </div>
           <div className="wrap entradas-grid">
             <div>
               <p className="eyebrow">Agenda paralela · Boleta Silicio</p>
               <h2>250–300 participantes. <span className="acc">Una sola boleta.</span></h2>
               <p className="chip-estado"><i aria-hidden /> {boleta}</p>
-              <p className="lead muted">El 12.11: agenda personalizada, reuniones uno a uno, plenarias, Evidence Floor - Experiencias, almuerzo por sector y Network. Después: informe al D+30, certificado y prioridad en Trust Academy 2027.</p>
               <p className="muted">Se venden bloques corporativos. Un aliado puede patrocinar boletas para las pymes de su cadena. <strong>La boleta no da acceso al salón oval.</strong></p>
               <div className="eve"><strong>EVE</strong><p>Al completar tu registro, EVE, nuestra asistente de IA, te lo confirma por WhatsApp, te resuelve dudas de agenda, ubicación y accesos, y te conecta con personas afines a tu rol.</p></div>
               {e.estadoListaEspera === 'abierta' && (

@@ -236,3 +236,26 @@
 .sz a.sz-btn-primary { color: var(--noche); }
 /* sugerencias del mismo ancho que los botones de la respuesta */
 .sz-pov-chips { width: min(760px, 100%); }
+
+/* panorama dentro de /ecosistema: ancla con margen para el encabezado fijo */
+.sz-ancla { scroll-margin-top: 90px; }
+.sz-apertura { max-width: 900px; font-size: clamp(26px, 3.6vw, 44px); line-height: 1.25; }
+
+/* modo claro institucional (addendum 30 oct): alterna con el oscuro en bloques de cifras/contexto. Solo tokens del manual v1.0:
+   Papel (fondo), Navy (texto), Profundo (acentos) y un gris pizarra para texto secundario. */
+.sz-claro {
+  --papel: #000119; --niebla: #3A4B63; --borde: #4A5B70; --cian: #00658C; --brillo: #00658C; --panel: #FFFFFF; --linea: rgba(0, 19, 53, .16);
+  background: #F2F6FA; color: var(--papel); color-scheme: light;
+}
+.sz-claro .sz-card { box-shadow: 0 1px 2px rgba(0, 19, 53, .06); }
+.sz-claro .sz-fuente, .sz-claro .sz-card p { color: var(--niebla); }
+.sz-claro .sz-card p:not(.sz-fuente) { color: var(--papel); }
+
+/* bloque ROI de la boleta (visible antes del precio / formulario) */
+.roi { margin-bottom: 48px; padding: clamp(24px, 4vw, 44px); border-radius: 20px; border: 1px solid var(--accent, #00C8F8); background: rgba(0, 200, 248, .06); }
+.roi h3 { margin: 0 0 12px; font-size: clamp(24px, 3.2vw, 36px); line-height: 1.2; }
+.roi-cols { display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(24px, 4vw, 48px); margin-top: 28px; }
+.roi-cols ul { margin: 0; padding-left: 20px; display: grid; gap: 14px; line-height: 1.55; }
+.roi-cols p:not(.eyebrow) { line-height: 1.6; margin: 0; }
+.roi-cierre { margin: 28px 0 0; font-size: 18px; }
+@media (max-width: 760px) { .roi-cols { grid-template-columns: 1fr; } }

@@ -56,7 +56,7 @@ Cuenta con organismos internacionales, sin nombrarlos. Ningún aliado altera el 
 
 ## Ciudades y ruta
 2026: Bogotá (12.11.2026), Villavicencio y Medellín (antes de finalizar 2026, fechas por anunciar). Siempre en ese orden.
-D+30 (12.12.2026): primeros hallazgos. D+90 (10.02.2027): arrancan los programas. D+180 (11.05.2027): llega a la ciudadanía. D+365 (12.11.2027): un año de ecosistema. 2030: rumbo país; después, LATAM.
+D+30 (12.12.2026): primeros hallazgos. D+90 (10.02.2027): arrancan los programas. D+180 (11.05.2027): llega a la ciudadanía. D+365 (12.11.2027): año 1 de 4. 2030: rumbo país; después, LATAM.
 
 ## Agenda paralela y boleta
 Agenda académica de keynotes y talleres en paralelo al ejercicio; después, Evidence Floor - Experiencias y networking con reuniones 1 a 1.
@@ -79,7 +79,7 @@ Credencial de aliado por categoría, con vigencia 2026. Ambos son verificables y
 ## Cifras que puedes usar (siempre con su fuente, tal como están escritas)
 - "Según MinTIC, en 2025 se gestionaron 697 incidentes de seguridad digital, y en los últimos dos años el fraude representó el 79,83 % de los incidentes." Fuente: MinTIC.
 - "El mercado de ciberseguridad en Colombia pasaría de cerca de USD 280 millones en 2024 a unos USD 1.102 millones en 2034, un crecimiento del 14,7 % anual." Fuente: ICEX España.
-- "Según IBM, en 2025 una filtración de datos en Latinoamérica costó en promedio USD 2,51 millones, y su ciclo de vida para identificarla y contenerla fue de 316 días." Fuente: IBM.
+- "Según MinTIC, en 2024 Colombia gestionó 1.427 incidentes de seguridad digital — y 8 de cada 10 registrados en los últimos dos años fueron por fraude." Fuente: MinTIC.
 No presentas la caída de incidentes frente a 2024 como prueba de que el país está más seguro. No uses ninguna otra cifra.
 
 # 6. Líneas rojas (EVE nunca)

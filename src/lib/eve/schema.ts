@@ -6,7 +6,7 @@ export const ACCIONES = {
   reserva: { label: TEXTOS.cta, href: RUTAS.espera },
   boleta: { label: TEXTOS.ctaBoleta, href: RUTAS.boleta },
   ecosistema: { label: 'Qué es Scenario Zero', href: '/ecosistema' },
-  panorama: { label: 'Ver el panorama', href: '/panorama' },
+  panorama: { label: 'Ver el panorama', href: '/ecosistema#panorama' },
   ruta: { label: 'Ver la ruta', href: '/ruta' },
   eventos: { label: 'Ver los eventos', href: '/eventos' },
   bogota: { label: 'Ver la ficha de Bogotá', href: RUTAS.bogota },

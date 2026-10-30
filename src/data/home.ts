@@ -14,7 +14,7 @@ export const ruta = [
   { when: 'D+30', title: 'Primeros hallazgos', text: 'Informe del programa de ejercicios y plan de mejora.' },
   { when: 'D+90', title: 'Arrancan los programas', text: 'Cohorte de juntas, línea base del Índice y autodiagnóstico pyme.' },
   { when: 'D+180', title: 'Llega a la ciudadanía', text: 'Piloto de campaña ciudadana y módulo de IA confiable.' },
-  { when: '12.11.2027', title: 'Un año de ecosistema', text: 'Lo que entregó cada transversal, a la vista.' },
+  { when: '12.11.2027', title: 'Año 1 de 4', text: 'Lo que entregó cada transversal, a la vista.' },
   { when: '2030', title: 'Colombia, el milagro digital y tecnológico', text: 'Un país tecnológicamente confiable y ciberresiliente.' },
 ];
 
