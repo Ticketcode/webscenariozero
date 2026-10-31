@@ -1,5 +1,4 @@
-import { responder as respaldo, RUTAS, type Respuesta } from '@/data/sz';
-import { esIntencionAliado, inicioLead } from './flujoLead';
+import { responder as respaldo, type Respuesta } from '@/data/sz';
 
 export type Turno = { rol: 'persona' | 'eve'; texto: string };
 
@@ -12,7 +11,6 @@ const sentencia = (s: string) => s.charAt(0).toUpperCase() + s.slice(1).toLowerC
 export function mensajeAlElegir(a: { label: string; href: string }): string {
   const destino = `«${sentencia(a.label)}»`;
   if (a.href.includes('#entradas')) return `Excelente. Te llevo a ${destino}. Si necesitas algo más, vuelve aquí y te sigo ayudando.`;
-  if (a.href.includes('lista-de-espera')) return `Perfecto. Te llevo a ${destino}. Si te queda alguna duda, vuelve aquí y la resolvemos.`;
   if (a.href === '/contacto') return `Listo. Te llevo a ${destino} para que hables con el equipo. Cuando termines, vuelve aquí si necesitas algo más.`;
   return `Claro. Te llevo a ${destino}. Cuando quieras, vuelve aquí y seguimos conversando.`;
 }
@@ -25,12 +23,6 @@ export const eleccionDe = (label: string) => sentencia(label);
 
 // Pide la respuesta a /api/eve. Si el modelo no está disponible (sin llave, caído) usa las respuestas de respaldo del Anexo B,
 // así la experiencia nunca se rompe. Con el límite de uso (429) muestra el mensaje de señal perdida.
-// Sin modelo, la intención de ser aliado igual inicia la solicitud.
-const respaldoDe = (pregunta: string): Respuesta => (esIntencionAliado(pregunta) ? inicioLead() : respaldo(pregunta));
-
-// ¿El botón es el de la solicitud de aliado? En el chat no se navega: EVE conduce la solicitud ahí mismo.
-export const esSolicitud = (href: string) => href === RUTAS.espera;
-
 export async function pedirRespuesta(pregunta: string, historial: Turno[]): Promise<Respuesta> {
   try {
     const r = await fetch('/api/eve', {
@@ -39,10 +31,10 @@ export async function pedirRespuesta(pregunta: string, historial: Turno[]): Prom
       body: JSON.stringify({ pregunta, historial }),
     });
     if (r.status === 429) return { re: '', texto: ERROR_SENAL, acciones: [{ label: 'Hablar con el equipo', href: '/contacto', principal: true }], sugerencias: [] };
-    if (!r.ok) return respaldoDe(pregunta);
-    const d = (await r.json()) as { texto: string; acciones: { label: string; href: string; principal?: boolean }[]; sugerencias?: string[]; flujo?: 'lead' };
-    return { re: '', texto: d.texto, acciones: d.acciones, sugerencias: d.sugerencias ?? [], flujo: d.flujo };
+    if (!r.ok) return respaldo(pregunta);
+    const d = (await r.json()) as { texto: string; acciones: { label: string; href: string; principal?: boolean }[]; sugerencias?: string[] };
+    return { re: '', texto: d.texto, acciones: d.acciones, sugerencias: d.sugerencias ?? [] };
   } catch {
-    return respaldoDe(pregunta);
+    return respaldo(pregunta);
   }
 }

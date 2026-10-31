@@ -30,14 +30,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function EventoPage({ params }: Props) {
   const e = eventos[(await params).slug];
   if (!e) notFound();
-  const espera = '/aliados/solicitud';
+  const espera = `/eventos/${e.slug}/lista-de-espera`;
   const abiertos = 20 - e.aliadosConfirmados.length;
   const boleta = {
     proximamente: `Venta desde el ${e.ventaDesdeLarga}`,
     venta_abierta: `Venta abierta desde el ${e.ventaDesdeLarga}`,
     agotada: 'Boletas agotadas',
   }[e.estadoBoleta];
-  const ctaEspera = 'Quiero ser aliado';
+  const ctaEspera = { abierta: 'Unirme a la lista de espera', llena: 'Lista de espera llena', cerrada: 'Lista de espera cerrada' }[e.estadoListaEspera];
 
   return (
     <>
@@ -66,7 +66,7 @@ export default async function EventoPage({ params }: Props) {
                 <Link className="door" href={espera}>
                   <span className="door-k">Para aliados</span>
                   <strong>Quiero ser aliado →</strong>
-                  <span>Cupo en la mesa del salón oval, con el equipo comercial.</span>
+                  <span>Cupo en la mesa del salón oval, por lista de espera.</span>
                 </Link>
               </div>
             </div>
@@ -151,10 +151,10 @@ export default async function EventoPage({ params }: Props) {
                   <li>Un lugar en el salón oval, el Simulacro nacional de ciberseguridad, en una de las 34 posiciones numeradas.</li>
                   <li>Cuatro distancias a la mesa: Silicio, Platinum, Gold y Silver, con 20 cupos en total.</li>
                   <li>Se acuerda directamente con el equipo; esta página no publica precios.</li>
-                  <li>Se empieza con una solicitud: un comercial te contacta. Enviarla no garantiza un cupo.</li>
+                  <li>Se empieza en la lista de espera. Inscribirte no garantiza un cupo.</li>
                   <li>Tu logo aparece en esta página cuando confirmas.</li>
                 </ul>
-                <Link className="btn btn-ghost" href={espera}>Quiero ser aliado</Link>
+                <Link className="btn btn-ghost" href={espera}>Unirme a la lista de espera</Link>
               </Reveal>
             </div>
             <p className="note">La boleta no da acceso al salón oval. El salón oval es el Simulacro nacional de ciberseguridad, con 70 a 80 decisores.</p>
@@ -166,10 +166,10 @@ export default async function EventoPage({ params }: Props) {
             <Reveal>
               <p className="eyebrow">Espacio 2 · Dónde se ubica cada aliado</p>
               <h2>La proximidad a la mesa es el producto.</h2>
-              <p className="muted lead">34 posiciones numeradas en cuatro distancias. Los cupos de la mesa se acuerdan en una conversación con el equipo. Para empezar, deja tu solicitud y un comercial te contacta.</p>
+              <p className="muted lead">34 posiciones numeradas en cuatro distancias. Los cupos de la mesa se acuerdan en una conversación con el equipo. Para empezar, únete a la lista de espera.</p>
             </Reveal>
             <MesaResumen anillos={e.mesa.anillos} />
-            <Link className="btn" href={espera} style={{ marginTop: 32 }}>Quiero ser aliado →</Link>
+            <Link className="btn" href={espera} style={{ marginTop: 32 }}>Unirme a la lista de espera →</Link>
           </div>
         </section>
 

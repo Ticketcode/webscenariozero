@@ -69,7 +69,7 @@ export default function MesaScene({ anillos, eyebrow }: { anillos: Anillo[]; eye
                   </button>
                 ))}
               </div>
-              <p className="mesa-note">34 posiciones numeradas, 20 cupos. Toca un anillo, en la lista o en la mesa, para ver dónde queda. Los cupos se acuerdan con el equipo, y se empieza con una solicitud: EVE la toma y la pasa al equipo comercial.</p>
+              <p className="mesa-note">34 posiciones numeradas, 20 cupos. Toca un anillo, en la lista o en la mesa, para ver dónde queda. Los cupos se acuerdan con el equipo, y se empieza en la lista de espera.</p>
             </div>
             <div className="stagewrap" role="img" aria-label="Mesa oval con 34 posiciones en cuatro anillos">
               <div className="floor" />

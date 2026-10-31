@@ -4,7 +4,7 @@ import { CATEGORIAS, lineaRecibe } from './categorias';
 // Regla: nada sale al sitio fuera de esta base. Las cifras solo se renderizan si su estado es 'verificada'.
 
 export const RUTAS = {
-  espera: '/aliados/solicitud', // "Reserva tu lugar en la mesa": solicitud de aliado (en el chat la conduce EVE)
+  espera: '/eventos/bogota/lista-de-espera', // "Reserva tu lugar en la mesa"
   boleta: '/eventos/bogota#entradas', // "Compra tu boleta"
   bogota: '/eventos/bogota',
 };
@@ -162,7 +162,7 @@ export const ALIADOS = {
   categorias: CATEGORIAS.filter((c) => c.recibe).map((c) => ({ nombre: c.nombre, cupos: c.cupos as number, texto: c.rol, cifras: lineaRecibe(c) })),
   academia: 'Las universidades y centros de investigación se vinculan como aliados Academic, con aportes en especie: 3 a 4 cupos en especie, que no consumen cupo pago.',
   pasos: [
-    'Hablas con EVE o dejas tus datos, y una persona del equipo comercial te contacta.',
+    'Te inscribes en la lista de tu categoría.',
     'Recibes la propuesta formal y tienes 5 días hábiles para decidir; tu posición queda reservada a tu nombre.',
     'Firmas la carta de intención y la ficha de aporte.',
     'Confirmas tu cupo con el anticipo y la firma de los términos y condiciones.',
@@ -199,12 +199,10 @@ export type Respuesta = {
   acciones: { label: string; href: string; principal?: boolean }[];
   /** Preguntas de seguimiento propuestas según la respuesta. Si no viene, el sitio usa las sugerencias fijas de la portada. */
   sugerencias?: string[];
-  /** 'lead': EVE inicia la solicitud de aliado (preguntas breves y envío al equipo comercial). */
-  flujo?: 'lead';
 };
 
 export const KB: Respuesta[] = [
-  { re: 'cu[aá]nto cuesta ser aliado|precio.*(cupo|aliad)|valor.*(cupo|aliad)|cu[aá]nto.*(cupo|vincul)', texto: 'Los valores llegan en tu propuesta formal. Te muestro qué recibe cada categoría y, si quieres, EVE le pasa tu solicitud al equipo comercial.', acciones: [{ label: TEXTOS.cta, href: RUTAS.espera, principal: true }, { label: 'Qué recibe cada categoría', href: '/aliados' }] },
+  { re: 'cu[aá]nto cuesta ser aliado|precio.*(cupo|aliad)|valor.*(cupo|aliad)|cu[aá]nto.*(cupo|vincul)', texto: 'Los valores llegan en tu propuesta formal. Te muestro qué recibe cada categoría y te inscribes en la lista de la que te interese.', acciones: [{ label: TEXTOS.cta, href: RUTAS.espera, principal: true }, { label: 'Qué recibe cada categoría', href: '/aliados' }] },
   { re: 'c[oó]digo', texto: 'Te conecto con el equipo para que te asignen uno. Escríbenos por WhatsApp o por correo.', acciones: [{ label: 'Hablar con el equipo', href: '/contacto', principal: true }] },
   { re: 'cu[aá]nto cuesta|cu[aá]nto vale|boleta.*(precio|valor|cuesta)|precio.*boleta', texto: 'La boleta única de la agenda paralela vale $3.000.000 COP e incluye agenda personalizada, alimentación, informe al D+30 y certificado. Se compra con el código del comercial que te contactó.', acciones: [{ label: TEXTOS.ctaBoleta, href: RUTAS.boleta, principal: true }, { label: 'Ver la agenda paralela', href: '/agenda-paralela' }] },
   { re: 'agenda paralela', texto: AGENDA_PARALELA_TEXTO, acciones: [{ label: 'Ver la agenda paralela', href: '/agenda-paralela', principal: true }, { label: TEXTOS.ctaBoleta, href: RUTAS.boleta }] },
@@ -221,7 +219,7 @@ export const KB: Respuesta[] = [
   { re: 'qu[eé] gana|retorno|roi', texto: 'Depende de tu perfil: te muestro qué recibe cada categoría. El retorno en dinero lo calculas con tus cifras en la reunión 1 a 1.', acciones: [{ label: 'Qué recibe cada categoría', href: '/aliados', principal: true }, { label: TEXTOS.cta, href: RUTAS.espera }] },
   { re: 'operador|infraestructura cr[ií]tica', texto: 'El regulador, la junta y tus clientes van a preguntar si la crisis se ensayó antes de que ocurriera. El ecosistema te da esa evidencia. Te abro el panorama: tu sector es una de las 5 infraestructuras críticas del Simulacro nacional de ciberseguridad.', acciones: [{ label: TEXTOS.cta, href: RUTAS.espera, principal: true }, { label: 'Ver el panorama', href: '/ecosistema#panorama' }] },
   { re: 'proveedor|tecnolog[ií]a|ciberseguridad.*(vendo|soluci)', texto: 'Entre 2026 y 2030 el país va a definir qué necesita en confianza digital y tecnológica. Estar adentro es conocerlo cuando se define.', acciones: [{ label: 'Qué recibe cada categoría', href: '/aliados', principal: true }, { label: TEXTOS.ctaBoleta, href: RUTAS.boleta }] },
-  { re: 'vincul|aliad|cupo|mesa|lista', texto: 'Hay 20 cupos en cuatro categorías: Silicio, Platinum, Gold y Silver, y Academic para la academia. Dejas tus datos y el equipo comercial te contacta, recibes la propuesta formal y tienes 5 días hábiles para decidir.', acciones: [{ label: TEXTOS.cta, href: RUTAS.espera, principal: true }, { label: 'Qué recibe cada categoría', href: '/aliados' }] },
+  { re: 'vincul|aliad|cupo|mesa|lista', texto: 'Hay 20 cupos en cuatro categorías: Silicio, Platinum, Gold y Silver, y Academic para la academia. Te inscribes en la lista de tu categoría, recibes la propuesta formal y tienes 5 días hábiles para decidir.', acciones: [{ label: TEXTOS.cta, href: RUTAS.espera, principal: true }, { label: 'Qué recibe cada categoría', href: '/aliados' }] },
   { re: 'boleta|entrada|comprar|asistir', texto: 'La boleta única da acceso a la agenda paralela del 12 de noviembre en Bogotá. Se compra con el código del comercial que te contactó.', acciones: [{ label: TEXTOS.ctaBoleta, href: RUTAS.boleta, principal: true }] },
   { re: 'ejercicio|ttx|simulacro|decisor', texto: 'Es una crisis cibernética nacional que empieza con una anomalía pendiente de verificar y se propaga en cascada por cinco sectores. Participan 70–80 decisores. Los hallazgos son agregados y salen en un informe al D+30; nunca un ranking.', acciones: [{ label: 'Ver el panorama', href: '/ecosistema#panorama', principal: true }] },
   { re: 'ruta|2030|transversal|programa|academy|pyme', texto: 'Arranca el 12 de noviembre de 2026 con seis transversales y entregables fechados: D+30, D+90 y D+180. El rumbo llega a 2030 y después a LATAM.', acciones: [{ label: 'Ver la ruta', href: '/ruta', principal: true }] },

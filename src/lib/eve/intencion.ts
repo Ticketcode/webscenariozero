@@ -1,5 +1,4 @@
 import { ACCIONES, type RespuestaEve } from './schema';
-import { esIntencionAliado, textoInicioLead } from './flujoLead';
 import { AGENDA_PARALELA_TEXTO, RE_AGENDA_PARALELA } from '@/data/agenda';
 
 // Cierre de la conversación: cuando la persona dice que quiere dar el paso (reservar como aliado o comprar su boleta), EVE responde
@@ -7,16 +6,15 @@ import { AGENDA_PARALELA_TEXTO, RE_AGENDA_PARALELA } from '@/data/agenda';
 // "Quiero comprar mi boleta". Sin pasar por el modelo: es inmediato y no inventa nada.
 const norm = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
+const RESERVA = /\b(quiero|quisiera|deseo|me gustaria|voy a|puedo)\b.{0,30}\b(reservar|apartar|inscribirme|unirme)\b.{0,40}\b(lugar|cupo|mesa|lista|aliado)\b/;
 const BOLETA = /\b(quiero|quisiera|deseo|me gustaria|voy a)\b.{0,30}\b(comprar|adquirir|registrarme|inscribirme)\b.{0,40}\b(boleta|entrada|asistente|asistir)\b/;
 
 export function responderIntencion(pregunta: string): RespuestaEve | null {
   const q = norm(pregunta);
-  if (esIntencionAliado(pregunta)) {
-    // EVE conduce la solicitud: pregunta lo mínimo y la pasa al equipo comercial (guion fijo en flujoLead.ts).
+  if (RESERVA.test(q)) {
     return {
-      texto: textoInicioLead(),
-      acciones: [],
-      flujo: 'lead',
+      texto: 'Te inscribes en la lista de la categoría que te interese, recibes la propuesta formal y tienes 5 días hábiles para decidir.',
+      acciones: [{ ...ACCIONES.reserva, principal: true }],
       perfil: 'desconocido',
       componente: 'ninguno',
       sugerencias: [],

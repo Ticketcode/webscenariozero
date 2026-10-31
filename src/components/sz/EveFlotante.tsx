@@ -3,8 +3,7 @@ import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import EveAvatar, { eve } from './EveAvatar';
 import { PORTADA, type Respuesta } from '@/data/sz';
-import { esSolicitud, etiqueta, pedirRespuesta } from '@/lib/eve/cliente';
-import { estadoInicialLead, inicioLead, procesarLead, type EstadoLead } from '@/lib/eve/flujoLead';
+import { etiqueta, pedirRespuesta } from '@/lib/eve/cliente';
 
 type Msg = { id: number; role: 'persona' | 'eve'; texto: string; r?: Respuesta };
 
@@ -15,7 +14,6 @@ export default function EveFlotante() {
   const [msgs, setMsgs] = useState<Msg[]>([]);
   const [pensando, setPensando] = useState(false);
   const n = useRef(0);
-  const lead = useRef<EstadoLead | null>(null); // solicitud de aliado en curso (la conduce EVE con un guion fijo)
   const fin = useRef<HTMLDivElement>(null);
   const timer = useRef<ReturnType<typeof setInterval>>(undefined);
   const [escrito, setEscrito] = useState('');
@@ -47,16 +45,7 @@ export default function EveFlotante() {
     setValor('');
     setPensando(true);
     eve.estado('pensando');
-    let r: Respuesta | null = null;
-    if (lead.current) { // mientras hay solicitud en curso la procesa el guion; una pregunta la cancela y la responde EVE
-      const p = await procesarLead(lead.current, q);
-      if (p) { lead.current = p.estado; r = p.respuesta; } else lead.current = null;
-    }
-    if (!r) { r = await pedirRespuesta(q, historial); if (r.flujo === 'lead') lead.current = estadoInicialLead(); }
-    hablar(r);
-  };
-
-  const hablar = (r: Respuesta) => {
+    const r = await pedirRespuesta(q, historial);
     setPensando(false);
     setEscrito('');
     setMsgs((m) => [...m, { id: ++n.current, role: 'eve', texto: r.texto, r }]);
@@ -71,16 +60,6 @@ export default function EveFlotante() {
       setEscrito(r.texto.slice(0, i));
       if (i >= r.texto.length) { clearInterval(timer.current); terminar(); }
     }, 50);
-  };
-
-  // La solicitud de aliado se hace en el mismo chat: EVE pregunta lo mínimo y la pasa al equipo comercial.
-  const empezarSolicitud = (label: string) => {
-    if (pensando) return;
-    setMsgs((m) => [...m, { id: ++n.current, role: 'persona', texto: label.charAt(0).toUpperCase() + label.slice(1).toLowerCase() }]);
-    lead.current = estadoInicialLead();
-    setPensando(true);
-    eve.estado('pensando');
-    setTimeout(() => hablar(inicioLead()), 500);
   };
 
   const ultima = [...msgs].reverse().find((m) => m.role === 'eve');
@@ -107,7 +86,7 @@ export default function EveFlotante() {
             {msgs.map((m) => m.role === 'persona' ? <p key={m.id} className="eve-fl-msg eve-fl-p">{m.texto}</p> : (
               <div key={m.id} className="eve-fl-msg">
                 <p>{m === ultima ? escrito : m.texto}</p>
-                {m === ultima && listo && chips.length === 0 && m.r?.acciones.map((a) => <Link key={a.href + a.label} href={a.href} className="eve-fl-chip" onClick={(e) => { if (esSolicitud(a.href) && !e.metaKey && !e.ctrlKey && !e.shiftKey) { e.preventDefault(); empezarSolicitud(a.label); } }}>{etiqueta(a.label)}</Link>)}
+                {m === ultima && listo && chips.length === 0 && m.r?.acciones.map((a) => <Link key={a.href + a.label} href={a.href} className="eve-fl-chip">{etiqueta(a.label)}</Link>)}
               </div>
             ))}
             {pensando && <p className="eve-fl-msg">EVE está pensando...</p>}

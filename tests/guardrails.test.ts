@@ -4,7 +4,6 @@ import { esInyeccion, limpiarSugerencias, normalizar, revisar } from '../src/lib
 import { responderCategoria } from '../src/lib/eve/categorias';
 import { responderIntencion } from '../src/lib/eve/intencion';
 import { limitar } from '../src/lib/eve/ratelimit';
-import { estadoInicialLead, procesarLead, validarLead, validar, type EstadoLead } from '../src/lib/eve/flujoLead';
 import type { SalidaModelo } from '../src/lib/eve/schema';
 
 const base: SalidaModelo = { texto: 'Es una iniciativa privada con el respaldo de MinTIC.', perfil: 'desconocido', componente: 'ninguno', acciones: ['ecosistema'], sin_respuesta: false, sugerencias: [] };
@@ -123,8 +122,7 @@ ok('cuenta por separado a cada visitante', () => assert.equal(limitar('otra-ip',
 
 
 // Cierre de la conversación: las sugerencias de intención dan un texto fijo y solo el botón de ese paso.
-ok('"Quiero reservar mi lugar como aliado" -> inicia la solicitud (flujo lead), sin botones', () => { const r = responderIntencion('Quiero reservar mi lugar como aliado'); assert.equal(r?.flujo, 'lead'); assert.deepEqual(r?.acciones, []); assert.match(r!.texto, /¿Cómo te llamas?/); });
-ok('"Quiero ser aliado" y "quiero hablar con un comercial" también inician la solicitud', () => { assert.equal(responderIntencion('Quiero ser aliado')?.flujo, 'lead'); assert.equal(responderIntencion('Quisiera hablar con un comercial')?.flujo, 'lead'); });
+ok('"Quiero reservar mi lugar como aliado" -> solo el botón de reserva', () => { const r = responderIntencion('Quiero reservar mi lugar como aliado'); assert.deepEqual(r?.acciones.map((a) => a.label.toLowerCase()), ['reserva tu lugar en la mesa']); assert.deepEqual(r?.sugerencias, []); });
 ok('"Quiero comprar mi boleta" -> solo el botón de boleta', () => { const r = responderIntencion('Quiero comprar mi boleta'); assert.deepEqual(r?.acciones.map((a) => a.label.toLowerCase()), ['compra tu boleta']); assert.deepEqual(r?.sugerencias, []); });
 ok('una pregunta común no dispara la intención', () => { assert.equal(responderIntencion('¿Cómo me vinculo?'), null); assert.equal(responderIntencion('¿Cuánto cuesta la boleta?'), null); });
 ok('las frases de las sugerencias pasan el filtro de sugerencias', () => assert.deepEqual(limpiarSugerencias(['Quiero reservar mi lugar como aliado', 'Quiero comprar mi boleta']), ['Quiero reservar mi lugar como aliado', 'Quiero comprar mi boleta']));
@@ -132,23 +130,4 @@ ok('las frases de las sugerencias pasan el filtro de sugerencias', () => assert.
 ok('"¿Cuál es la agenda paralela?" da la definición fija (sin modelo) y sin "directorio"', () => { const r = responderIntencion('¿Cuál es la agenda paralela?'); assert.match(r!.texto, /Keynote — El algoritmo contraataca/); assert.doesNotMatch(r!.texto, /directorio/i); assert.equal(r!.fuente, 'tabla'); });
 ok('el filtro bloquea "directorio" si el modelo lo menciona', () => assert.equal(revisar(con('La boleta incluye certificado y directorio de participantes.')).ok, false));
 
-// Solicitud de aliado conducida por EVE (guion fijo).
-ok('valida correo, WhatsApp y categoría', () => { assert.equal(validar.correo('ana@banco.co'), 'ana@banco.co'); assert.equal(validar.correo('ana@banco'), null); assert.equal(validar.telefono('+57 300 000 0000'), '+57 300 000 0000'); assert.equal(validar.telefono('abc'), null); assert.equal(validar.categoria('Gold'), 'Gold'); assert.equal(validar.categoria('no sé'), 'Por definir con el equipo'); assert.equal(validar.categoria('xyz'), null); });
-ok('validarLead rechaza datos incompletos', () => { assert.equal(validarLead({ nombre: 'Ana' }), null); });
-
-const paso = async (e: EstadoLead | null, t: string) => (await procesarLead(e!, t))!;
-(async () => {
-  let p = await paso(estadoInicialLead(), 'Ana Pérez'); assert.match(p.respuesta.texto, /organización/);
-  p = await paso(p.estado, 'Banco X, directora de riesgos'); assert.match(p.respuesta.texto, /categoría/);
-  p = await paso(p.estado, 'Gold'); assert.match(p.respuesta.texto, /correo/);
-  p = await paso(p.estado, 'correo-malo'); assert.match(p.respuesta.texto, /no parece válido/); assert.equal(p.estado!.paso, 3);
-  p = await paso(p.estado, 'ana@banco.co'); assert.match(p.respuesta.texto, /WhatsApp/);
-  p = await paso(p.estado, '+57 300 000 0000'); assert.match(p.respuesta.texto, /Algo que quieras/);
-  p = await paso(p.estado, 'no'); assert.match(p.respuesta.texto, /Esto es lo que voy a enviar/); assert.match(p.respuesta.texto, /no garantiza un cupo/); assert.deepEqual(p.respuesta.sugerencias, ['Sí, enviar', 'Corregir mis datos']);
-  n++; console.log('  ✓ el guion pide los datos en orden, repite si son inválidos y pide confirmación');
-  const c = await paso({ paso: 2, datos: {} }, 'mejor no'); assert.equal(c.estado, null); assert.equal(await procesarLead({ paso: 2, datos: {} }, '¿Cuánto cuesta?'), null);
-  n++; console.log('  ✓ cancelar cierra la solicitud y una pregunta la deja al modelo');
-  const r = await paso({ paso: 6, datos: { nombre: 'Ana' } }, 'Corregir mis datos'); assert.equal(r.estado!.paso, 0);
-  n++; console.log('  ✓ "corregir" en la confirmación reinicia el guion');
-  console.log(`\n${n} pruebas pasaron`);
-})();
+console.log(`\n${n} pruebas pasaron`);

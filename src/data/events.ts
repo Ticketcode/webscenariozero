@@ -94,7 +94,7 @@ export const bogota: EventoData = {
   faq: [
     { q: '¿Dónde y a qué hora es?', a: 'En Américas BPS, calle 26, Bogotá, Colombia. El horario se publicará aquí apenas esté confirmado.' },
     { q: '¿La boleta da acceso al salón oval?', a: 'No. La boleta da acceso a la agenda paralela. El salón oval es el Simulacro nacional de ciberseguridad, con 70 a 80 decisores.' },
-    { q: '¿Cómo participo como aliado en la mesa?', a: 'Los cupos se acuerdan con el equipo. Cuéntale a EVE o deja tus datos y una persona del equipo comercial te contacta.' },
+    { q: '¿Cómo participo como aliado en la mesa?', a: 'Los cupos se acuerdan con el equipo. Inscríbete en la lista de espera y una persona te contacta.' },
     { q: '¿Me registro igual si soy aliado o invitado?', a: '[Por definir]' },
     { q: '¿Habrá eventos en otras ciudades?', a: 'Sí. Bogotá es el primero; el ecosistema tiene eventos en todo el país entre 2026 y 2030. Las próximas ciudades se anunciarán en esta página.' },
   ],
@@ -105,5 +105,18 @@ export const eventoActivo = bogota;
 
 // Ciudades sin confirmar: la landing global muestra la tarjeta punteada `[Ciudad por anunciar]`.
 export const proximosEventos: { ciudad: string | null }[] = [{ ciudad: null }, { ciudad: null }];
+
+export const listaEsperaFaq = [
+  { q: '¿Cuánto cuesta un cupo?', a: 'Se acuerda directamente con el equipo, según el perfil de cada organización.' },
+  { q: '¿Inscribirme garantiza un cupo?', a: 'No. La lista permite que el equipo te contacte; la confirmación se da tras la conversación y el acuerdo.' },
+  { q: '¿Cuándo me contactan?', a: 'En un día hábil.' },
+  { q: '¿Qué datos piden?', a: 'Los de tu organización y un contacto. Se tratan según la política de datos personales.' },
+];
+
+export const pasosListaEspera = [
+  { n: '1', title: 'Inscríbete en la lista', text: 'Completa el formulario con los datos de tu organización.' },
+  { n: '2', title: 'Te contactamos', text: 'Una persona del equipo te escribe para conversar sobre tu perfil y las opciones en la mesa.' },
+  { n: '3', title: 'Acordamos y formalizamos', text: 'Si hay acuerdo, el equipo te acompaña hasta confirmar tu cupo.' },
+];
 
 export const PENDIENTE = '[Por confirmar]';
