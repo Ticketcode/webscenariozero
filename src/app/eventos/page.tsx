@@ -16,9 +16,9 @@ export default function Eventos() {
               <article key={f.ciudad} className="sz-card">
                 <p className="sz-estado-tag">{f.estado}</p>
                 <h3>{f.ciudad}</h3>
-                <p className="sz-etq" style={{ margin: '8px 0' }}>{f.fecha}</p>
+                <p className="sz-etq" style={{ margin: '4px 0 18px' }}>{f.fecha}</p>
                 <p>{f.texto}</p>
-                {f.href && <Link href={f.href} className="sz-btn sz-btn-ghost" style={{ marginTop: 20 }}>Ver la ficha</Link>}
+                {f.href && <Link href={f.href} className="sz-btn sz-btn-ghost" style={{ marginTop: 28 }}>Ver la ficha</Link>}
               </article>
             ))}
           </div>

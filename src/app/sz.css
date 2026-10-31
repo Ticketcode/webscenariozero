@@ -389,3 +389,8 @@
     @keyframes sz-sube { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
   }
 }
+
+/* etiqueta de estado, título y fecha de las tarjetas con más aire */
+.sz-card .sz-estado-tag { margin: 0 0 20px; line-height: 1.6; }
+.sz-card .sz-estado-tag + h3 { margin-bottom: 8px; }
+.sz-card .sz-etq { line-height: 1.6; }
