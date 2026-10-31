@@ -42,7 +42,7 @@ export default async function EventoPage({ params }: Props) {
   return (
     <>
       <Header
-        links={[{ href: '#formas', label: 'Participar' }, { href: '#aliados', label: 'Aliados' }, { href: '#entradas', label: 'Entradas' }, { href: '#faq', label: 'Preguntas' }]}
+        links={[{ href: '#formas', label: 'Participar' }, { href: '#aliados', label: 'Aliados' }, { href: '#faq', label: 'Preguntas' }]}
         right={<a className="btn btn-sm" href="#entradas">Entradas</a>}
       />
       <main>
