@@ -4,6 +4,7 @@ import type { ReactNode } from 'react';
 import Loader from '@/components/home/Loader';
 import QuitaPuerta from './QuitaPuerta';
 import EveFlotante from './EveFlotante';
+import NavLinks from './NavLinks';
 import { NAV, RUTAS, TEXTOS } from '@/data/sz';
 
 // Estructura común del sitio global: cabecera, contenido, franja institucional y pie.
@@ -19,13 +20,13 @@ export function Shell({ children, loader = false, home = false }: { children: Re
             <Image src="/brand/scenario-zero-horizontal.png" alt="Scenario Zero" width={900} height={435} priority />
           </Link>
           <nav className="sz-nav" aria-label="Principal">
-            {NAV.map((n) => <Link key={n.href} href={n.href}>{n.label}</Link>)}
+            <NavLinks items={NAV} />
           </nav>
           <Link href="/ecosistema" className="sz-btn sz-btn-ghost sz-explorar">{TEXTOS.explorar}</Link>
         </div>
         <details className="sz-menu">
           <summary>Menú</summary>
-          <div>{NAV.map((n) => <Link key={n.href} href={n.href}>{n.label}</Link>)}</div>
+          <div><NavLinks items={NAV} /></div>
         </details>
       </header>
       <main id="contenido">{children}</main>
@@ -33,7 +34,7 @@ export function Shell({ children, loader = false, home = false }: { children: Re
       <footer className="sz-foot">
         <div className="sz-wrap">
           <p className="sz-foot-1">{TEXTOS.pie1}</p>
-          <p className="sz-foot-2">{TEXTOS.pie2}</p>
+          <p className="sz-foot-2">{TEXTOS.pie2} <Image className="mintic-in" src="/brand/mintic-oficial.png" alt="MinTIC" width={300} height={584} /></p>
           <p className="sz-foot-links">
             <Link href="/politica-de-datos">{TEXTOS.pieEnlaces[0]}</Link>
             <Link href="/terminos-y-condiciones">{TEXTOS.pieEnlaces[1]}</Link>

@@ -96,7 +96,6 @@ export const CIFRA_APERTURA = { texto: 'Según MinTIC, en 2024 Colombia gestion�
 export const CIFRAS: Cifra[] = [
   { texto: 'Según Asobancaria, los bancos colombianos reciben más de 1.000 ciberataques por segundo — 32.000 millones en 2025 — y han invertido COP 1,74 billones en ciberseguridad en los últimos dos años.', fuente: 'Asobancaria, vía Ricardo Ávila Pinto, “Un riesgo sistémico”, El Tiempo, 17 oct 2026', url: null, estado: 'verificada' },
   { texto: 'Solo el 24 % de los colombianos confía en que sus datos personales están protegidos frente a la IA; más del 60 % pide más cooperación entre gobierno y sector privado para gobernarla.', fuente: 'Centro Nacional de Consultoría (CNC), estudio “Apropiación Digital” Colombia/Chile/Perú 2025', url: null, estado: 'verificada' },
-  { texto: 'Entre quienes no usan internet en Colombia, el 7 % dice que es muy inseguro y el 6 % que le preocupa su privacidad.', fuente: 'Centro Nacional de Consultoría (CNC), estudio “Apropiación Digital” Colombia/Chile/Perú 2025', url: null, estado: 'verificada' },
   { texto: 'Según MinTIC, en 2025 se gestionaron 697 incidentes de seguridad digital, y en los últimos dos años el fraude representó el 79,83 % de los incidentes.', fuente: 'MinTIC', url: null, estado: 'verificada' },
   { texto: 'El mercado de ciberseguridad en Colombia pasaría de cerca de USD 280 millones en 2024 a unos USD 1.102 millones en 2034, un crecimiento del 14,7 % anual.', fuente: 'ICEX España', url: null, estado: 'verificada' },
 ];

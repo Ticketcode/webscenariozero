@@ -166,3 +166,8 @@ h2.h-sm { font-size: clamp(22px, 2.4vw, 28px); letter-spacing: -.01em; margin-bo
 /* mismo logo que el sitio global en la cabecera de las páginas de evento */
 .brand-logo { display: block; flex: none; }
 .brand-logo img { display: block; height: clamp(60px, 7vw, 88px); width: auto; }
+
+/* volver al inicio desde las páginas de evento */
+.top .volver { text-decoration: none; color: var(--muted); font-size: 14px; min-height: 44px; display: inline-flex; align-items: center; white-space: nowrap; margin-right: auto; margin-left: 16px; }
+.top .volver:hover { color: var(--fg); }
+.top .mintic-in, .foot .mintic-in { height: 22px; width: auto; margin-left: 8px; vertical-align: middle; }

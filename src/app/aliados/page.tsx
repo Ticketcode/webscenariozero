@@ -32,7 +32,7 @@ export default function Aliados() {
             {A.pasos.map((p, i) => <li key={p}><b>{String(i + 1).padStart(2, '0')}</b><span>{p}</span></li>)}
           </ol>
           <p className="sz-nota">{A.nota}</p>
-          <CtaRow />
+          <CtaRow boleta />
           <p className="sz-nota" style={{ marginTop: 48 }}>{A.credencial}</p>
           <p className="sz-nota">{A.marca}</p>
         </div>

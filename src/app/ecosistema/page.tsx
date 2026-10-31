@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Reveal from '@/components/Reveal';
 import { CtaRow, PageHead, Shell } from '@/components/sz/Shell';
 import { CIFRAS, CIFRA_APERTURA, ECOSISTEMA as E, PANORAMA as P, SEO } from '@/data/sz';
 
@@ -34,11 +35,11 @@ export default function Ecosistema() {
             <h2 className="sz-h2 sz-apertura">{CIFRA_APERTURA.texto}</h2>
             <p className="sz-fuente">Fuente: {CIFRA_APERTURA.fuente}</p>
             <div className="sz-grid" style={{ marginTop: 40 }}>
-              {cifras.map((c) => (
-                <article key={c.texto} className="sz-card">
+              {cifras.map((c, i) => (
+                <Reveal as="article" key={c.texto} className="sz-card" delay={i * 90}>
                   <p>{c.texto}</p>
                   <p className="sz-fuente">Fuente: {c.url ? <a href={c.url} target="_blank" rel="noopener noreferrer">{c.fuente}</a> : c.fuente}</p>
-                </article>
+                </Reveal>
               ))}
             </div>
           </div>
@@ -48,7 +49,7 @@ export default function Ecosistema() {
             <h2 className="sz-h2">Las seis transversales</h2>
             <p className="sz-lead">{P.bajada}</p>
             <div className="sz-grid" style={{ marginTop: 32 }}>
-              {P.transversales.map(([t, x]) => <article key={t} className="sz-card"><h3>{t}</h3><p>{x}</p></article>)}
+              {P.transversales.map(([t, x], i) => <Reveal as="article" key={t} className="sz-card sz-card-cian" delay={i * 80}><h3>{t}</h3><p>{x}</p></Reveal>)}
             </div>
             <p className="sz-nota">{P.fase2}</p>
           </div>
@@ -56,7 +57,7 @@ export default function Ecosistema() {
         <section className="sz-sec">
           <div className="sz-wrap">
             <h2 className="sz-h2">Cinco sectores críticos</h2>
-            <div className="sz-pills">{P.sectores.map((x) => <span key={x} className="sz-pill">{x}</span>)}</div>
+            <div className="sz-pills sz-sectores">{P.sectores.map((x, i) => <Reveal as="span" key={x} className="sz-pill" delay={i * 110}>{x}</Reveal>)}</div>
             <p className="sz-nota">{P.sectoresTexto}</p>
           </div>
         </section>
@@ -64,7 +65,7 @@ export default function Ecosistema() {
           <div className="sz-wrap">
             <h2 className="sz-h2">Cuatro palancas: dónde gana tu organización</h2>
             <div className="sz-grid">
-              {P.palancas.map(([t, x]) => <article key={t} className="sz-card"><h3>{t}</h3><p>{x}</p></article>)}
+              {P.palancas.map(([t, x], i) => <Reveal as="article" key={t} className="sz-card" delay={i * 110}><h3>{t}</h3><p>{x}</p></Reveal>)}
             </div>
           </div>
         </section>
