@@ -23,6 +23,7 @@ export function Shell({ children, loader = false, home = false }: { children: Re
             <NavLinks items={NAV} />
           </nav>
           <Link href="/ecosistema" className="sz-btn sz-btn-ghost sz-explorar">{TEXTOS.explorar}</Link>
+          <Image className="sz-mintic-h" src="/brand/mintic.png" alt="Con el respaldo de MinTIC" width={131} height={260} />
         </div>
         <details className="sz-menu">
           <summary>Menú</summary>

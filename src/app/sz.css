@@ -367,3 +367,25 @@
   .g-nodo, .g-anillo-lienzo line, .g-col-barra i, .g-red ol::after, .g-red li, .g-red li i { transition: none; }
 }
 .g-red p.g-red-nota { margin-top: 32px; }
+
+/* MinTIC en la cabecera de todo el sitio */
+.sz-mintic-h { height: clamp(40px, 4vw, 54px); width: auto; flex: none; margin-left: 8px; }
+
+/* divisores muy sutiles entre secciones, de tres tipos que se alternan: línea de luz, puntos y pulso */
+.sz-sec { position: relative; }
+.sz-sec:not(.sz-pagehead):not(.sz-claro)::before { content: ''; position: absolute; top: 0; left: 50%; width: min(1120px, 92vw); transform: translateX(-50%); pointer-events: none; opacity: .9; }
+.sz-sec:nth-of-type(3n+1):not(.sz-pagehead):not(.sz-claro)::before { height: 1px; background: linear-gradient(90deg, transparent, rgba(0, 200, 248, .4), transparent); }
+.sz-sec:nth-of-type(3n+2):not(.sz-pagehead):not(.sz-claro)::before { height: 6px; top: -3px; background: radial-gradient(circle, rgba(0, 200, 248, .55) 1.5px, transparent 2px) 0 50% / 18px 6px repeat-x; -webkit-mask: linear-gradient(90deg, transparent, #000 25%, #000 75%, transparent); mask: linear-gradient(90deg, transparent, #000 25%, #000 75%, transparent); }
+.sz-sec:nth-of-type(3n):not(.sz-pagehead):not(.sz-claro)::before { height: 24px; top: -12px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 24'%3E%3Cpath d='M0 12H90L98 12L104 3L112 21L118 12H126L131 7L136 12H240' fill='none' stroke='%2300C8F8' stroke-opacity='.5' stroke-width='1'/%3E%3C/svg%3E") center / 240px 24px no-repeat, linear-gradient(90deg, transparent, rgba(0, 200, 248, .22) 30%, rgba(0, 200, 248, .22) 70%, transparent) center / 100% 1px no-repeat; }
+/* secciones claras: borde en diagonal para pasar del fondo oscuro al claro y volver */
+.sz-claro { position: relative; }
+.sz-claro::before, .sz-claro::after { content: ''; position: absolute; left: 0; right: 0; height: clamp(28px, 4vw, 56px); background: #F2F6FA; pointer-events: none; }
+.sz-claro::before { bottom: 100%; clip-path: polygon(0 100%, 100% 0, 100% 100%); }
+.sz-claro::after { top: 100%; clip-path: polygon(0 0, 100% 0, 0 100%); }
+/* los títulos y textos de apertura entran con un desplazamiento suave (solo donde el navegador lo soporta) */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .sz-sec:not(.sz-pagehead) .sz-h2, .sz-sec:not(.sz-pagehead) .sz-lead { animation: sz-sube both linear; animation-timeline: view(); animation-range: entry 0% entry 35%; }
+    @keyframes sz-sube { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+  }
+}

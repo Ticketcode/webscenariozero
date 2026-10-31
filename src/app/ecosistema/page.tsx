@@ -13,7 +13,7 @@ export default function Ecosistema() {
   return (
     <Shell>
       <PageHead antetitulo={E.antetitulo} titular={E.titular} bajada={E.bajada} />
-      <section className="sz-sec">
+      <section className="sz-sec sz-claro">
         <div className="sz-wrap">
           <h2 className="sz-h2">Qué es y qué no es</h2>
           <div className="sz-grid">

@@ -21,11 +21,12 @@ export default function Header({ links = [], right, logos = false }: { links?: {
         <Link href="/" className="brand-logo" aria-label="Scenario Zero, inicio">
           <Image src="/brand/scenario-zero-horizontal.png" alt="Scenario Zero" width={900} height={435} priority />
         </Link>
-        <Link href="/" className="volver">← Inicio</Link>
+        <Link href="/" className="volver">← Volver</Link>
         <nav aria-label="Principal">
           {links.map((l) => <a key={l.href} href={l.href}>{l.label}</a>)}
           {right}
         </nav>
+        <Image className="logo-mintic-h" src="/brand/mintic.png" alt="Con el respaldo de MinTIC" width={131} height={260} />
       </div>
     </header>
   );

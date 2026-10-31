@@ -9,7 +9,7 @@ export default function Aliados() {
   return (
     <Shell>
       <PageHead antetitulo={A.antetitulo} titular={A.titular} bajada={A.bajada} />
-      <section className="sz-sec">
+      <section className="sz-sec sz-claro">
         <div className="sz-wrap">
           <h2 className="sz-h2">Qué recibe cada categoría</h2>
           <div className="sz-grid">
