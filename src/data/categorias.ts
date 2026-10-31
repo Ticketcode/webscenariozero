@@ -13,7 +13,7 @@ export type Categoria = {
 export const CATEGORIAS: Categoria[] = [
   {
     id: 'silicio', nombre: 'Silicio', cupos: 2,
-    rol: 'Diseñas el ejercicio y tienes voz: abres o cierras el ejercicio nacional. Eres aliado ancla de una transversal y eliges primero.',
+    rol: 'Diseñas el ejercicio y tienes voz: abres o cierras el Simulacro nacional de ciberseguridad. Eres aliado ancla de una transversal y eliges primero.',
     recibe: { sillas: '3 sillas en el ejercicio', reuniones: '12 reuniones 1 a 1 prioritarias', boletas: '10 boletas para tus clientes', presencia: 'presencia en Bogotá, Villavicencio y Medellín' },
   },
   {

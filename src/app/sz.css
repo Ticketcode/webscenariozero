@@ -188,7 +188,7 @@
 .eve-fl-panel form button { flex: none; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #00C8F8; color: #000119; font-size: 20px; font-weight: 700; cursor: pointer; }
 
 /* logo del encabezado más grande */
-.sz-logo img { height: clamp(60px, 7vw, 88px); }
+.sz-logo img { height: clamp(72px, 8vw, 112px); max-width: 100%; }
 
 /* móvil: el texto del campo no debe chocar con el botón de enviar */
 .sz-ask input { width: 0; text-overflow: ellipsis; }
@@ -198,7 +198,7 @@
   .sz-ask button { width: 48px; height: 48px; }
 }
 .mapa { display: block; width: 100%; height: 360px; margin-top: 24px; border: 1px solid rgba(25, 188, 232, .35); border-radius: 16px; }
-@media (max-width: 600px) { .eve-fl-btn { width: 52px; height: 52px; } .eve-fl-btn canvas { width: 36px; height: 36px; } }
+@media (max-width: 600px) { .eve-fl-btn { width: 52px; height: 52px; } .eve-fl-btn canvas { width: 36px !important; height: 36px !important; } }
 /* el botón flotante de EVE no debe tapar los enlaces del pie al llegar al final */
 .sz-foot, .foot { padding-bottom: 96px; }
 @media (max-width: 600px) { .eve-fl { transition: opacity .2s; } .eve-fl-scroll { opacity: 0; pointer-events: none; } }
@@ -259,3 +259,31 @@
 .roi-cols p:not(.eyebrow) { line-height: 1.6; margin: 0; }
 .roi-cierre { margin: 28px 0 0; font-size: 18px; }
 @media (max-width: 760px) { .roi-cols { grid-template-columns: 1fr; } }
+
+/* en la conversación de la puerta el cuadro de texto baja con ella: queda al final del hilo, fijo al borde inferior */
+.gate .sz-pov-conv .sz-pov-ask { order: 10; position: sticky; bottom: 12px; z-index: 2; background: var(--noche); }
+.gate .sz-pov-conv { padding-bottom: 24px; }
+
+/* solicitud de aliado y política de datos */
+.sol { display: grid; gap: 18px; max-width: 640px; }
+.sol label { display: grid; gap: 8px; font-size: 15px; color: var(--niebla); }
+.sol input[type=text], .sol input[type=email], .sol input[type=tel], .sol select, .sol textarea { width: 100%; min-height: 48px; padding: 12px 16px; border-radius: 12px; border: 1px solid var(--linea); background: rgba(255, 255, 255, .04); color: var(--papel); font: inherit; font-size: 16px; }
+.sol input:focus, .sol select:focus, .sol textarea:focus { outline: 2px solid var(--brillo); outline-offset: 1px; }
+.sol select option { color: #000119; }
+.sol-web { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.sol .sol-check { display: flex; align-items: flex-start; gap: 12px; }
+.sol .sol-check input { width: 22px; height: 22px; margin-top: 2px; flex: none; }
+.sol .sol-check a, .politica a { color: var(--brillo); }
+.sol-error { color: #ffb4a8; margin: 0; }
+.sol-nota { font-size: 14px; color: var(--niebla); margin: 0; }
+.sol button.sz-btn { justify-self: start; min-height: 48px; }
+.sol-ok { max-width: 640px; padding: 28px; border: 1px solid var(--brillo); border-radius: 16px; background: rgba(0, 200, 248, .06); }
+.sol-ok h2 { margin: 0 0 8px; }
+.politica { max-width: 760px; }
+.politica h2 { font-size: 20px; margin: 28px 0 8px; }
+.politica p { line-height: 1.65; }
+@media (max-width: 640px) { .sol button.sz-btn { justify-self: stretch; } }
+
+/* el anillo de EVE queda centrado en el círculo: sin relleno del botón y con el lienzo del tamaño que dicta el CSS */
+.eve-fl-btn { padding: 0; }
+.eve-fl-btn canvas { display: block; margin: auto; }

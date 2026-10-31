@@ -18,8 +18,9 @@ export default function Footer({ variant = 'completo', fecha }: { variant?: 'com
           <p className="dim">Ecosistema de confianza digital y tecnológica · Con el respaldo de MinTIC</p>
         </div>
         <div className="foot-links">
-          <span>[Correo de contacto]</span>
-          <span>[Política de datos personales]</span>
+          <a href="mailto:operaciones@scenariozero.org">operaciones@scenariozero.org</a>
+          <a href="/politica-de-datos">Política de tratamiento de datos</a>
+          <a href="/terminos-y-condiciones">Términos y condiciones</a>
         </div>
       </div>
     </footer>

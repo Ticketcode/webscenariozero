@@ -23,21 +23,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const e = eventos[(await params).slug];
   if (!e) return {};
   const title = `${e.ciudad} · ${e.fechaLarga}`;
-  const description = `Scenario Zero abre el ecosistema el ${e.fechaLarga} en ${e.ciudad}: entradas, ejercicio nacional y salón oval.`;
+  const description = `Scenario Zero abre el ecosistema el ${e.fechaLarga} en ${e.ciudad}: entradas, Simulacro nacional de ciberseguridad y salón oval.`;
   return { title, description, openGraph: { title, description, type: 'website' } };
 }
 
 export default async function EventoPage({ params }: Props) {
   const e = eventos[(await params).slug];
   if (!e) notFound();
-  const espera = `/eventos/${e.slug}/lista-de-espera`;
+  const espera = '/aliados/solicitud';
   const abiertos = 20 - e.aliadosConfirmados.length;
   const boleta = {
     proximamente: `Venta desde el ${e.ventaDesdeLarga}`,
     venta_abierta: `Venta abierta desde el ${e.ventaDesdeLarga}`,
     agotada: 'Boletas agotadas',
   }[e.estadoBoleta];
-  const ctaEspera = { abierta: 'Unirme a la lista de espera', llena: 'Lista de espera llena', cerrada: 'Lista de espera cerrada' }[e.estadoListaEspera];
+  const ctaEspera = 'Quiero ser aliado';
 
   return (
     <>
@@ -66,7 +66,7 @@ export default async function EventoPage({ params }: Props) {
                 <Link className="door" href={espera}>
                   <span className="door-k">Para aliados</span>
                   <strong>Quiero ser aliado →</strong>
-                  <span>Cupo en la mesa del salón oval, por lista de espera.</span>
+                  <span>Cupo en la mesa del salón oval, con el equipo comercial.</span>
                 </Link>
               </div>
             </div>
@@ -100,11 +100,11 @@ export default async function EventoPage({ params }: Props) {
           </div>
         </section>
 
-        <section className="sec alt" id="hangares">
+        <section className="sec alt" id="espacios">
           <div className="wrap">
-            <Reveal><p className="eyebrow">Hangares</p><h2>Cuatro hangares. <span className="acc">Un solo ecosistema en marcha.</span></h2></Reveal>
+            <Reveal><p className="eyebrow">Espacios</p><h2>Cuatro espacios. <span className="acc">Un solo ecosistema en marcha.</span></h2></Reveal>
             <div className="cards">
-              {e.hangares.map((h, i) => (
+              {e.espacios.map((h, i) => (
                 <Reveal key={h.id} className="card" delay={i * 80}>
                   <div className="when">{h.id}</div>
                   <h3>{h.title}</h3>
@@ -117,7 +117,7 @@ export default async function EventoPage({ params }: Props) {
 
         <section className="sec" id="ejercicio">
           <div className="wrap">
-            <Reveal><p className="eyebrow">Hangar 2 · El ejercicio nacional</p><h2>La primera muestra de lo que el ecosistema hará en todo el país.</h2></Reveal>
+            <Reveal><p className="eyebrow">Espacio 2 · El Simulacro nacional de ciberseguridad</p><h2>La primera muestra de lo que el ecosistema hará en todo el país.</h2></Reveal>
             <ol className="fases">
               {e.fases.map((f, i) => (
                 <Reveal as="li" key={f.k} delay={i * 90}><span className="when">{String(i + 1).padStart(2, '0')} · {f.k.toUpperCase()}</span><p>{f.v}</p></Reveal>
@@ -139,7 +139,7 @@ export default async function EventoPage({ params }: Props) {
                 <div className="when">ASISTENTES</div><h3>Boleta única</h3>
                 <ul>
                   <li>Agenda paralela: agenda personalizada, sesiones (keynote, stand up chat y panel), Evidence Floor - Experiencias y networking con reuniones 1 a 1.</li>
-                  <li>Después: informe al D+30, certificado y directorio autorizado de participantes.</li>
+                  <li>Después: informe al D+30 y certificado.</li>
                   <li>Se compra aquí, en el formulario de Ticketcode del evento.</li>
                   <li>EVE te acompaña por WhatsApp y te conecta con personas afines.</li>
                 </ul>
@@ -148,28 +148,28 @@ export default async function EventoPage({ params }: Props) {
               <Reveal className="forma aliados" delay={120}>
                 <div className="when">ALIADOS</div><h3>Cupo en la mesa</h3>
                 <ul>
-                  <li>Un lugar en el salón oval, el ejercicio nacional, en una de las 34 posiciones numeradas.</li>
+                  <li>Un lugar en el salón oval, el Simulacro nacional de ciberseguridad, en una de las 34 posiciones numeradas.</li>
                   <li>Cuatro distancias a la mesa: Silicio, Platinum, Gold y Silver, con 20 cupos en total.</li>
                   <li>Se acuerda directamente con el equipo; esta página no publica precios.</li>
-                  <li>Se empieza en la lista de espera. Inscribirte no garantiza un cupo.</li>
+                  <li>Se empieza con una solicitud: un comercial te contacta. Enviarla no garantiza un cupo.</li>
                   <li>Tu logo aparece en esta página cuando confirmas.</li>
                 </ul>
-                <Link className="btn btn-ghost" href={espera}>Unirme a la lista de espera</Link>
+                <Link className="btn btn-ghost" href={espera}>Quiero ser aliado</Link>
               </Reveal>
             </div>
-            <p className="note">La boleta no da acceso al salón oval. El salón oval es el ejercicio nacional, con 70 a 80 decisores.</p>
+            <p className="note">La boleta no da acceso al salón oval. El salón oval es el Simulacro nacional de ciberseguridad, con 70 a 80 decisores.</p>
           </div>
         </section>
 
         <section className="sec" id="mesa">
           <div className="wrap">
             <Reveal>
-              <p className="eyebrow">Hangar 2 · Dónde se ubica cada aliado</p>
+              <p className="eyebrow">Espacio 2 · Dónde se ubica cada aliado</p>
               <h2>La proximidad a la mesa es el producto.</h2>
-              <p className="muted lead">34 posiciones numeradas en cuatro distancias. Los cupos de la mesa se acuerdan en una conversación con el equipo. Para empezar, únete a la lista de espera.</p>
+              <p className="muted lead">34 posiciones numeradas en cuatro distancias. Los cupos de la mesa se acuerdan en una conversación con el equipo. Para empezar, deja tu solicitud y un comercial te contacta.</p>
             </Reveal>
             <MesaResumen anillos={e.mesa.anillos} />
-            <Link className="btn" href={espera} style={{ marginTop: 32 }}>Unirme a la lista de espera →</Link>
+            <Link className="btn" href={espera} style={{ marginTop: 32 }}>Quiero ser aliado →</Link>
           </div>
         </section>
 
@@ -224,9 +224,7 @@ export default async function EventoPage({ params }: Props) {
               <p className="chip-estado"><i aria-hidden /> {boleta}</p>
               <p className="muted">Se venden bloques corporativos. Un aliado puede patrocinar boletas para las pymes de su cadena. <strong>La boleta no da acceso al salón oval.</strong></p>
               <div className="eve"><strong>EVE</strong><p>Al completar tu registro, EVE, nuestra asistente de IA, te lo confirma por WhatsApp, te resuelve dudas de agenda, ubicación y accesos, y te conecta con personas afines a tu rol.</p></div>
-              {e.estadoListaEspera === 'abierta' && (
-                <p className="muted" style={{ marginTop: 24 }}>¿Quieres un lugar en el salón oval? Los cupos de la mesa se acuerdan con el equipo. <Link className="lnk" href={espera}>Unirme a la lista de espera →</Link></p>
-              )}
+                              <p className="muted" style={{ marginTop: 24 }}>¿Quieres un lugar en el salón oval? Los cupos de la mesa se acuerdan con el equipo. <Link className="lnk" href={espera}>Quiero ser aliado →</Link></p>
             </div>
             <div className="form-card">
               {e.estadoBoleta === 'venta_abierta'

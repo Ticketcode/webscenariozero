@@ -1,4 +1,5 @@
-import { responder as respaldo, type Respuesta } from '@/data/sz';
+import { responder as respaldo, RUTAS, type Respuesta } from '@/data/sz';
+import { esIntencionAliado, inicioLead } from './flujoLead';
 
 export type Turno = { rol: 'persona' | 'eve'; texto: string };
 
@@ -24,6 +25,12 @@ export const eleccionDe = (label: string) => sentencia(label);
 
 // Pide la respuesta a /api/eve. Si el modelo no está disponible (sin llave, caído) usa las respuestas de respaldo del Anexo B,
 // así la experiencia nunca se rompe. Con el límite de uso (429) muestra el mensaje de señal perdida.
+// Sin modelo, la intención de ser aliado igual inicia la solicitud.
+const respaldoDe = (pregunta: string): Respuesta => (esIntencionAliado(pregunta) ? inicioLead() : respaldo(pregunta));
+
+// ¿El botón es el de la solicitud de aliado? En el chat no se navega: EVE conduce la solicitud ahí mismo.
+export const esSolicitud = (href: string) => href === RUTAS.espera;
+
 export async function pedirRespuesta(pregunta: string, historial: Turno[]): Promise<Respuesta> {
   try {
     const r = await fetch('/api/eve', {
@@ -32,10 +39,10 @@ export async function pedirRespuesta(pregunta: string, historial: Turno[]): Prom
       body: JSON.stringify({ pregunta, historial }),
     });
     if (r.status === 429) return { re: '', texto: ERROR_SENAL, acciones: [{ label: 'Hablar con el equipo', href: '/contacto', principal: true }], sugerencias: [] };
-    if (!r.ok) return respaldo(pregunta);
-    const d = (await r.json()) as { texto: string; acciones: { label: string; href: string; principal?: boolean }[]; sugerencias?: string[] };
-    return { re: '', texto: d.texto, acciones: d.acciones, sugerencias: d.sugerencias ?? [] };
+    if (!r.ok) return respaldoDe(pregunta);
+    const d = (await r.json()) as { texto: string; acciones: { label: string; href: string; principal?: boolean }[]; sugerencias?: string[]; flujo?: 'lead' };
+    return { re: '', texto: d.texto, acciones: d.acciones, sugerencias: d.sugerencias ?? [], flujo: d.flujo };
   } catch {
-    return respaldo(pregunta);
+    return respaldoDe(pregunta);
   }
 }

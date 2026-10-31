@@ -4,7 +4,8 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import EveAvatar, { eve } from './EveAvatar';
 import { PORTADA, type Respuesta } from '@/data/sz';
-import { eleccionDe, etiqueta, mensajeAlElegir, pedirRespuesta } from '@/lib/eve/cliente';
+import { eleccionDe, esSolicitud, etiqueta, mensajeAlElegir, pedirRespuesta } from '@/lib/eve/cliente';
+import { estadoInicialLead, inicioLead, procesarLead, type EstadoLead } from '@/lib/eve/flujoLead';
 
 type Msg = { id: number; role: 'persona' | 'eve'; texto: string; r?: Respuesta };
 
@@ -34,6 +35,9 @@ export default function Portada() {
   const hiloP = useRef<HTMLDivElement>(null);
   const povRef = useRef<HTMLDivElement>(null);
   const n = useRef(0);
+  const lead = useRef<EstadoLead | null>(null); // solicitud de aliado en curso (la conduce EVE con un guion fijo)
+  const tecleo = useRef<ReturnType<typeof setInterval>>(undefined);
+  const tecleando = useRef(false);
 
   useEffect(() => {
     const f = () => { setGrande(window.innerWidth >= 1000 ? 420 : 200); setGran(Math.round(Math.min(380, window.innerWidth * 0.72, window.innerHeight * 0.42))); };
@@ -52,7 +56,37 @@ export default function Portada() {
     setValorP('');
     setEstado('EVE está pensando...');
     eve.estado('pensando');
-    Promise.all([pedirRespuesta(q, historial), new Promise((ok) => setTimeout(ok, reduce() ? 0 : 900))]).then(([r]) => hablar(r));
+    Promise.all([obtener(q, historial), new Promise((ok) => setTimeout(ok, reduce() ? 0 : 900))]).then(([r]) => hablar(r as Respuesta));
+  };
+
+  // Mientras hay una solicitud de aliado en curso, lo que se escribe lo procesa el guion (no el modelo); si la persona hace una
+  // pregunta, la solicitud se cancela y la responde EVE normalmente.
+  const obtener = async (q: string, historial: { rol: 'persona' | 'eve'; texto: string }[]): Promise<Respuesta> => {
+    if (lead.current) {
+      const p = await procesarLead(lead.current, q);
+      if (p) { lead.current = p.estado; return p.respuesta; }
+      lead.current = null;
+    }
+    const r = await pedirRespuesta(q, historial);
+    if (r.flujo === 'lead') lead.current = estadoInicialLead();
+    return r;
+  };
+
+  // Al elegir una opción, su texto se escribe en el cuadro (como si la persona lo tecleara) y luego se envía.
+  const elegirOpcion = (texto: string) => {
+    if (tecleando.current) return;
+    const set = document.documentElement.classList.contains('gate') ? setValorP : setValor;
+    if (reduce()) { enviar(texto); return; }
+    tecleando.current = true;
+    let i = 0;
+    tecleo.current = setInterval(() => {
+      i += 1;
+      set(texto.slice(0, i));
+      if (i >= texto.length) {
+        clearInterval(tecleo.current);
+        setTimeout(() => { tecleando.current = false; enviar(texto); }, 250);
+      }
+    }, 18);
   };
 
   // EVE "habla": agrega su mensaje y lo escribe a ritmo de lectura. Devuelve una promesa que se cumple al terminar de hablar.
@@ -85,6 +119,16 @@ export default function Portada() {
   const elegir = (e: React.MouseEvent, a: { label: string; href: string }) => {
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return; // abrir en pestaña nueva sigue funcionando
     e.preventDefault();
+    if (esSolicitud(a.href)) { // la solicitud de aliado se hace aquí mismo, conversando con EVE
+      if (tecleando.current) return;
+      clearInterval(timer.current);
+      setMsgs((m) => [...m, { id: ++n.current, role: 'persona', texto: eleccionDe(a.label) }]);
+      lead.current = estadoInicialLead();
+      setEstado('EVE está pensando...');
+      eve.estado('pensando');
+      setTimeout(() => hablar(inicioLead()), reduce() ? 0 : 500);
+      return;
+    }
     if (yendo) return;
     setYendo(true);
     clearInterval(timer.current);
@@ -156,13 +200,13 @@ export default function Portada() {
         </form>
         {!msgs.length && (
           <div className="sz-chips sz-pov-chips">
-            {PORTADA.sugerencias.map((s) => <button key={s} type="button" className="sz-chip" onClick={() => enviar(s)}>{s}</button>)}
+            {PORTADA.sugerencias.map((s) => <button key={s} type="button" className="sz-chip" onClick={() => elegirOpcion(s)}>{s}</button>)}
           </div>
         )}
         {renderHilo(hiloP, 'sz-hilo sz-pov-hilo')}
         {listo && !yendo && restantes.length > 0 && (
           <div className="sz-chips sz-pov-chips">
-            {restantes.slice(0, 3).map((s) => <button key={s} type="button" className="sz-chip" onClick={() => enviar(s)}>{s}</button>)}
+            {restantes.slice(0, 3).map((s) => <button key={s} type="button" className="sz-chip" onClick={() => elegirOpcion(s)}>{s}</button>)}
           </div>
         )}
       </div>
@@ -186,18 +230,18 @@ export default function Portada() {
               />
               <button type="submit" aria-label="Enviar pregunta"><span aria-hidden>→</span></button>
             </form>
-            <p className="sz-aviso">Guardamos esta conversación para mejorar las respuestas. Al seguir, aceptas la <Link href="/contacto">política de tratamiento de datos</Link>.</p>
+            <p className="sz-aviso">Guardamos esta conversación para mejorar las respuestas. Al seguir, aceptas la <Link href="/politica-de-datos">política de tratamiento de datos</Link>.</p>
 
             {!msgs.length && (
               <div className="sz-chips">
-                {PORTADA.sugerencias.map((s) => <button key={s} type="button" className="sz-chip" onClick={() => enviar(s)}>{s}</button>)}
+                {PORTADA.sugerencias.map((s) => <button key={s} type="button" className="sz-chip" onClick={() => elegirOpcion(s)}>{s}</button>)}
               </div>
             )}
 
             {renderHilo(hilo, 'sz-hilo')}
             {listo && !yendo && restantes.length > 0 && (
               <div className="sz-chips">
-                {restantes.slice(0, 3).map((s) => <button key={s} type="button" className="sz-chip" onClick={() => enviar(s)}>{s}</button>)}
+                {restantes.slice(0, 3).map((s) => <button key={s} type="button" className="sz-chip" onClick={() => elegirOpcion(s)}>{s}</button>)}
               </div>
             )}
           </div>

@@ -31,6 +31,7 @@ export function esInyeccion(texto: string): boolean {
 const PROHIBIDOS: [RegExp, string][] = [
   [/blockchain|vitrina|primera\s+cohorte|centro\s+nacional|plataforma\s+oficial|alianza\s+p[uú]blico[- ]privada|\bAPP\b/i, 'termino_prohibido'],
   [/\bferia\b|\bstands?\b/i, 'termino_prohibido'],
+  [/\bdirectorio\b/i, 'termino_prohibido'], // ya no es parte de lo que incluye la boleta
   [/sal[oó]n\s+oval|hangar(es)?|distribuci[oó]n\s+de\s+espacios/i, 'espacios_evento'],
   [/MinTIC\s+(convoca|organiza|avala|vende)/i, 'rol_mintic'],
   [/\b(garantiza|garantizamos|prometemos?)\b.{0,40}\b(retorno|roi|ganancia|dinero)\b/i, 'promesa_retorno'],

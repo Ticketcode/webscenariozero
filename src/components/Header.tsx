@@ -8,7 +8,7 @@ export default function Header({ links = [], right, logos = false }: { links?: {
       <header className="top top-logos">
         <div className="wrap">
           <Link href="/" aria-label="Scenario Zero">
-            <Image className="logo-sz" src="/brand/scenario-zero.png" alt="Scenario Zero" width={900} height={355} priority />
+            <Image className="logo-sz" src="/brand/scenario-zero-horizontal.png" alt="Scenario Zero" width={900} height={435} priority />
           </Link>
           <Image className="logo-mintic" src="/brand/mintic.png" alt="Con el respaldo de MinTIC" width={131} height={260} priority />
         </div>
@@ -18,7 +18,9 @@ export default function Header({ links = [], right, logos = false }: { links?: {
   return (
     <header className="top">
       <div className="wrap">
-        <Link href="/" className="brand">SCENARIO ZERO</Link>
+        <Link href="/" className="brand-logo" aria-label="Scenario Zero, inicio">
+          <Image src="/brand/scenario-zero-horizontal.png" alt="Scenario Zero" width={900} height={435} priority />
+        </Link>
         <nav aria-label="Principal">
           {links.map((l) => <a key={l.href} href={l.href}>{l.label}</a>)}
           {right}

@@ -35,8 +35,8 @@ export function Shell({ children, loader = false, home = false }: { children: Re
           <p className="sz-foot-1">{TEXTOS.pie1}</p>
           <p className="sz-foot-2">{TEXTOS.pie2}</p>
           <p className="sz-foot-links">
-            <Link href="/contacto">{TEXTOS.pieEnlaces[0]}</Link>
-            <Link href="/contacto">{TEXTOS.pieEnlaces[1]}</Link>
+            <Link href="/politica-de-datos">{TEXTOS.pieEnlaces[0]}</Link>
+            <Link href="/terminos-y-condiciones">{TEXTOS.pieEnlaces[1]}</Link>
             <Link href="/contacto">{TEXTOS.pieEnlaces[2]}</Link>
             <Link href="/contacto">{TEXTOS.pieEnlaces[3]}</Link>
           </p>
