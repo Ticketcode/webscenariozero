@@ -13,6 +13,8 @@ import QuitaPuerta from '@/components/sz/QuitaPuerta';
 import { SESIONES, TE_LLEVAS } from '@/data/agenda';
 import { eventos, PENDIENTE } from '@/data/events';
 
+const COLORES = ['#34d399', '#f87171', '#facc15', '#fb923c', '#00c8f8', '#a78bfa', '#f472b6', '#60a5fa'];
+
 type Props = { params: Promise<{ slug: string }> };
 
 export function generateStaticParams() {
@@ -85,7 +87,7 @@ export default async function EventoPage({ params }: Props) {
           {e.lugar && (<div className="wrap"><iframe className="mapa" title={`Mapa: ${e.lugar}`} loading="lazy" referrerPolicy="no-referrer-when-downgrade" src={`https://www.google.com/maps?q=${encodeURIComponent(e.lugar)}&output=embed`} /></div>)}
         </section>
 
-        <section className="sec" id="hitos">
+        <section className="sec claro" id="hitos">
           <div className="wrap">
             <Reveal><p className="eyebrow">{e.ciudad} · 12.11.2026</p><h2>Un día. <span className="acc">Tres hitos.</span></h2></Reveal>
             <div className="cards">
@@ -125,7 +127,7 @@ export default async function EventoPage({ params }: Props) {
             </ol>
             <Reveal>
               <p className="eyebrow" style={{ marginTop: 40 }}>Ocho dimensiones de evaluación</p>
-              <div className="chips">{e.dimensiones.map((d) => <span key={d} className="chip">{d}</span>)}</div>
+              <div className="chips">{e.dimensiones.map((d, i) => <span key={d} className="chip chip-c" style={{ ['--c' as string]: COLORES[i % COLORES.length] }}>{d}</span>)}</div>
               <p className="muted" style={{ marginTop: 24, maxWidth: 720 }}>70 a 80 decisores públicos y privados, con la participación de organismos internacionales. Hallazgos agregados al cierre e informe al D+30.</p>
             </Reveal>
           </div>

@@ -95,7 +95,7 @@ export const bogota: EventoData = {
     { q: '¿Dónde y a qué hora es?', a: 'En Américas BPS, calle 26, Bogotá, Colombia. El horario se publicará aquí apenas esté confirmado.' },
     { q: '¿La boleta da acceso al salón oval?', a: 'No. La boleta da acceso a la agenda paralela. El salón oval es el Simulacro nacional de ciberseguridad, con 70 a 80 decisores.' },
     { q: '¿Cómo participo como aliado en la mesa?', a: 'Los cupos se acuerdan con el equipo. Inscríbete en la lista de espera y una persona te contacta.' },
-    { q: '¿Me registro igual si soy aliado o invitado?', a: '[Por definir]' },
+    { q: '¿Me registro igual si soy aliado o invitado?', a: 'Sí, en ambos casos te registras con un código de acceso especial según tu perfil.' },
     { q: '¿Habrá eventos en otras ciudades?', a: 'Sí. Bogotá es el primero; el ecosistema tiene eventos en todo el país entre 2026 y 2030. Las próximas ciudades se anunciarán en esta página.' },
   ],
 };

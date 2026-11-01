@@ -179,3 +179,45 @@ h2.h-sm { font-size: clamp(22px, 2.4vw, 28px); letter-spacing: -.01em; margin-bo
   .top .btn-sm { padding-inline: 14px; }
   .top .logo-mintic-h { height: 38px; margin-left: 4px; }
 }
+
+/* página de evento: más vida, sin saturar */
+/* dimensiones de evaluación en botones de colores, y las cuatro fases con una escala de intensidad */
+.chips .chip-c { --c: #00c8f8; border: 1.5px solid var(--c); color: var(--c); background: color-mix(in srgb, var(--c) 14%, transparent); font-weight: 600; transition: transform .25s, box-shadow .25s; }
+.chips .chip-c:hover { transform: translateY(-2px); box-shadow: 0 0 18px color-mix(in srgb, var(--c) 45%, transparent); }
+.fases li { --c: #34d399; border-top-color: var(--c); }
+.fases li:nth-child(2) { --c: #facc15; }
+.fases li:nth-child(3) { --c: #fb923c; }
+.fases li:nth-child(4) { --c: #f87171; }
+.fases li .when { color: var(--c); }
+.fases li { box-shadow: 0 -10px 24px -18px var(--c); }
+/* los cuatro espacios, cada uno con su color */
+#espacios .card { --c: #34d399; border-top: 3px solid var(--c); transition: transform .3s, box-shadow .3s, border-color .3s; }
+#espacios .card:nth-child(2) { --c: #f87171; }
+#espacios .card:nth-child(3) { --c: #facc15; }
+#espacios .card:nth-child(4) { --c: #fb923c; }
+#espacios .card .when { color: var(--c); }
+.card:hover { transform: translateY(-4px); border-color: var(--accent); }
+#espacios .card:hover { box-shadow: 0 10px 30px -14px var(--c); border-color: var(--c); }
+/* sección clara con borde en diagonal (los tres hitos) */
+.sec.claro { --fg: #000119; --muted: #3A4B63; --line: rgba(0, 19, 53, .16); --line-2: rgba(0, 19, 53, .22); --panel: #FFFFFF; --accent: #00658C; background: #F2F6FA; color: #000119; position: relative; }
+.sec.claro h2, .sec.claro h3 { color: #000119; }
+.sec.claro .card { box-shadow: 0 1px 2px rgba(0, 19, 53, .06); }
+.sec.claro::before, .sec.claro::after { content: ''; position: absolute; left: 0; right: 0; height: clamp(28px, 4vw, 56px); background: #F2F6FA; pointer-events: none; }
+.sec.claro::before { bottom: 100%; clip-path: polygon(0 100%, 100% 0, 100% 100%); }
+.sec.claro::after { top: 100%; clip-path: polygon(0 0, 100% 0, 0 100%); }
+/* divisores muy sutiles entre secciones, de tres tipos que se alternan */
+.sec { position: relative; }
+.sec:not(.datos):not(.claro):not(.cyan)::before { content: ''; position: absolute; top: 0; left: 50%; width: min(1120px, 92vw); transform: translateX(-50%); pointer-events: none; }
+main > .sec:nth-of-type(3n+1):not(.datos):not(.claro):not(.cyan)::before { height: 1px; background: linear-gradient(90deg, transparent, rgba(0, 200, 248, .4), transparent); }
+main > .sec:nth-of-type(3n+2):not(.datos):not(.claro):not(.cyan)::before { height: 6px; top: -3px; background: radial-gradient(circle, rgba(0, 200, 248, .55) 1.5px, transparent 2px) 0 50% / 18px 6px repeat-x; -webkit-mask: linear-gradient(90deg, transparent, #000 25%, #000 75%, transparent); mask: linear-gradient(90deg, transparent, #000 25%, #000 75%, transparent); }
+main > .sec:nth-of-type(3n):not(.datos):not(.claro):not(.cyan)::before { height: 24px; top: -12px; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 24'%3E%3Cpath d='M0 12H90L98 12L104 3L112 21L118 12H126L131 7L136 12H240' fill='none' stroke='%2300C8F8' stroke-opacity='.5' stroke-width='1'/%3E%3C/svg%3E") center / 240px 24px no-repeat, linear-gradient(90deg, transparent, rgba(0, 200, 248, .22) 30%, rgba(0, 200, 248, .22) 70%, transparent) center / 100% 1px no-repeat; }
+/* los títulos de sección entran con un desplazamiento suave (solo donde el navegador lo soporta) */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .sec h2 { animation: ev-sube both linear; animation-timeline: view(); animation-range: entry 0% entry 35%; }
+    @keyframes ev-sube { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+  }
+}
+@media (prefers-reduced-motion: reduce) { .card:hover, .chips .chip-c:hover { transform: none; } }
+/* la cabecera fija se lee también sobre las secciones claras */
+.top { background: linear-gradient(#020418 0, #020418f2 70%, #02041800 100%); backdrop-filter: blur(6px); }

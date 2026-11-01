@@ -11,11 +11,11 @@ export default function Politica() {
       <section className="sz-sec">
         <div className="sz-wrap politica">
           <h2>Responsable</h2>
-          <p>Scenario Zero, iniciativa privada con el respaldo de MinTIC. [Razón social y NIT por confirmar]. Contacto: operaciones@scenariozero.org.</p>
+          <p>Scenario Zero, iniciativa privada con el respaldo de MinTIC, liderada por la Fundación Social Colectivo con NIT: 900644463. Contacto: operaciones@scenariozero.org.</p>
           <h2>Qué datos recogemos</h2>
-          <p>Los que nos das al pedir ser aliado, por EVE o por el formulario: nombre, organización y cargo, correo, WhatsApp, categoría de interés y el mensaje que quieras dejar. También las preguntas que escribes a EVE, para mejorar sus respuestas.</p>
+          <p>Los que nos das al conversar con EVE o al inscribirte en la lista de espera: nombre, organización y cargo, correo, WhatsApp, categoría de interés y el mensaje que quieras dejar. También las preguntas que escribes a EVE, para mejorar sus respuestas.</p>
           <h2>Para qué los usamos</h2>
-          <p>Para que una persona del equipo comercial te contacte sobre tu solicitud, enviarte la propuesta formal, atender tus preguntas y mejorar las respuestas de EVE. No vendemos tus datos ni los usamos para fines distintos sin avisarte.</p>
+          <p>Para que una persona del equipo comercial te contacte sobre tu inscripción, enviarte la propuesta formal, atender tus preguntas y mejorar las respuestas de EVE. No vendemos tus datos ni los usamos para fines distintos sin avisarte.</p>
           <h2>Con quién los compartimos</h2>
           <p>Con el equipo comercial y de operaciones de Scenario Zero y con los proveedores que nos prestan servicios técnicos (correo, alojamiento y automatización), bajo deber de confidencialidad.</p>
           <h2>Tus derechos</h2>
