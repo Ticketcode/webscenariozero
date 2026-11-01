@@ -53,7 +53,14 @@ export const bogota: EventoData = {
   paginaEventoPublicada: false,
   // Pegar aquí los embeds de Ticketcode cuando estén listos.
   ticketcode: {
-    boletaEmbed: null,
+    boletaEmbed: {
+      kind: 'html',
+      minHeight: 600,
+      html: `<script src="https://code.jquery.com/jquery-1.10.2.min.js" integrity="sha256-C6CB9UYIS9UJeqinPHWTHVqh/E1uhG5Twh+Y5qFQmYg=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+<script src="https://www.ticketcode.co/assets/ticketcode/ticketcode-iframe.js"></script>
+<iframe id="iframe_ticketcode" type="text/html" height="600" width="100%" src="https://www.ticketcode.co/iframe/scenario-zero-bogota" style="border:transparent" scrolling="no"></iframe>`,
+    },
     listaEsperaEmbed: {
       kind: 'html',
       minHeight: 600,
