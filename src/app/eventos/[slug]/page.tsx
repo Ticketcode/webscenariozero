@@ -5,6 +5,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Countdown from '@/components/Countdown';
 import Reveal from '@/components/Reveal';
+import { EscaleraFases, RuedaDimensiones } from '@/components/SimulacroGraficos';
 import Faq from '@/components/Faq';
 import MesaResumen from '@/components/Mesa';
 import TicketcodeEmbed from '@/components/TicketcodeEmbed';
@@ -12,8 +13,6 @@ import EveFlotante from '@/components/sz/EveFlotante';
 import QuitaPuerta from '@/components/sz/QuitaPuerta';
 import { SESIONES, TE_LLEVAS } from '@/data/agenda';
 import { eventos, PENDIENTE } from '@/data/events';
-
-const COLORES = ['#34d399', '#f87171', '#facc15', '#fb923c', '#00c8f8', '#a78bfa', '#f472b6', '#60a5fa'];
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -120,14 +119,10 @@ export default async function EventoPage({ params }: Props) {
         <section className="sec" id="ejercicio">
           <div className="wrap">
             <Reveal><p className="eyebrow">Espacio 2 · El Simulacro nacional de ciberseguridad</p><h2>La primera muestra de lo que el ecosistema hará en todo el país.</h2></Reveal>
-            <ol className="fases">
-              {e.fases.map((f, i) => (
-                <Reveal as="li" key={f.k} delay={i * 90}><span className="when">{String(i + 1).padStart(2, '0')} · {f.k.toUpperCase()}</span><p>{f.v}</p></Reveal>
-              ))}
-            </ol>
+            <EscaleraFases fases={e.fases} />
             <Reveal>
               <p className="eyebrow" style={{ marginTop: 40 }}>Ocho dimensiones de evaluación</p>
-              <div className="chips">{e.dimensiones.map((d, i) => <span key={d} className="chip chip-c" style={{ ['--c' as string]: COLORES[i % COLORES.length] }}>{d}</span>)}</div>
+              <RuedaDimensiones items={e.dimensiones} />
               <p className="muted" style={{ marginTop: 24, maxWidth: 720 }}>70 a 80 decisores públicos y privados, con la participación de organismos internacionales. Hallazgos agregados al cierre e informe al D+30.</p>
             </Reveal>
           </div>
