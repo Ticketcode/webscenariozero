@@ -36,7 +36,7 @@ export const publicos = [
   {
     tag: 'Operadores',
     title: 'La junta va a preguntar si la crisis se ensayó antes de que ocurriera.',
-    text: 'Energía y agua, banca y fintech, salud, movilidad y logística, telecomunicaciones. El ecosistema muestra la evidencia: el sector ejercitado, el equipo entrenado y hallazgos agregados.',
+    text: 'Energía, transporte, salud, agua y saneamiento y sector financiero. El ecosistema muestra la evidencia: el sector ejercitado, el equipo entrenado y hallazgos agregados.',
     cta: 'Quiero un cupo en la mesa',
     to: 'espera',
   },

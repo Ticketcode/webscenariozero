@@ -40,8 +40,8 @@ export const KB: KbItem[] = [
   },
   {
     re: 'ejercicio|ttx|simulacro|decisor|oval|crisis',
-    q: '¿Qué es el Simulacro nacional de ciberseguridad?',
-    a: 'Es el Simulacro nacional de ciberseguridad en el salón oval: 70 a 80 decisores públicos y privados atraviesan cuatro fases (Ambigüedad, Interdependencia, Confianza y continuidad, y Decisión). Los hallazgos agregados se entregan en un informe al D+30.',
+    q: '¿Qué es el Simulacro Nacional de Ciberresiliencia?',
+    a: 'Es el Simulacro Nacional de Ciberresiliencia en el salón oval: 70 a 80 decisores públicos y privados atraviesan cuatro fases (Ambigüedad, Interdependencia, Confianza y continuidad, y Decisión). Los hallazgos agregados se entregan en un informe al D+30.',
     src: [['La mesa', '#mesa'], ['La ruta', '#ruta']],
     cta: null,
   },
@@ -74,10 +74,10 @@ export const CHIPS = [
   '¿Cuándo y dónde es el evento en Bogotá?',
   '¿Cómo compro una boleta?',
   '¿Cómo participo como aliado?',
-  '¿Qué es el Simulacro nacional de ciberseguridad?',
+  '¿Qué es el Simulacro Nacional de Ciberresiliencia?',
 ];
 
-export const PLACEHOLDERS = ['Pregunta lo que quieras saber', '¿Cuándo es el evento en Bogotá?', '¿Cómo compro una boleta?', '¿Cómo participo como aliado?', '¿Qué es el Simulacro nacional de ciberseguridad?'];
+export const PLACEHOLDERS = ['Pregunta lo que quieras saber', '¿Cuándo es el evento en Bogotá?', '¿Cómo compro una boleta?', '¿Cómo participo como aliado?', '¿Qué es el Simulacro Nacional de Ciberresiliencia?'];
 
 export function responder(texto: string): KbItem {
   const low = texto.toLowerCase();

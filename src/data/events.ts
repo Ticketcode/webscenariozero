@@ -1,3 +1,4 @@
+import { APERTURA } from './agenda';
 // Un archivo de datos por evento. `null` = por confirmar: la página muestra el marcador, nunca un valor inventado.
 
 export type Embed =
@@ -80,11 +81,7 @@ export const bogota: EventoData = {
   },
   aliadosConfirmados: [],
   lugares: { total: 200, incluidosEnCupos: 84, entidadesPublicas: 30, enVenta: 86 },
-  hitos: [
-    { n: '01', title: 'MinTIC presenta el Plan de desarrollo TIC y ciberseguridad 2026-2030', text: 'La hoja de ruta del país, en la apertura.' },
-    { n: '02', title: 'Se lanza Scenario Zero', text: 'Todos los actores del Ecosistema de Confianza Digital y Tecnológica en un solo lugar, compartiendo conocimiento y conectando voluntades.' },
-    { n: '03', title: 'El Simulacro nacional de ciberseguridad (TTX)', text: '70 a 80 decisores públicos y privados ponen a prueba la coordinación del país.' },
-  ],
+  hitos: APERTURA.hitos.map((h) => ({ n: h.n, title: h.titulo, text: h.texto })),
   espacios: [
     { id: 'E1', title: 'Apertura, agenda paralela y cierre', text: '250–300 participantes en la agenda paralela, con boleta única.' },
     { id: 'E2', title: 'TTX en el salón oval', text: '70 a 80 decisores en 34 posiciones numeradas.' },
@@ -100,7 +97,7 @@ export const bogota: EventoData = {
   dimensiones: ['Gobernanza', 'Articulación', 'Calidad de la información', 'Continuidad', 'Narrativa pública', 'Riesgo reputacional', 'Cooperación', 'Trazabilidad'],
   faq: [
     { q: '¿Dónde y a qué hora es?', a: 'En Américas BPS, calle 26, Bogotá, Colombia. El horario se publicará aquí apenas esté confirmado.' },
-    { q: '¿La boleta da acceso al salón oval?', a: 'No. La boleta da acceso a la agenda paralela. El salón oval es el Simulacro nacional de ciberseguridad, con 70 a 80 decisores.' },
+    { q: '¿La boleta da acceso al salón oval?', a: 'No. La boleta da acceso a la agenda paralela. El salón oval es el Simulacro Nacional de Ciberresiliencia, con 70 a 80 decisores.' },
     { q: '¿Cómo participo como aliado en la mesa?', a: 'Los cupos se acuerdan con el equipo. Inscríbete en la lista de espera y una persona te contacta.' },
     { q: '¿Me registro igual si soy aliado o invitado?', a: 'Sí, en ambos casos te registras con un código de acceso especial según tu perfil.' },
     { q: '¿Habrá eventos en otras ciudades?', a: 'Sí. Bogotá es el primero; el ecosistema tiene eventos en todo el país entre 2026 y 2030. Las próximas ciudades se anunciarán en esta página.' },

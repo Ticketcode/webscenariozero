@@ -44,7 +44,7 @@ export default async function ListaEspera({ params }: Props) {
                 <span className="line"><span className="acc">lugar en la mesa.</span></span>
               </h1>
               <p className="bar-sub">{e.ciudad} · {e.fechaLarga}</p>
-              <p className="lead muted">Veinte cupos para organizaciones que quieren decidir en la misma mesa donde se ejecuta el Simulacro nacional de ciberseguridad. Define cómo quieres verte y actuar dentro del primer ejercicio del ecosistema.</p>
+              <p className="lead muted">Veinte cupos para organizaciones que quieren decidir en la misma mesa donde se ejecuta el Simulacro Nacional de Ciberresiliencia. Define cómo quieres verte y actuar dentro del primer ejercicio del ecosistema.</p>
               <ol className="pasos">
                 {pasosListaEspera.map((p, i) => (
                   <Reveal as="li" key={p.n} delay={i * 120}><span className="n">{p.n}</span><div><h3>{p.title}</h3><p className="muted">{p.text}</p></div></Reveal>

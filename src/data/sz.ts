@@ -1,4 +1,4 @@
-import { AGENDA_PARALELA_TEXTO, SESIONES_TEXTO, TE_LLEVAS } from '@/data/agenda';
+import { AGENDA_PARALELA_TEXTO, APERTURA, APERTURA_TEXTO, SECTORES, SECTORES_TEXTO, SESIONES_TEXTO, SIMULACRO, TE_LLEVAS } from '@/data/agenda';
 import { CATEGORIAS, lineaRecibe } from './categorias';
 // Sitio global (sombrilla) de Scenario Zero. Textos del Anexo A y corpus de EVE del Anexo B (requerimiento del 18 oct 2026).
 // Regla: nada sale al sitio fuera de esta base. Las cifras solo se renderizan si su estado es 'verificada'.
@@ -61,7 +61,7 @@ export const PANORAMA = {
   titular: 'Seis transversales, cinco sectores críticos, un solo ecosistema.',
   bajada: 'Toca un eje para ver qué entrega y cuándo. Elige una palanca para ver dónde gana tu organización.',
   transversales: [
-    ['1 · Simulacros nacionales y regionales', 'Un programa permanente de ejercicios en todo el país. Primer entregable: el Simulacro nacional de ciberseguridad del 12 de noviembre y su informe al D+30.'],
+    ['1 · Simulacros nacionales y regionales', 'Un programa permanente de ejercicios en todo el país. Primer entregable: el Simulacro Nacional de Ciberresiliencia del 12 de noviembre y su informe al D+30.'],
     ['2 · Trust Academy', 'Formación por rol para juntas y equipos. Primer entregable: la Cohorte de juntas al D+90.'],
     ['3 · Índice y Observatorio', 'La madurez en confianza digital, medida de 0 a 5. Primer entregable: la línea base publicada al D+90.'],
     ['4 · Pyme Cibersegura', 'Una ruta para pequeñas y medianas empresas. Primer entregable: el autodiagnóstico en línea al D+90.'],
@@ -69,18 +69,18 @@ export const PANORAMA = {
     ['6 · IA confiable', 'Adopción segura y responsable de la IA. Primer entregable: el módulo en Trust Academy al D+180.'],
   ],
   fase2: 'Fase 2 · horizonte 2027-2030: Trust Lab, cyber range, vouchers y fondo de innovación.',
-  sectores: ['Eléctrico', 'Banca', 'Salud', 'Movilidad', 'Telecomunicaciones'],
-  sectoresTexto: 'Cuando un sector cae, arrastra a los demás. Por eso el Simulacro nacional de ciberseguridad pone a los cinco en la misma mesa.',
+  sectores: SECTORES,
+  sectoresTexto: 'Cuando un sector cae, arrastra a los demás. Por eso el Simulacro Nacional de Ciberresiliencia pone a los cinco en la misma mesa.',
   palancas: [
     ['Impacto', 'Las ciudades, los sectores críticos y las transversales donde aparece tu marca.'],
     ['Posicionamiento', 'Tu presencia por categoría, tu voz ante el país, tu transversal y tu credencial de aliado.'],
-    ['Influencia', 'Tu posición en el Simulacro nacional de ciberseguridad, tus reuniones 1 a 1 y las boletas para tus clientes.'],
+    ['Influencia', 'Tu posición en el Simulacro Nacional de Ciberresiliencia, tus reuniones 1 a 1 y las boletas para tus clientes.'],
     ['Data', 'Informes, benchmark del Índice y fichas de valor, siempre agregados y anonimizados.'],
   ],
   ejercicio: {
-    antetitulo: 'SCENARIO ZERO · SIMULACRO NACIONAL DE CIBERSEGURIDAD · 5 INFRAESTRUCTURAS CRÍTICAS',
+    antetitulo: 'SCENARIO ZERO · SIMULACRO NACIONAL DE CIBERRESILIENCIA · 5 INFRAESTRUCTURAS CRÍTICAS',
     titular: 'Ensayar la crisis antes de que ocurra.',
-    texto: 'Una crisis cibernética nacional que empieza con una anomalía pendiente de verificar y se propaga en cascada por el sector eléctrico, la banca, la salud, la movilidad y las telecomunicaciones. Participan 70–80 decisores públicos y privados. El ejercicio es ficticio y no interviene sistemas reales.',
+    texto: `Una crisis cibernética nacional que empieza con una anomalía pendiente de verificar y se propaga en cascada por ${SECTORES_TEXTO}. Participan 70–80 decisores públicos y privados. El ejercicio es ficticio y no interviene sistemas reales.`,
     momentos: ['Ambigüedad', 'Interdependencia', 'Confianza y continuidad', 'Decisión'],
     dimensiones: 'Ocho dimensiones que se miden: gobernanza, articulación, calidad de la información, continuidad, narrativa pública, riesgo reputacional, cooperación y trazabilidad.',
     resultado: 'Hallazgos agregados al cierre, informe al D+30 y un programa permanente de ejercicios. Nunca un ranking de participantes.',
@@ -108,7 +108,7 @@ export const RUTA = {
     { fecha: 'Agosto 2026', titulo: 'Nace la idea', texto: 'Un simulacro nacional de gestión de crisis cibernética.', aprobado: false },
     { fecha: 'Septiembre 2026', titulo: 'Nace la plataforma', texto: 'Scenario Zero se define como el lugar donde converge el ecosistema, con el respaldo de MinTIC.', aprobado: false },
     { fecha: '13 oct 2026', titulo: 'Presentación a los primeros aliados', texto: 'Operadores de infraestructura crítica y proveedores de tecnología conocen el ecosistema.', aprobado: false },
-    { fecha: '12.11.2026', titulo: 'Apertura del ecosistema', texto: 'En Bogotá arranca la agenda 2026-2030: tres hitos en un día.', aprobado: true },
+    { fecha: '12.11.2026', titulo: 'Apertura del ecosistema', texto: 'En Bogotá arranca la agenda 2026-2030: tres acontecimientos en un día.', aprobado: true },
     { fecha: 'Antes de finalizar 2026', titulo: 'Ejercicios regionales', texto: 'Además de Bogotá: Villavicencio y Medellín.', aprobado: true },
     { fecha: 'D+30 · 12.12.2026', titulo: 'Primeros hallazgos', texto: 'Informe del programa de ejercicios y plan de mejora.', aprobado: true },
     { fecha: 'D+90 · 10.02.2027', titulo: 'Arrancan los programas', texto: 'Cohorte de juntas, línea base del Índice y autodiagnóstico pyme.', aprobado: true },
@@ -123,18 +123,14 @@ export const EVENTOS = {
   titular: 'Un ecosistema, tres ciudades en 2026.',
   bajada: 'Cada evento abre el ecosistema en un territorio. Lo que pasa en cada ciudad queda en su historia.',
   fichas: [
-    { ciudad: 'Bogotá', estado: 'Próximo', fecha: '12.11.2026 · Américas BPS', texto: 'Apertura del ecosistema. Un día, tres hitos.', href: RUTAS.bogota },
+    { ciudad: 'Bogotá', estado: 'Próximo', fecha: '12.11.2026 · Américas BPS', texto: 'Apertura del ecosistema. Un día, tres acontecimientos.', href: RUTAS.bogota },
     { ciudad: 'Villavicencio', estado: 'Por anunciar', fecha: 'Antes de finalizar 2026', texto: 'Ejercicio regional del ecosistema. Te avisamos cuando haya fecha.', href: null },
     { ciudad: 'Medellín', estado: 'Por anunciar', fecha: 'Antes de finalizar 2026', texto: 'Ejercicio regional del ecosistema. Te avisamos cuando haya fecha.', href: null },
   ],
   bogota: {
     antetitulo: '12.11.2026 · LA APERTURA · AMÉRICAS BPS, BOGOTÁ',
-    titular: 'Un día. Tres hitos.',
-    hitos: [
-      'MinTIC presenta el Plan de desarrollo TIC y ciberseguridad 2026-2030.',
-      'Se lanza Scenario Zero - Ecosistema de Confianza Digital y Tecnológica.',
-      'Scenario Zero - Simulacro nacional de ciberseguridad: 5 infraestructuras críticas, con 70–80 decisores.',
-    ],
+    titular: 'Un día. Tres acontecimientos.',
+    hitos: APERTURA.hitos.map((h) => h.resumen),
   },
   cierre: 'El 12 de noviembre es el día en que Colombia empieza a desarrollar su confianza digital y tecnológica, y los primeros aliados la construyen desde adentro.',
 };
@@ -142,7 +138,7 @@ export const EVENTOS = {
 export const AGENDA = {
   antetitulo: 'AGENDA PARALELA · BOGOTÁ · 12.11.2026',
   titular: 'Mientras el país ensaya, tú te conectas.',
-  bajada: 'Una agenda académica de keynotes y talleres que corre en paralelo al Simulacro nacional de ciberseguridad, y después, experiencias y reuniones 1 a 1 con el ecosistema.',
+  bajada: 'Una agenda académica de keynotes y talleres que corre en paralelo al Simulacro Nacional de Ciberresiliencia, y después, experiencias y reuniones 1 a 1 con el ecosistema.',
   aforo: 'Aforo total esperado: 250–300 participantes en la agenda paralela.',
   recorrido: [
     ['Antes', 'tu agenda personalizada.'],
@@ -151,7 +147,7 @@ export const AGENDA = {
     ['Después', 'informe al D+30 y certificado.'],
   ],
   precio: 'Boleta única: $3.000.000 COP.',
-  nota: 'La boleta no da acceso al salón del Simulacro nacional de ciberseguridad. Se compra con el código del comercial que te contactó; si no lo tienes, pídeselo a EVE.',
+  nota: 'La boleta no da acceso al salón del Simulacro Nacional de Ciberresiliencia. Se compra con el código del comercial que te contactó; si no lo tienes, pídeselo a EVE.',
 };
 
 export const ALIADOS = {
@@ -207,16 +203,16 @@ export const KB: Respuesta[] = [
   { re: 'agenda paralela', texto: AGENDA_PARALELA_TEXTO, acciones: [{ label: 'Ver la agenda paralela', href: '/agenda-paralela', principal: true }, { label: TEXTOS.ctaBoleta, href: RUTAS.boleta }] },
   { re: 'keynote|panel|stand up|hackers|zero day|sesi[oó]n|sesiones|qu[eé] voy a (vivir|ver)|qu[eé] (incluye|trae) la agenda|qu[eé] me llevo|qu[eé] gano con la boleta', texto: `Lo que vives ese día: ${SESIONES_TEXTO} Lo que te llevas: ${TE_LLEVAS}`, acciones: [{ label: TEXTOS.ctaBoleta, href: RUTAS.boleta, principal: true }, { label: 'Ver la agenda paralela', href: '/agenda-paralela' }] },
   { re: 'hora|horario|a qu[eé] hora|empieza', texto: 'La agenda detallada llega a quienes tienen boleta. Te muestro cómo comprarla.', acciones: [{ label: TEXTOS.ctaBoleta, href: RUTAS.boleta, principal: true }] },
-  { re: 'acceso|entrar.*(ejercicio|simulacro)|boleta.*(ejercicio|simulacro)|(ejercicio|simulacro).*boleta', texto: 'No. El Simulacro nacional de ciberseguridad es para sus 70–80 decisores y los aliados. La boleta te da la agenda paralela, las experiencias y las reuniones 1 a 1.', acciones: [{ label: TEXTOS.ctaBoleta, href: RUTAS.boleta, principal: true }, { label: 'Ver la agenda paralela', href: '/agenda-paralela' }] },
+  { re: 'acceso|entrar.*(ejercicio|simulacro)|boleta.*(ejercicio|simulacro)|(ejercicio|simulacro).*boleta', texto: 'No. El Simulacro Nacional de Ciberresiliencia es para sus 70–80 decisores y los aliados. La boleta te da la agenda paralela, las experiencias y las reuniones 1 a 1.', acciones: [{ label: TEXTOS.ctaBoleta, href: RUTAS.boleta, principal: true }, { label: 'Ver la agenda paralela', href: '/agenda-paralela' }] },
   { re: 'gobierno|mintic', texto: 'No. Es una iniciativa privada, financiada por el sector privado y con el respaldo de MinTIC.', acciones: [{ label: 'Qué es Scenario Zero', href: '/ecosistema', principal: true }] },
-  { re: '12 de noviembre|12\\.11|bogot[aá]|qu[eé] pasa', texto: 'Es la apertura del ecosistema en Américas BPS, Bogotá: MinTIC presenta el Plan de desarrollo TIC y ciberseguridad 2026-2030, se lanza Scenario Zero y se realiza el Simulacro nacional de ciberseguridad con 70–80 decisores. ¿Quieres asistir a la agenda paralela?', acciones: [{ label: TEXTOS.ctaBoleta, href: RUTAS.boleta, principal: true }, { label: 'Ver la ficha de Bogotá', href: RUTAS.bogota }] },
+  { re: '12 de noviembre|12\\.11|bogot[aá]|qu[eé] pasa', texto: `Es la apertura del ecosistema en Américas BPS, Bogotá. ${APERTURA_TEXTO} ¿Quieres asistir a la agenda paralela?`, acciones: [{ label: TEXTOS.ctaBoleta, href: RUTAS.boleta, principal: true }, { label: 'Ver la ficha de Bogotá', href: RUTAS.bogota }] },
   { re: 'villavicencio|medell[ií]n|otras ciudades', texto: 'Antes de finalizar 2026. Las fechas se anuncian aquí y por WhatsApp.', acciones: [{ label: 'Ver los eventos', href: '/eventos', principal: true }] },
   { re: 'emblema', texto: 'Es un reconocimiento que se gana, no se compra: Ensaya, Mide, Mejora. Certifica la práctica, no la seguridad, y lo otorga Scenario Zero.', acciones: [{ label: 'Explorar el panorama', href: '/ecosistema#panorama', principal: true }] },
   { re: 'c[oó]mo se paga|pago|anticipo|factur', texto: 'Con un anticipo del 50 % al confirmar y el saldo el 5 de noviembre; factura la Fundación Social Colectivo. Cualquier detalle adicional te lo confirma el comercial por escrito.', acciones: [{ label: 'Hablar con el equipo', href: '/contacto', principal: true }] },
   { re: 'arrepient|reembols', texto: 'Queda establecido en los términos y condiciones que firmas al confirmar. Te conecto con el equipo.', acciones: [{ label: 'Hablar con el equipo', href: '/contacto', principal: true }] },
   { re: 'qui[eé]nes m[aá]s|qui[eé]nes participan|participan', texto: 'Participan Gobierno, empresas, academia y organismos internacionales. Los nombres se anuncian cuando cada vinculación está confirmada.', acciones: [{ label: 'Ver el panorama', href: '/ecosistema#panorama', principal: true }] },
   { re: 'qu[eé] gana|retorno|roi', texto: 'Depende de tu perfil: te muestro qué recibe cada categoría. El retorno en dinero lo calculas con tus cifras en la reunión 1 a 1.', acciones: [{ label: 'Qué recibe cada categoría', href: '/aliados', principal: true }, { label: TEXTOS.cta, href: RUTAS.espera }] },
-  { re: 'operador|infraestructura cr[ií]tica', texto: 'El regulador, la junta y tus clientes van a preguntar si la crisis se ensayó antes de que ocurriera. El ecosistema te da esa evidencia. Te abro el panorama: tu sector es una de las 5 infraestructuras críticas del Simulacro nacional de ciberseguridad.', acciones: [{ label: TEXTOS.cta, href: RUTAS.espera, principal: true }, { label: 'Ver el panorama', href: '/ecosistema#panorama' }] },
+  { re: 'operador|infraestructura cr[ií]tica', texto: 'El regulador, la junta y tus clientes van a preguntar si la crisis se ensayó antes de que ocurriera. El ecosistema te da esa evidencia. Te abro el panorama: tu sector es una de las 5 infraestructuras críticas del Simulacro Nacional de Ciberresiliencia.', acciones: [{ label: TEXTOS.cta, href: RUTAS.espera, principal: true }, { label: 'Ver el panorama', href: '/ecosistema#panorama' }] },
   { re: 'proveedor|tecnolog[ií]a|ciberseguridad.*(vendo|soluci)', texto: 'Entre 2026 y 2030 el país va a definir qué necesita en confianza digital y tecnológica. Estar adentro es conocerlo cuando se define.', acciones: [{ label: 'Qué recibe cada categoría', href: '/aliados', principal: true }, { label: TEXTOS.ctaBoleta, href: RUTAS.boleta }] },
   { re: 'vincul|aliad|cupo|mesa|lista', texto: 'Hay 20 cupos en cuatro categorías: Silicio, Platinum, Gold y Silver, y Academic para la academia. Te inscribes en la lista de tu categoría, recibes la propuesta formal y tienes 5 días hábiles para decidir.', acciones: [{ label: TEXTOS.cta, href: RUTAS.espera, principal: true }, { label: 'Qué recibe cada categoría', href: '/aliados' }] },
   { re: 'boleta|entrada|comprar|asistir', texto: 'La boleta única da acceso a la agenda paralela del 12 de noviembre en Bogotá. Se compra con el código del comercial que te contactó.', acciones: [{ label: TEXTOS.ctaBoleta, href: RUTAS.boleta, principal: true }] },

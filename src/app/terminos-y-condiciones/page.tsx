@@ -17,7 +17,7 @@ export default function Terminos() {
           <h2>EVE, la asistente</h2>
           <p>EVE es una asistente de inteligencia artificial. Responde con la información publicada por Scenario Zero y, si no la tiene, te conecta con el equipo. Sus respuestas no son una oferta, una promesa ni un compromiso contractual.</p>
           <h2>Lista de espera y boletas</h2>
-          <p>Inscribirte en la lista de espera de aliados no garantiza un cupo ni fija un precio. La boleta única de la agenda paralela se compra con el código del comercial que te contactó y no da acceso al Simulacro nacional de ciberseguridad.</p>
+          <p>Inscribirte en la lista de espera de aliados no garantiza un cupo ni fija un precio. La boleta única de la agenda paralela se compra con el código del comercial que te contactó y no da acceso al Simulacro Nacional de Ciberresiliencia.</p>
           <h2>Marca y respaldo</h2>
           <p>Los aliados pueden decir «Somos aliados de Scenario Zero, una iniciativa con el respaldo de MinTIC». No pueden usar el logo de MinTIC ni sugerir que respalda su producto.</p>
           <h2>Datos personales</h2>

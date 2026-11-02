@@ -6,6 +6,7 @@ import Footer from '@/components/Footer';
 import Countdown from '@/components/Countdown';
 import Reveal from '@/components/Reveal';
 import { EscaleraFases, RuedaDimensiones } from '@/components/SimulacroGraficos';
+import { APERTURA } from '@/data/agenda';
 import Faq from '@/components/Faq';
 import MesaResumen from '@/components/Mesa';
 import TicketcodeEmbed from '@/components/TicketcodeEmbed';
@@ -24,7 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const e = eventos[(await params).slug];
   if (!e) return {};
   const title = `${e.ciudad} · ${e.fechaLarga}`;
-  const description = `Scenario Zero abre el ecosistema el ${e.fechaLarga} en ${e.ciudad}: entradas, Simulacro nacional de ciberseguridad y salón oval.`;
+  const description = `Scenario Zero abre el ecosistema el ${e.fechaLarga} en ${e.ciudad}: entradas, Simulacro Nacional de Ciberresiliencia y salón oval.`;
   return { title, description, openGraph: { title, description, type: 'website' } };
 }
 
@@ -88,7 +89,7 @@ export default async function EventoPage({ params }: Props) {
 
         <section className="sec claro" id="hitos">
           <div className="wrap">
-            <Reveal><p className="eyebrow">{e.ciudad} · 12.11.2026</p><h2>Un día. <span className="acc">Tres hitos.</span></h2></Reveal>
+            <Reveal><p className="eyebrow">{e.ciudad} · 12.11.2026</p><h2>Colombia se reúne alrededor de la <span className="acc">confianza digital y tecnológica.</span></h2><p className="lead muted">{APERTURA.intro}</p></Reveal>
             <div className="cards">
               {e.hitos.map((h, i) => (
                 <Reveal key={h.n} className="card" delay={i * 100}>
@@ -98,6 +99,7 @@ export default async function EventoPage({ params }: Props) {
                 </Reveal>
               ))}
             </div>
+            <Reveal><p className="lead" style={{ marginTop: 40, maxWidth: 820 }}>{APERTURA.cierre}</p><p className="muted" style={{ marginTop: 16, maxWidth: 820 }}>{APERTURA.invitacion}</p></Reveal>
           </div>
         </section>
 
@@ -118,7 +120,7 @@ export default async function EventoPage({ params }: Props) {
 
         <section className="sec" id="ejercicio">
           <div className="wrap">
-            <Reveal><p className="eyebrow">Espacio 2 · El Simulacro nacional de ciberseguridad</p><h2>La primera muestra de lo que el ecosistema hará en todo el país.</h2></Reveal>
+            <Reveal><p className="eyebrow">Espacio 2 · El Simulacro Nacional de Ciberresiliencia</p><h2>La primera muestra de lo que el ecosistema hará en todo el país.</h2></Reveal>
             <EscaleraFases fases={e.fases} />
             <Reveal>
               <p className="eyebrow" style={{ marginTop: 40 }}>Ocho dimensiones de evaluación</p>
@@ -145,7 +147,7 @@ export default async function EventoPage({ params }: Props) {
               <Reveal className="forma aliados" delay={120}>
                 <div className="when">ALIADOS</div><h3>Cupo en la mesa</h3>
                 <ul>
-                  <li>Un lugar en el salón oval, el Simulacro nacional de ciberseguridad, en una de las 34 posiciones numeradas.</li>
+                  <li>Un lugar en el salón oval, el Simulacro Nacional de Ciberresiliencia, en una de las 34 posiciones numeradas.</li>
                   <li>Cuatro distancias a la mesa: Silicio, Platinum, Gold y Silver, con 20 cupos en total.</li>
                   <li>Se acuerda directamente con el equipo; esta página no publica precios.</li>
                   <li>Se empieza en la lista de espera. Inscribirte no garantiza un cupo.</li>
@@ -154,7 +156,7 @@ export default async function EventoPage({ params }: Props) {
                 <Link className="btn btn-ghost" href={espera}>Unirme a la lista de espera</Link>
               </Reveal>
             </div>
-            <p className="note">La boleta no da acceso al salón oval. El salón oval es el Simulacro nacional de ciberseguridad, con 70 a 80 decisores.</p>
+            <p className="note">La boleta no da acceso al salón oval. El salón oval es el Simulacro Nacional de Ciberresiliencia, con 70 a 80 decisores.</p>
           </div>
         </section>
 
