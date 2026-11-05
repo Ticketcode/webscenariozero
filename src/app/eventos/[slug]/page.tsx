@@ -14,6 +14,7 @@ import EveFlotante from '@/components/sz/EveFlotante';
 import QuitaPuerta from '@/components/sz/QuitaPuerta';
 import { SESIONES, TE_LLEVAS } from '@/data/agenda';
 import { eventos, PENDIENTE } from '@/data/events';
+import { cortaDe, cortaDMDe, diaDe } from '@/data/fechas';
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -51,9 +52,9 @@ export default async function EventoPage({ params }: Props) {
         <section className="hero">
           <div className="wrap">
             <div className="hero-copy">
-              <p className="eyebrow eyebrow-u">{e.ciudad} · 12.11.2026 · La apertura</p>
+              <p className="eyebrow eyebrow-u">{e.ciudad} · {cortaDe(e.fecha)} · La apertura</p>
               <h1>
-                <span className="line"><span>El 12 de noviembre</span></span>
+                <span className="line"><span>El {diaDe(e.fecha)}</span></span>
                 <span className="line"><span className="acc">se abre</span></span>
                 <span className="line"><span>el ecosistema.</span></span>
               </h1>
@@ -89,7 +90,7 @@ export default async function EventoPage({ params }: Props) {
 
         <section className="sec claro" id="hitos">
           <div className="wrap">
-            <Reveal><p className="eyebrow">{e.ciudad} · 12.11.2026</p><h2>Colombia se reúne alrededor de la <span className="acc">confianza digital y tecnológica.</span></h2><p className="lead muted">{APERTURA.intro}</p></Reveal>
+            <Reveal><p className="eyebrow">{e.ciudad} · {cortaDe(e.fecha)}</p><h2>Colombia se reúne alrededor de la <span className="acc">confianza digital y tecnológica.</span></h2><p className="lead muted">{APERTURA.intro}</p></Reveal>
             <div className="cards">
               {e.hitos.map((h, i) => (
                 <Reveal key={h.n} className="card" delay={i * 100}>
@@ -200,7 +201,7 @@ export default async function EventoPage({ params }: Props) {
           <div className="wrap">
             <div className="roi">
               <h3>Esto es lo que ganas, no solo lo que pagas.</h3>
-              <p className="lead">Tu boleta de $3M te lleva por toda la Agenda Paralela del 12.11 — y te vas con mucho más que una entrada.</p>
+              <p className="lead">Tu boleta de $3M te lleva por toda la Agenda Paralela del {cortaDMDe(e.fecha)} — y te vas con mucho más que una entrada.</p>
               <div className="roi-cols">
                 <div>
                   <p className="eyebrow">Lo que vives ese día</p>

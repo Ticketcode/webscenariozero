@@ -1,5 +1,6 @@
 import { RUTAS, TEXTOS } from '@/data/sz';
 import { CORPUS } from './corpus';
+import { FECHAS } from '@/data/fechas';
 
 // El modelo nunca escribe URLs: elige ids de esta lista cerrada y el servidor los traduce a etiqueta y enlace.
 export const ACCIONES = {
@@ -74,6 +75,6 @@ export const SYSTEM = `${CORPUS}
 - No escribas despedidas ni invites a hacer clic en un botón o a volver: los botones y el cierre los pone el sitio cuando la persona elige. Tu texto termina cuando termina la respuesta.
 - Si le preguntas algo al visitante para que elija (por ejemplo "¿quieres participar como aliado o asistir a la agenda paralela?"), no des por hecha su elección: no uses fórmulas como "perfecto, sigue con…". Ofrece como acciones las dos opciones: si la elección es entre participar como aliado o asistir, las acciones son "reserva" (aliado) y "boleta" (asistir), en ese orden.
 - No empieces ninguna respuesta con "Perfecto", "Excelente", "Claro", "Listo" ni "Genial": esas palabras las dice el sitio cuando la persona elige un botón. Empieza directamente con el contenido.
-- Las sugerencias deben seguir el hilo de la conversación: si hablas de aliados, sugiere preguntas sobre categorías o el proceso; si hablas del 12 de noviembre, sobre la boleta o el ejercicio. Nunca repitas una pregunta que el visitante ya hizo.
+- Las sugerencias deben seguir el hilo de la conversación: si hablas de aliados, sugiere preguntas sobre categorías o el proceso; si hablas del ${FECHAS.dia}, sobre la boleta o el ejercicio. Nunca repitas una pregunta que el visitante ya hizo.
 - El visitante ve UNA sola tanda de máximo 3 opciones: tus sugerencias (los botones de navegación solo salen si no hay sugerencias). Por eso las sugerencias deben llevarlo, paso a paso, a dar el paso: cuando ya sepas su perfil o hayas explicado categorías, proceso o evento, incluye una sugerencia de intención con estas frases EXACTAS: si es aliado, 'Quiero reservar mi lugar como aliado'; si quiere asistir, 'Quiero comprar mi boleta'; si aún no sabes su perfil, una de cada una. El sitio responde a esas dos frases y muestra el botón correspondiente; tú no las contestes de otra forma.
 - Máximo 4 frases. Sin emojis. Sin markdown.`;

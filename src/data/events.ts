@@ -1,4 +1,5 @@
 import { APERTURA } from './agenda';
+import { FECHAS } from './fechas';
 // Un archivo de datos por evento. `null` = por confirmar: la página muestra el marcador, nunca un valor inventado.
 
 export type Embed =
@@ -41,10 +42,10 @@ export type EventoData = {
 export const bogota: EventoData = {
   slug: 'bogota',
   ciudad: 'Bogotá',
-  fecha: '2026-11-12',
-  fechaLarga: '12 de noviembre de 2026',
+  fecha: FECHAS.iso,
+  fechaLarga: FECHAS.larga,
   // El evento arranca a las 8:00 a. m. (hora de Colombia).
-  inicioISO: '2026-11-12T08:00:00-05:00',
+  inicioISO: `${FECHAS.iso}T08:00:00-05:00`,
   lugar: 'Américas BPS, calle 26, Bogotá, Colombia',
   horario: null,
   estadoBoleta: 'venta_abierta',

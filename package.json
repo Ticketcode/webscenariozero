@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "test:eve": "tsx tests/guardrails.test.ts",
+    "test:eve": "tsx tests/guardrails.test.ts && tsx tests/fecha.test.ts",
     "battery:eve": "node scripts/eve-battery.mjs"
   },
   "keywords": [],

@@ -1,5 +1,6 @@
 import { AGENDA_PARALELA_TEXTO, APERTURA, APERTURA_TEXTO, SECTORES, SECTORES_TEXTO, SESIONES_TEXTO, SIMULACRO, TE_LLEVAS } from '@/data/agenda';
 import { CATEGORIAS, lineaRecibe } from './categorias';
+import { FECHAS } from './fechas';
 // Sitio global (sombrilla) de Scenario Zero. Textos del Anexo A y corpus de EVE del Anexo B (requerimiento del 18 oct 2026).
 // Regla: nada sale al sitio fuera de esta base. Las cifras solo se renderizan si su estado es 'verificada'.
 
@@ -32,7 +33,7 @@ export const PORTADA = {
   bajada: 'Pregúntale a EVE lo que quieras saber del ecosistema: te responde corto y te muestra el camino.',
   estado: 'EVE · en línea',
   campo: 'Pregúntale a EVE sobre el ecosistema...',
-  sugerencias: ['Soy operador de infraestructura crítica', 'Soy proveedor de tecnología', '¿Qué pasa el 12 de noviembre?', '¿Cómo me vinculo?'],
+  sugerencias: ['Soy operador de infraestructura crítica', 'Soy proveedor de tecnología', `¿Qué pasa el ${FECHAS.dia}?`, '¿Cómo me vinculo?'],
   bloque: ['El desafío del país es de coordinación.', 'Scenario Zero es donde converge el ecosistema.'],
 };
 
@@ -41,7 +42,7 @@ export const ECOSISTEMA = {
   titular: 'El desafío del país es de coordinación.',
   bajada: 'Scenario Zero es donde converge el ecosistema: una iniciativa privada, financiada por el sector privado y con el respaldo de MinTIC, que entre 2026 y 2030 convierte la confianza digital en una capacidad de país.',
   tarjetas: [
-    ['Un evento de ciberseguridad', 'Un ecosistema 2026-2030 que se lanza el 12 de noviembre'],
+    ['Un evento de ciberseguridad', `Un ecosistema 2026-2030 que se lanza el ${FECHAS.dia}`],
     ['Una iniciativa del Gobierno', 'Una iniciativa privada con el respaldo de MinTIC'],
     ['Una feria con stands', 'El lugar donde convergen programas, ejercicios y conocimiento'],
     ['Un patrocinio con logos', 'Una inversión con retorno medible en cuatro palancas'],
@@ -61,7 +62,7 @@ export const PANORAMA = {
   titular: 'Seis transversales, cinco sectores críticos, un solo ecosistema.',
   bajada: 'Toca un eje para ver qué entrega y cuándo. Elige una palanca para ver dónde gana tu organización.',
   transversales: [
-    ['1 · Simulacros nacionales y regionales', 'Un programa permanente de ejercicios en todo el país. Primer entregable: el Simulacro Nacional de Ciberresiliencia del 12 de noviembre y su informe al D+30.'],
+    ['1 · Simulacros nacionales y regionales', `Un programa permanente de ejercicios en todo el país. Primer entregable: el Simulacro Nacional de Ciberresiliencia del ${FECHAS.dia} y su informe al D+30.`],
     ['2 · Trust Academy', 'Formación por rol para juntas y equipos. Primer entregable: la Cohorte de juntas al D+90.'],
     ['3 · Índice y Observatorio', 'La madurez en confianza digital, medida de 0 a 5. Primer entregable: la línea base publicada al D+90.'],
     ['4 · Pyme Cibersegura', 'Una ruta para pequeñas y medianas empresas. Primer entregable: el autodiagnóstico en línea al D+90.'],
@@ -108,12 +109,12 @@ export const RUTA = {
     { fecha: 'Agosto 2026', titulo: 'Nace la idea', texto: 'Un simulacro nacional de gestión de crisis cibernética.', aprobado: false },
     { fecha: 'Septiembre 2026', titulo: 'Nace la plataforma', texto: 'Scenario Zero se define como el lugar donde converge el ecosistema, con el respaldo de MinTIC.', aprobado: false },
     { fecha: '13 oct 2026', titulo: 'Presentación a los primeros aliados', texto: 'Operadores de infraestructura crítica y proveedores de tecnología conocen el ecosistema.', aprobado: false },
-    { fecha: '12.11.2026', titulo: 'Apertura del ecosistema', texto: 'En Bogotá arranca la agenda 2026-2030: tres acontecimientos en un día.', aprobado: true },
+    { fecha: FECHAS.corta, titulo: 'Apertura del ecosistema', texto: 'En Bogotá arranca la agenda 2026-2030: tres acontecimientos en un día.', aprobado: true },
     { fecha: 'Antes de finalizar 2026', titulo: 'Ejercicios regionales', texto: 'Además de Bogotá: Villavicencio y Medellín.', aprobado: true },
-    { fecha: 'D+30 · 12.12.2026', titulo: 'Primeros hallazgos', texto: 'Informe del programa de ejercicios y plan de mejora.', aprobado: true },
-    { fecha: 'D+90 · 10.02.2027', titulo: 'Arrancan los programas', texto: 'Cohorte de juntas, línea base del Índice y autodiagnóstico pyme.', aprobado: true },
-    { fecha: 'D+180 · 11.05.2027', titulo: 'Llega a la ciudadanía', texto: 'Piloto de campaña ciudadana y módulo de IA confiable.', aprobado: true },
-    { fecha: 'D+365 · 12.11.2027', titulo: 'Año 1 de 4', texto: 'Lo que entregó cada transversal, a la vista.', aprobado: true },
+    { fecha: `D+30 · ${FECHAS.d30}`, titulo: 'Primeros hallazgos', texto: 'Informe del programa de ejercicios y plan de mejora.', aprobado: true },
+    { fecha: `D+90 · ${FECHAS.d90}`, titulo: 'Arrancan los programas', texto: 'Cohorte de juntas, línea base del Índice y autodiagnóstico pyme.', aprobado: true },
+    { fecha: `D+180 · ${FECHAS.d180}`, titulo: 'Llega a la ciudadanía', texto: 'Piloto de campaña ciudadana y módulo de IA confiable.', aprobado: true },
+    { fecha: `D+365 · ${FECHAS.aniv}`, titulo: 'Año 1 de 4', texto: 'Lo que entregó cada transversal, a la vista.', aprobado: true },
     { fecha: '2030', titulo: 'Rumbo país', texto: 'Colombia, el milagro digital y tecnológico. Después, LATAM.', aprobado: true },
   ],
 };
@@ -123,20 +124,20 @@ export const EVENTOS = {
   titular: 'Un ecosistema, tres ciudades en 2026.',
   bajada: 'Cada evento abre el ecosistema en un territorio. Lo que pasa en cada ciudad queda en su historia.',
   fichas: [
-    { ciudad: 'Bogotá', estado: 'Próximo', fecha: '12.11.2026 · Américas BPS', texto: 'Apertura del ecosistema. Un día, tres acontecimientos.', href: RUTAS.bogota },
+    { ciudad: 'Bogotá', estado: 'Próximo', fecha: `${FECHAS.corta} · Américas BPS`, texto: 'Apertura del ecosistema. Un día, tres acontecimientos.', href: RUTAS.bogota },
     { ciudad: 'Villavicencio', estado: 'Por anunciar', fecha: 'Antes de finalizar 2026', texto: 'Ejercicio regional del ecosistema. Te avisamos cuando haya fecha.', href: null },
     { ciudad: 'Medellín', estado: 'Por anunciar', fecha: 'Antes de finalizar 2026', texto: 'Ejercicio regional del ecosistema. Te avisamos cuando haya fecha.', href: null },
   ],
   bogota: {
-    antetitulo: '12.11.2026 · LA APERTURA · AMÉRICAS BPS, BOGOTÁ',
+    antetitulo: `${FECHAS.corta} · LA APERTURA · AMÉRICAS BPS, BOGOTÁ`,
     titular: 'Un día. Tres acontecimientos.',
     hitos: APERTURA.hitos.map((h) => h.resumen),
   },
-  cierre: 'El 12 de noviembre es el día en que Colombia empieza a desarrollar su confianza digital y tecnológica, y los primeros aliados la construyen desde adentro.',
+  cierre: `El ${FECHAS.dia} es el día en que Colombia empieza a desarrollar su confianza digital y tecnológica, y los primeros aliados la construyen desde adentro.`,
 };
 
 export const AGENDA = {
-  antetitulo: 'AGENDA PARALELA · BOGOTÁ · 12.11.2026',
+  antetitulo: `AGENDA PARALELA · BOGOTÁ · ${FECHAS.corta}`,
   titular: 'Mientras el país ensaya, tú te conectas.',
   bajada: 'Una agenda académica de keynotes y talleres que corre en paralelo al Simulacro Nacional de Ciberresiliencia, y después, experiencias y reuniones 1 a 1 con el ecosistema.',
   aforo: 'Aforo total esperado: 250–300 participantes en la agenda paralela.',
@@ -180,9 +181,9 @@ export const CONTACTO = {
 export const SEO: Record<string, [string, string]> = {
   '/': ['Scenario Zero · Ecosistema de Confianza Digital y Tecnológica', 'La confianza digital y tecnológica no se decreta. Se construye juntos. Ecosistema 2026-2030 con el respaldo de MinTIC.'],
   '/ecosistema': ['Qué es Scenario Zero', 'Una iniciativa privada que diagnostica, forma, ejercita, mide y conecta la confianza digital del país.'],
-  '/ruta': ['La ruta 2026-2030', 'Del lanzamiento del 12 de noviembre a 2030: cuatro años de ecosistema, con entregables fechados.'],
+  '/ruta': ['La ruta 2026-2030', `Del lanzamiento del ${FECHAS.dia} a 2030: cuatro años de ecosistema, con entregables fechados.`],
   '/eventos': ['Eventos 2026 · Bogotá, Villavicencio, Medellín', 'La apertura del ecosistema en Bogotá y los ejercicios regionales de 2026.'],
-  '/agenda-paralela': ['Agenda paralela · 12.11.2026', 'Keynotes, talleres, experiencias y reuniones 1 a 1 en la apertura del ecosistema.'],
+  '/agenda-paralela': [`Agenda paralela · ${FECHAS.corta}`, 'Keynotes, talleres, experiencias y reuniones 1 a 1 en la apertura del ecosistema.'],
   '/aliados': ['Vincúlate como aliado', '20 cupos en cuatro categorías para construir el ecosistema desde adentro.'],
   '/contacto': ['Contacto', 'EVE responde de inmediato. Si prefieres a una persona, escríbenos.'],
 };
@@ -205,7 +206,7 @@ export const KB: Respuesta[] = [
   { re: 'hora|horario|a qu[eé] hora|empieza', texto: 'La agenda detallada llega a quienes tienen boleta. Te muestro cómo comprarla.', acciones: [{ label: TEXTOS.ctaBoleta, href: RUTAS.boleta, principal: true }] },
   { re: 'acceso|entrar.*(ejercicio|simulacro)|boleta.*(ejercicio|simulacro)|(ejercicio|simulacro).*boleta', texto: 'No. El Simulacro Nacional de Ciberresiliencia es para sus 70–80 decisores y los aliados. La boleta te da la agenda paralela, las experiencias y las reuniones 1 a 1.', acciones: [{ label: TEXTOS.ctaBoleta, href: RUTAS.boleta, principal: true }, { label: 'Ver la agenda paralela', href: '/agenda-paralela' }] },
   { re: 'gobierno|mintic', texto: 'No. Es una iniciativa privada, financiada por el sector privado y con el respaldo de MinTIC.', acciones: [{ label: 'Qué es Scenario Zero', href: '/ecosistema', principal: true }] },
-  { re: '12 de noviembre|12\\.11|bogot[aá]|qu[eé] pasa', texto: `Es la apertura del ecosistema en Américas BPS, Bogotá. ${APERTURA_TEXTO} ¿Quieres asistir a la agenda paralela?`, acciones: [{ label: TEXTOS.ctaBoleta, href: RUTAS.boleta, principal: true }, { label: 'Ver la ficha de Bogotá', href: RUTAS.bogota }] },
+  { re: `${FECHAS.dia}|\\d{1,2}\\.11|bogot[aá]|qu[eé] pasa`, texto: `Es la apertura del ecosistema en Américas BPS, Bogotá. ${APERTURA_TEXTO} ¿Quieres asistir a la agenda paralela?`, acciones: [{ label: TEXTOS.ctaBoleta, href: RUTAS.boleta, principal: true }, { label: 'Ver la ficha de Bogotá', href: RUTAS.bogota }] },
   { re: 'villavicencio|medell[ií]n|otras ciudades', texto: 'Antes de finalizar 2026. Las fechas se anuncian aquí y por WhatsApp.', acciones: [{ label: 'Ver los eventos', href: '/eventos', principal: true }] },
   { re: 'emblema', texto: 'Es un reconocimiento que se gana, no se compra: Ensaya, Mide, Mejora. Certifica la práctica, no la seguridad, y lo otorga Scenario Zero.', acciones: [{ label: 'Explorar el panorama', href: '/ecosistema#panorama', principal: true }] },
   { re: 'c[oó]mo se paga|pago|anticipo|factur', texto: 'Con un anticipo del 50 % al confirmar y el saldo el 5 de noviembre; factura la Fundación Social Colectivo. Cualquier detalle adicional te lo confirma el comercial por escrito.', acciones: [{ label: 'Hablar con el equipo', href: '/contacto', principal: true }] },
@@ -215,9 +216,9 @@ export const KB: Respuesta[] = [
   { re: 'operador|infraestructura cr[ií]tica', texto: 'El regulador, la junta y tus clientes van a preguntar si la crisis se ensayó antes de que ocurriera. El ecosistema te da esa evidencia. Te abro el panorama: tu sector es una de las 5 infraestructuras críticas del Simulacro Nacional de Ciberresiliencia.', acciones: [{ label: TEXTOS.cta, href: RUTAS.espera, principal: true }, { label: 'Ver el panorama', href: '/ecosistema#panorama' }] },
   { re: 'proveedor|tecnolog[ií]a|ciberseguridad.*(vendo|soluci)', texto: 'Entre 2026 y 2030 el país va a definir qué necesita en confianza digital y tecnológica. Estar adentro es conocerlo cuando se define.', acciones: [{ label: 'Qué recibe cada categoría', href: '/aliados', principal: true }, { label: TEXTOS.ctaBoleta, href: RUTAS.boleta }] },
   { re: 'vincul|aliad|cupo|mesa|lista', texto: 'Hay 20 cupos en cuatro categorías: Silicio, Platinum, Gold y Silver, y Academic para la academia. Te inscribes en la lista de tu categoría, recibes la propuesta formal y tienes 5 días hábiles para decidir.', acciones: [{ label: TEXTOS.cta, href: RUTAS.espera, principal: true }, { label: 'Qué recibe cada categoría', href: '/aliados' }] },
-  { re: 'boleta|entrada|comprar|asistir', texto: 'La boleta única da acceso a la agenda paralela del 12 de noviembre en Bogotá. Se compra con el código del comercial que te contactó.', acciones: [{ label: TEXTOS.ctaBoleta, href: RUTAS.boleta, principal: true }] },
+  { re: 'boleta|entrada|comprar|asistir', texto: `La boleta única da acceso a la agenda paralela del ${FECHAS.dia} en Bogotá. Se compra con el código del comercial que te contactó.`, acciones: [{ label: TEXTOS.ctaBoleta, href: RUTAS.boleta, principal: true }] },
   { re: 'ejercicio|ttx|simulacro|decisor', texto: 'Es una crisis cibernética nacional que empieza con una anomalía pendiente de verificar y se propaga en cascada por cinco sectores. Participan 70–80 decisores. Los hallazgos son agregados y salen en un informe al D+30; nunca un ranking.', acciones: [{ label: 'Ver el panorama', href: '/ecosistema#panorama', principal: true }] },
-  { re: 'ruta|2030|transversal|programa|academy|pyme', texto: 'Arranca el 12 de noviembre de 2026 con seis transversales y entregables fechados: D+30, D+90 y D+180. El rumbo llega a 2030 y después a LATAM.', acciones: [{ label: 'Ver la ruta', href: '/ruta', principal: true }] },
+  { re: 'ruta|2030|transversal|programa|academy|pyme', texto: `Arranca el ${FECHAS.larga} con seis transversales y entregables fechados: D+30, D+90 y D+180. El rumbo llega a 2030 y después a LATAM.`, acciones: [{ label: 'Ver la ruta', href: '/ruta', principal: true }] },
   { re: 'qu[eé] es|scenario|ecosistema', texto: 'Es el ecosistema de confianza digital y tecnológica de Colombia entre 2026 y 2030: una iniciativa privada con el respaldo de MinTIC que diagnostica, forma, ejercita, mide y conecta. El desafío del país es de coordinación, y aquí converge el ecosistema. Te abro el panorama.', acciones: [{ label: 'Explorar el panorama', href: '/ecosistema#panorama', principal: true }] },
 ];
 

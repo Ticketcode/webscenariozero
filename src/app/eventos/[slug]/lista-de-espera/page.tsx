@@ -9,6 +9,7 @@ import Faq from '@/components/Faq';
 import MesaResumen from '@/components/Mesa';
 import TicketcodeEmbed from '@/components/TicketcodeEmbed';
 import { eventos, listaEsperaFaq, pasosListaEspera } from '@/data/events';
+import { cortaDe } from '@/data/fechas';
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -77,7 +78,7 @@ export default async function ListaEspera({ params }: Props) {
           </div>
         </section>
       </main>
-      <Footer variant="espera" fecha="12.11.2026" />
+      <Footer variant="espera" fecha={cortaDe(e.fecha)} />
       <EveFlotante />
       <QuitaPuerta />
     </>

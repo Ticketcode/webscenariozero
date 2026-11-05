@@ -1,12 +1,13 @@
 'use client';
 import { useEffect, useRef } from 'react';
+import { FECHAS } from '@/data/fechas';
 import { clamp, reducedMotion, subscribe } from '@/lib/raf';
 
 type Hito = { fecha: string; titulo: string; texto: string };
 
 // La ruta como Señal Vital: la línea de pulso se dibuja con el scroll y cada hito se enciende cuando la punta lo alcanza.
 // Escritorio: línea horizontal. Móvil: línea vertical con los mismos hitos. Con movimiento reducido todo queda encendido.
-export default function PulseRuta({ hitos, destacado = '12.11.2026' }: { hitos: Hito[]; destacado?: string }) {
+export default function PulseRuta({ hitos, destacado = FECHAS.corta }: { hitos: Hito[]; destacado?: string }) {
   const root = useRef<HTMLDivElement>(null);
   const path = useRef<SVGPathElement>(null);
   const head = useRef<SVGCircleElement>(null);

@@ -1,6 +1,7 @@
 // Base de conocimiento de EVE en la web: respuestas fijas con información oficial publicada en el sitio.
 // En producción se reemplaza por un modelo con recuperación sobre este mismo contenido (fase C).
 import { eventoActivo as ev } from './events';
+import { FECHAS } from './fechas';
 
 export const IA_NOMBRE = 'EVE';
 
@@ -27,14 +28,14 @@ export const KB: KbItem[] = [
   {
     re: 'boleta|entrada|comprar|ticket|asistir|registr|agenda',
     q: '¿Cómo compro una boleta?',
-    a: `La boleta única da acceso a la agenda paralela del 12 de noviembre. Se compra en la página del evento con el formulario de Ticketcode; la venta está abierta desde el ${ev.ventaDesdeLarga}. No da acceso al salón oval.`,
+    a: `La boleta única da acceso a la agenda paralela del ${FECHAS.dia}. Se compra en la página del evento con el formulario de Ticketcode; la venta está abierta desde el ${ev.ventaDesdeLarga}. No da acceso al salón oval.`,
     src: [['Eventos', '#eventos']],
     cta: ['Ir a entradas', `${EVENTO}#entradas`],
   },
   {
     re: 'cu[aá]ndo|d[oó]nde|lugar|hora|fecha|bogot|evento|ubicaci',
     q: '¿Cuándo y dónde es el evento en Bogotá?',
-    a: 'El primer evento es en Bogotá el 12 de noviembre de 2026. El lugar es Américas BPS, calle 26, Bogotá, Colombia. El horario se publicará en la página del evento apenas esté confirmado.',
+    a: `El primer evento es en Bogotá el ${FECHAS.larga}. El lugar es Américas BPS, calle 26, Bogotá, Colombia. El horario se publicará en la página del evento apenas esté confirmado.`,
     src: [['Eventos', '#eventos']],
     cta: ['Ver el evento', EVENTO],
   },
@@ -48,7 +49,7 @@ export const KB: KbItem[] = [
   {
     re: 'ruta|2030|transversal|programa|academy|pyme|d\\+',
     q: '¿Cuál es la ruta del ecosistema?',
-    a: 'Arranca el 12 de noviembre de 2026 con seis transversales: ejercicios nacionales a D+30; Pyme Cibersegura, Trust Academy e Índice y Observatorio a D+90; confianza ciudadana e IA confiable a D+180. El rumbo llega hasta 2030.',
+    a: `Arranca el ${FECHAS.larga} con seis transversales: ejercicios nacionales a D+30; Pyme Cibersegura, Trust Academy e Índice y Observatorio a D+90; confianza ciudadana e IA confiable a D+180. El rumbo llega hasta 2030.`,
     src: [['La ruta', '#ruta'], ['Transversales', '#programas']],
     cta: null,
   },

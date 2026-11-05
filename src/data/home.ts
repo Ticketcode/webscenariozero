@@ -1,3 +1,5 @@
+import { FECHAS } from './fechas';
+
 // Contenido de la landing global.
 
 export const transversales = [
@@ -10,11 +12,11 @@ export const transversales = [
 ];
 
 export const ruta = [
-  { when: '12.11.2026', title: 'Apertura del ecosistema', text: 'Arranca la agenda 2026-2030.' },
+  { when: FECHAS.corta, title: 'Apertura del ecosistema', text: 'Arranca la agenda 2026-2030.' },
   { when: 'D+30', title: 'Primeros hallazgos', text: 'Informe del programa de ejercicios y plan de mejora.' },
   { when: 'D+90', title: 'Arrancan los programas', text: 'Cohorte de juntas, línea base del Índice y autodiagnóstico pyme.' },
   { when: 'D+180', title: 'Llega a la ciudadanía', text: 'Piloto de campaña ciudadana y módulo de IA confiable.' },
-  { when: '12.11.2027', title: 'Año 1 de 4', text: 'Lo que entregó cada transversal, a la vista.' },
+  { when: FECHAS.aniv, title: 'Año 1 de 4', text: 'Lo que entregó cada transversal, a la vista.' },
   { when: '2030', title: 'Colombia, el milagro digital y tecnológico', text: 'Un país tecnológicamente confiable y ciberresiliente.' },
 ];
 

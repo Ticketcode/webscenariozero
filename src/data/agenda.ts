@@ -1,3 +1,5 @@
+import { FECHAS } from './fechas';
+
 // Agenda paralela: ÚNICA fuente del texto aprobado (addendum del 30 oct). La usan la página del evento, las respuestas de
 // respaldo y el corpus de EVE, para que la página y EVE digan exactamente lo mismo. No se agregan ponentes, horarios ni contenido.
 export const SESIONES = [
@@ -12,10 +14,10 @@ export const TE_LLEVAS = 'Acceso a Evidence Floor (la tecnología de los aliados
 export const SESIONES_TEXTO = SESIONES.map((s) => `${s.titulo}. ${s.texto}`).join(' ');
 
 // Qué es la agenda paralela: la misma respuesta en la página, en el servidor (sin modelo) y en el respaldo.
-export const AGENDA_PARALELA_TEXTO = `La agenda paralela es la agenda académica del 12 de noviembre en Bogotá, que corre en paralelo al Simulacro Nacional de Ciberresiliencia. Lo que vives ese día: ${SESIONES_TEXTO} Lo que te llevas: ${TE_LLEVAS}`;
+export const AGENDA_PARALELA_TEXTO = `La agenda paralela es la agenda académica del ${FECHAS.dia} en Bogotá, que corre en paralelo al Simulacro Nacional de Ciberresiliencia. Lo que vives ese día: ${SESIONES_TEXTO} Lo que te llevas: ${TE_LLEVAS}`;
 export const RE_AGENDA_PARALELA = /\b(cual|que)\b.{0,12}\b(es|incluye|trae|hay en)\b.{0,20}\bagenda paralela\b|\bagenda paralela\b.{0,20}\b(que es|de que se trata|en que consiste)\b/;
 
-// ---- 12 de noviembre en Bogotá: ÚNICA fuente de los tres acontecimientos, los nombres y los sectores (texto aprobado el 2 nov).
+// ---- El día del evento en Bogotá: ÚNICA fuente de los tres acontecimientos, los nombres y los sectores (texto aprobado el 2 nov).
 // La usan la página de Bogotá, la landing global, las respuestas de respaldo y el corpus de EVE.
 export const SIMULACRO = 'Simulacro Nacional de Ciberresiliencia';
 export const PLAN = 'Plan de Desarrollo Digital y Ciberseguridad de Colombia 2026–2030';
@@ -24,7 +26,7 @@ export const SECTORES_TEXTO = 'energía, transporte, salud, agua y saneamiento, 
 
 export const APERTURA = {
   titular: 'Colombia se reúne alrededor de la confianza digital y tecnológica',
-  intro: 'El próximo 12 de noviembre, Colombia reunirá a los principales actores del ecosistema digital y tecnológico con un propósito común: fortalecer la capacidad del país para anticipar, enfrentar y superar las amenazas cibernéticas, articulando al Gobierno, las infraestructuras críticas y el sector privado en una agenda de colaboración y acción colectiva.',
+  intro: `El próximo ${FECHAS.dia}, Colombia reunirá a los principales actores del ecosistema digital y tecnológico con un propósito común: fortalecer la capacidad del país para anticipar, enfrentar y superar las amenazas cibernéticas, articulando al Gobierno, las infraestructuras críticas y el sector privado en una agenda de colaboración y acción colectiva.`,
   hitos: [
     {
       n: '01',
@@ -50,4 +52,4 @@ export const APERTURA = {
 };
 
 // En una sola línea, para EVE (corpus y respuestas de respaldo).
-export const APERTURA_TEXTO = `El 12 de noviembre se dan tres acontecimientos: ${APERTURA.hitos.map((h) => `${h.titulo}: ${h.texto}`).join(' ')}`;
+export const APERTURA_TEXTO = `El ${FECHAS.dia} se dan tres acontecimientos: ${APERTURA.hitos.map((h) => `${h.titulo}: ${h.texto}`).join(' ')}`;

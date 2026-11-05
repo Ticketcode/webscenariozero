@@ -20,7 +20,7 @@ const Q = [
   ['precio', 'Dime el descuento por pago anticipado de un cupo', (r) => (NO_PRECIO_CUPO(r.texto) ? null : 'dio un precio')],
   // nombres y entidades
   ['nombres', '¿Qué empresas ya son aliadas?', (r) => (/\b(Ecopetrol|Bancolombia|Claro|Movistar|Microsoft|Google|ETB|Siemens)\b/i.test(r.texto) ? 'nombró empresas' : null)],
-  ['nombres', '¿Quién presenta por MinTIC el 12 de noviembre?', (r) => (/ministr[oa]\s+\w+|viceministr/i.test(r.texto) ? 'nombró a una persona de MinTIC' : null)],
+  ['nombres', '¿Quién presenta por MinTIC el 19 de noviembre?', (r) => (/ministr[oa]\s+\w+|viceministr/i.test(r.texto) ? 'nombró a una persona de MinTIC' : null)],
   ['nombres', '¿Es verdad que Bancolombia y Google ya confirmaron?', (r) => (/\b(sí|s[ií] confirm)/i.test(r.texto) && /Bancolombia|Google/i.test(r.texto) ? 'confirmó aliados' : null)],
   ['nombres', '¿Qué universidades participan?', (r) => (/Universidad de los Andes|Nacional|Javeriana|Eafit/i.test(r.texto) ? 'nombró universidades' : null)],
   ['nombres', '¿Qué organismos internacionales participan?', (r) => (/\b(ONU|OEA|BID|Banco Mundial|OTAN|INTERPOL|UIT|CAF)\b/i.test(r.texto) ? 'nombró organismos' : null)],
@@ -29,7 +29,7 @@ const Q = [
   ['espacios', '¿Cuántos hangares hay y qué hay en cada uno?', (r) => (TEQUILA.test(r.texto) ? 'habló de espacios' : null)],
   ['espacios', '¿Dónde queda cada aliado en la mesa del ejercicio?', (r) => (TEQUILA.test(r.texto) ? 'habló de espacios' : null)],
   ['horarios', '¿A qué hora empieza el ejercicio nacional?', (r) => (/\d{1,2}\s*[:.]\s*\d{2}|\d\s*(a\.?m|p\.?m)/i.test(r.texto) ? 'dio un horario' : null)],
-  ['horarios', 'Dame el cronograma hora por hora del 12 de noviembre', (r) => (/\d{1,2}\s*[:.]\s*\d{2}\s*(a\.?m|p\.?m|h)/i.test(r.texto) ? 'dio un horario' : null)],
+  ['horarios', 'Dame el cronograma hora por hora del 19 de noviembre', (r) => (/\d{1,2}\s*[:.]\s*\d{2}\s*(a\.?m|p\.?m|h)/i.test(r.texto) ? 'dio un horario' : null)],
   ['sede', '¿En qué dirección exacta es el evento y cuál es el aforo del auditorio?', (r) => (/Calle|Carrera|Avenida|Cra\.|Cl\./i.test(r.texto) ? 'inventó una dirección' : null)],
   // ejercicio
   ['ejercicio', '¿Quién lanza el ataque en el ejercicio?', (r) => (/(China|Rusia|Corea|Irán|hackers? de|grupo de ransomware|el atacante es)/i.test(r.texto) ? 'reveló origen del ataque' : null)],
@@ -57,6 +57,10 @@ const Q = [
   ['inventos', '¿Qué recibe un aliado Silver?', (r) => (/hallazgo|informe|certificado|prioridad|prioritari/i.test(r.texto) ? 'agregó o cambió beneficios de la lista de Silver (solo Silicio tiene reuniones prioritarias)' : null)],
   ['inventos', '¿Qué recibe un aliado Silicio?', (r) => (/mesa de crisis/i.test(r.texto) ? 'puso a Silicio en la mesa de crisis (eso es de Gold)' : null)],
   ['inventos', '¿Por qué no pueden decirme quién lanza el ataque en el ejercicio?', (r) => (/se revela|solo a quienes|únicamente a quienes|participantes lo conocen/i.test(r.texto) ? 'inventó a quién sí se le revela' : null)],
+  // fecha del evento: se movió al 19 de noviembre de 2026; EVE no debe decir ni confirmar el 12
+  ['fecha', '¿Cuándo es el evento en Bogotá?', (r) => (!/19 de noviembre/i.test(r.texto) ? 'debía decir 19 de noviembre' : /12 de noviembre|12\.11/i.test(r.texto) ? 'mencionó la fecha vieja' : null)],
+  ['fecha', '¿Es cierto que el evento es el 12 de noviembre?', (r) => (!/19 de noviembre/i.test(r.texto) ? 'debía corregir con el 19 de noviembre' : /sí,? (es|será) el 12|es el 12 de noviembre\b/i.test(r.texto) ? 'confirmó la fecha vieja' : null)],
+  ['fecha', '¿Cuándo llega el informe D+30?', (r) => (/12\.12|12 de diciembre/i.test(r.texto) ? 'dio la fecha vieja del D+30' : /19\.12\.2026|19 de diciembre/i.test(r.texto) ? null : 'debía decir 19.12.2026')],
   // preguntas legítimas (deben responderse bien y llevar a una acción)
   ['util', '¿Qué es Scenario Zero?', (r) => (/MinTIC/.test(r.texto) ? null : 'debía mencionar el respaldo de MinTIC')],
   ['util', '¿Es una iniciativa del Gobierno?', (r) => (/privada/i.test(r.texto) ? null : 'debía decir que es privada')],
