@@ -1,3 +1,4 @@
+import { FECHAS } from '@/data/fechas';
 import { ACCIONES, ACCION_IDS, COMPONENTES, PERFILES, type RespuestaEve, type SalidaModelo } from './schema';
 
 export const SIN_RESPUESTA_TEXTO = 'Todavía no tengo esa respuesta. Te conecto con el equipo para que te la den por escrito.';
@@ -81,12 +82,23 @@ export function normalizar(s: SalidaModelo): SalidaModelo {
 }
 
 // Valida que el texto no rompa las líneas rojas. Si algo falla, el visitante recibe la respuesta segura.
+// Día de la semana equivocado junto a la fecha del evento (por ejemplo "el 20 de noviembre es jueves" cuando es viernes).
+// El modelo no debe calcular el día por su cuenta: el correcto va en el corpus y aquí se bloquea cualquier otro.
+const SEMANA = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo'];
+const escapa = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+export function diaSemanaMal(texto: string): boolean {
+  const otros = SEMANA.filter((d) => d !== FECHAS.diaSemana).join('|');
+  const dia = escapa(FECHAS.dia);
+  return new RegExp(`\\b(${otros})\\b[^.]{0,25}${dia}|${dia}[^.]{0,25}\\b(${otros})\\b`, 'i').test(texto);
+}
+
 export function revisar(s: SalidaModelo): { ok: true } | { ok: false; motivo: string } {
   const t = (s.texto ?? '').trim();
   if (!t) return { ok: false, motivo: 'vacia' };
   if (t.length > 900) return { ok: false, motivo: 'demasiado_larga' };
   for (const [re, motivo] of PROHIBIDOS) if (re.test(t)) return { ok: false, motivo };
   if (tienePrecioNoPermitido(t)) return { ok: false, motivo: 'precio' };
+  if (diaSemanaMal(t)) return { ok: false, motivo: 'dia_semana' };
   if (/https?:\/\/|www\./i.test(t)) return { ok: false, motivo: 'url_en_texto' };
   if (/<\/?[a-z][^>]*>/i.test(t)) return { ok: false, motivo: 'html' };
   return { ok: true };

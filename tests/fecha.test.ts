@@ -6,32 +6,49 @@ import path from 'node:path';
 import { listaEsperaFaq } from '../src/data/events';
 import { FECHAS } from '../src/data/fechas';
 import { CORPUS } from '../src/lib/eve/corpus';
+import { diaSemanaMal } from '../src/lib/eve/guardrails';
 import { SYSTEM } from '../src/lib/eve/schema';
 
 let n = 0;
 const ok = (nombre: string, fn: () => void) => { fn(); n++; console.log('  ✓', nombre); };
 
 console.log('Fechas derivadas del evento');
-ok('fecha del evento: 19 de noviembre de 2026', () => {
-  assert.equal(FECHAS.iso, '2026-11-19');
-  assert.equal(FECHAS.corta, '19.11.2026');
-  assert.equal(FECHAS.cortaDM, '19.11');
-  assert.equal(FECHAS.dia, '19 de noviembre');
-  assert.equal(FECHAS.larga, '19 de noviembre de 2026');
+ok('fecha del evento: viernes 20 de noviembre de 2026', () => {
+  assert.equal(FECHAS.iso, '2026-11-20');
+  assert.equal(FECHAS.corta, '20.11.2026');
+  assert.equal(FECHAS.cortaDM, '20.11');
+  assert.equal(FECHAS.dia, '20 de noviembre');
+  assert.equal(FECHAS.diaSemana, 'viernes');
+  assert.equal(FECHAS.conDia, 'viernes 20 de noviembre');
+  assert.equal(FECHAS.larga, '20 de noviembre de 2026');
 });
-ok('hitos D+30, D+90, D+180 y aniversario contados desde el 19.11.2026', () => {
-  assert.equal(FECHAS.d30, '19.12.2026');
-  assert.equal(FECHAS.d90, '17.02.2027');
-  assert.equal(FECHAS.d180, '18.05.2027');
-  assert.equal(FECHAS.aniv, '19.11.2027');
+ok('hitos D+30, D+90, D+180 y aniversario contados desde el 20.11.2026', () => {
+  assert.equal(FECHAS.d30, '20.12.2026');
+  assert.equal(FECHAS.d90, '18.02.2027');
+  assert.equal(FECHAS.d180, '19.05.2027');
+  assert.equal(FECHAS.aniv, '20.11.2027');
 });
 ok('el corpus de EVE y su prompt usan la fecha nueva', () => {
-  for (const t of [CORPUS, SYSTEM]) assert.match(t, /19 de noviembre/);
+  for (const t of [CORPUS, SYSTEM]) assert.match(t, /20 de noviembre/);
   for (const s of [FECHAS.d30, FECHAS.d90, FECHAS.d180, FECHAS.aniv]) assert.ok(CORPUS.includes(s), s);
 });
 
-console.log('La fecha anterior no reaparece');
-const VIEJA = /12 de noviembre|12\.11|12\/11|2026-11-12|12\.12\.2026|10\.02\.2027|11\.05\.2027|12 dic\b|10 feb\b|11 may\b/;
+console.log('Día de la semana de la fecha del evento');
+ok('el filtro bloquea un día de la semana equivocado junto a la fecha', () => {
+  for (const t of ['El 20 de noviembre es jueves.', 'Será el jueves 20 de noviembre en Bogotá.', 'El evento: lunes 20 de noviembre.', 'El 20 de noviembre, un sábado, abrimos.']) assert.equal(diaSemanaMal(t), true, t);
+});
+ok('el filtro permite el día correcto y otros días de la semana que no son la fecha', () => {
+  for (const t of ['El 20 de noviembre es viernes.', 'Será el viernes 20 de noviembre en Bogotá.', 'El 20 de noviembre abre el ecosistema. Te contactamos el lunes.']) assert.equal(diaSemanaMal(t), false, t);
+});
+ok('el corpus de EVE trae el día de la semana correcto', () => {
+  assert.ok(CORPUS.includes(FECHAS.conDia), 'conDia');
+  assert.ok(CORPUS.includes('nunca calcules el día de la semana'));
+});
+
+console.log('Las fechas anteriores no reaparecen');
+// Fechas ya reemplazadas: 12 nov (original) y 19 nov (cambio del 5 nov), con sus D+30, D+90 y D+180.
+// Si la fecha vuelve a moverse, se agrega aquí la que sale.
+const VIEJA = /12 de noviembre|12\.11|12\/11|2026-11-12|12\.12\.2026|10\.02\.2027|11\.05\.2027|12 dic\b|10 feb\b|11 may\b|19 de noviembre|19\.11|19\/11|2026-11-19|19\.12\.2026|17\.02\.2027|18\.05\.2027|19 dic\b|17 feb\b|18 may\b/;
 const raiz = path.resolve(__dirname, '..');
 const archivos: string[] = [];
 const recorre = (dir: string) => {
@@ -43,7 +60,7 @@ const recorre = (dir: string) => {
   }
 };
 for (const d of ['src', 'scripts', 'tests', 'public']) if (fs.existsSync(path.join(raiz, d))) recorre(path.join(raiz, d));
-ok(`ninguno de ${archivos.length} archivos menciona el 12 de noviembre ni sus fechas derivadas`, () => {
+ok(`ninguno de ${archivos.length} archivos menciona el 12 ni el 19 de noviembre ni sus fechas derivadas`, () => {
   const mal = archivos.filter((f) => VIEJA.test(fs.readFileSync(f, 'utf8'))).map((f) => path.relative(raiz, f));
   assert.deepEqual(mal, []);
 });

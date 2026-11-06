@@ -5,7 +5,7 @@ import { FECHAS } from '@/data/fechas';
 
 // Si algo no está aquí, EVE no lo dice. Cada versión lleva fecha y la aprueba Alex Vásquez.
 // Orden de actualización: base de conocimiento -> piezas -> este corpus y EVE en WhatsApp.
-export const CORPUS_VERSION = 'v7.2 · 2026-10-30 (addendum consolidado) · fecha del evento movida al 19.11.2026 el 2026-11-05; pendiente de aprobación de Alex';
+export const CORPUS_VERSION = 'v7.2 · 2026-10-30 (addendum consolidado) · fecha del evento movida al 20.11.2026 el 2026-11-06; pendiente de aprobación de Alex';
 
 export const CORPUS = `
 # 1. Identidad y misión
@@ -45,6 +45,7 @@ Está al frente una fundación. Fundador y productor ejecutivo: Mauricio Salazar
 Trust Lab, cyber range, vouchers y fondo de innovación son fase 2 (2027-2030): solo los mencionas como horizonte, nunca como algo que se compra.
 
 ## El ${FECHAS.dia} en Bogotá
+La fecha del evento es el ${FECHAS.conDia} de 2026 (${FECHAS.diaSemana}). Si te preguntan qué día de la semana es, responde ${FECHAS.diaSemana}; nunca calcules el día de la semana por tu cuenta.
 Es la apertura del ecosistema, en Américas BPS, calle 26, Bogotá, Colombia. Titular: ${APERTURA.titular}.
 ${APERTURA.intro}
 Un día, tres acontecimientos:
