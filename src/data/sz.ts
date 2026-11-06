@@ -124,12 +124,12 @@ export const EVENTOS = {
   titular: 'Un ecosistema, tres ciudades en 2026.',
   bajada: 'Cada evento abre el ecosistema en un territorio. Lo que pasa en cada ciudad queda en su historia.',
   fichas: [
-    { ciudad: 'Bogotá', estado: 'Próximo', fecha: `${FECHAS.corta} · Américas BPS`, texto: 'Apertura del ecosistema. Un día, tres acontecimientos.', href: RUTAS.bogota },
+    { ciudad: 'Bogotá', estado: 'Próximo', fecha: `${FECHAS.corta} · Av. El Dorado #90-10`, texto: 'Apertura del ecosistema. Un día, tres acontecimientos.', href: RUTAS.bogota },
     { ciudad: 'Villavicencio', estado: 'Por anunciar', fecha: 'Antes de finalizar 2026', texto: 'Ejercicio regional del ecosistema. Te avisamos cuando haya fecha.', href: null },
     { ciudad: 'Medellín', estado: 'Por anunciar', fecha: 'Antes de finalizar 2026', texto: 'Ejercicio regional del ecosistema. Te avisamos cuando haya fecha.', href: null },
   ],
   bogota: {
-    antetitulo: `${FECHAS.corta} · LA APERTURA · AMÉRICAS BPS, BOGOTÁ`,
+    antetitulo: `${FECHAS.corta} · LA APERTURA · AV. EL DORADO #90-10, BOGOTÁ`,
     titular: 'Un día. Tres acontecimientos.',
     hitos: APERTURA.hitos.map((h) => h.resumen),
   },
@@ -206,7 +206,7 @@ export const KB: Respuesta[] = [
   { re: 'hora|horario|a qu[eé] hora|empieza', texto: 'La agenda detallada llega a quienes tienen boleta. Te muestro cómo comprarla.', acciones: [{ label: TEXTOS.ctaBoleta, href: RUTAS.boleta, principal: true }] },
   { re: 'acceso|entrar.*(ejercicio|simulacro)|boleta.*(ejercicio|simulacro)|(ejercicio|simulacro).*boleta', texto: 'No. El Simulacro Nacional de Ciberresiliencia es para sus 70–80 decisores y los aliados. La boleta te da la agenda paralela, las experiencias y las reuniones 1 a 1.', acciones: [{ label: TEXTOS.ctaBoleta, href: RUTAS.boleta, principal: true }, { label: 'Ver la agenda paralela', href: '/agenda-paralela' }] },
   { re: 'gobierno|mintic', texto: 'No. Es una iniciativa privada, financiada por el sector privado y con el respaldo de MinTIC.', acciones: [{ label: 'Qué es Scenario Zero', href: '/ecosistema', principal: true }] },
-  { re: `${FECHAS.dia}|\\d{1,2}\\.11|bogot[aá]|qu[eé] pasa`, texto: `Es la apertura del ecosistema en Américas BPS, Bogotá. ${APERTURA_TEXTO} ¿Quieres asistir a la agenda paralela?`, acciones: [{ label: TEXTOS.ctaBoleta, href: RUTAS.boleta, principal: true }, { label: 'Ver la ficha de Bogotá', href: RUTAS.bogota }] },
+  { re: `${FECHAS.dia}|\\d{1,2}\\.11|bogot[aá]|qu[eé] pasa`, texto: `Es la apertura del ecosistema en Américas BPS, Av. El Dorado #90-10, Bogotá. ${APERTURA_TEXTO} ¿Quieres asistir a la agenda paralela?`, acciones: [{ label: TEXTOS.ctaBoleta, href: RUTAS.boleta, principal: true }, { label: 'Ver la ficha de Bogotá', href: RUTAS.bogota }] },
   { re: 'villavicencio|medell[ií]n|otras ciudades', texto: 'Antes de finalizar 2026. Las fechas se anuncian aquí y por WhatsApp.', acciones: [{ label: 'Ver los eventos', href: '/eventos', principal: true }] },
   { re: 'emblema', texto: 'Es un reconocimiento que se gana, no se compra: Ensaya, Mide, Mejora. Certifica la práctica, no la seguridad, y lo otorga Scenario Zero.', acciones: [{ label: 'Explorar el panorama', href: '/ecosistema#panorama', principal: true }] },
   { re: 'c[oó]mo se paga|pago|anticipo|factur', texto: 'Con un anticipo del 50 % al confirmar y el saldo el 5 de noviembre; factura la Fundación Social Colectivo. Cualquier detalle adicional te lo confirma el comercial por escrito.', acciones: [{ label: 'Hablar con el equipo', href: '/contacto', principal: true }] },

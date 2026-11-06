@@ -35,7 +35,7 @@ export const KB: KbItem[] = [
   {
     re: 'cu[aá]ndo|d[oó]nde|lugar|hora|fecha|bogot|evento|ubicaci',
     q: '¿Cuándo y dónde es el evento en Bogotá?',
-    a: `El primer evento es en Bogotá el ${FECHAS.larga}. El lugar es Américas BPS, calle 26, Bogotá, Colombia. El horario se publicará en la página del evento apenas esté confirmado.`,
+    a: `El primer evento es en Bogotá el ${FECHAS.larga}. El lugar es Américas BPS, Av. El Dorado #90-10, Bogotá, Colombia. El horario se publicará en la página del evento apenas esté confirmado.`,
     src: [['Eventos', '#eventos']],
     cta: ['Ver el evento', EVENTO],
   },

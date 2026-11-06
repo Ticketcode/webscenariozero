@@ -46,7 +46,7 @@ export const bogota: EventoData = {
   fechaLarga: FECHAS.larga,
   // El evento arranca a las 8:00 a. m. (hora de Colombia).
   inicioISO: `${FECHAS.iso}T08:00:00-05:00`,
-  lugar: 'Américas BPS, calle 26, Bogotá, Colombia',
+  lugar: 'Américas BPS, Av. El Dorado #90-10, Bogotá, Colombia',
   horario: null,
   estadoBoleta: 'venta_abierta',
   ventaDesde: '2026-10-14',
@@ -97,7 +97,7 @@ export const bogota: EventoData = {
   ],
   dimensiones: ['Gobernanza', 'Articulación', 'Calidad de la información', 'Continuidad', 'Narrativa pública', 'Riesgo reputacional', 'Cooperación', 'Trazabilidad'],
   faq: [
-    { q: '¿Dónde y a qué hora es?', a: 'En Américas BPS, calle 26, Bogotá, Colombia. El horario se publicará aquí apenas esté confirmado.' },
+    { q: '¿Dónde y a qué hora es?', a: 'En Américas BPS, Av. El Dorado #90-10, Bogotá, Colombia. El horario se publicará aquí apenas esté confirmado.' },
     { q: '¿La boleta da acceso al salón oval?', a: 'No. La boleta da acceso a la agenda paralela. El salón oval es el Simulacro Nacional de Ciberresiliencia, con 70 a 80 decisores.' },
     { q: '¿Cómo participo como aliado en la mesa?', a: 'Los cupos se acuerdan con el equipo. Inscríbete en la lista de espera y una persona te contacta.' },
     { q: '¿Me registro igual si soy aliado o invitado?', a: 'Sí, en ambos casos te registras con un código de acceso especial según tu perfil.' },
